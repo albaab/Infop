@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "426551091515",
+    "firebase_url": "https://infopapp-d8289.firebaseio.com",
+    "project_id": "infopapp-d8289",
+    "storage_bucket": "infopapp-d8289.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426551091515:android:80197d09c756f433",
+        "android_client_info": {
+          "package_name": "com.example.infopapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426551091515-sta1lgag0k3sgkdlg8u6mad5vk531jji.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.infopapp",
+            "certificate_hash": "3decb57f407a826dad6fad5aa80160a801e1f2b7"
+          }
+        },
+        {
+          "client_id": "426551091515-0a4ob9bdugeo9rhu9b0ue9q132do5b9q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvpVBE8yJ603XmfcXGCRhxPGRXZOY3LcY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426551091515-0a4ob9bdugeo9rhu9b0ue9q132do5b9q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
