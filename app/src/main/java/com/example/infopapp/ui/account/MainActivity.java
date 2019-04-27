@@ -1,4 +1,4 @@
-package com.example.infopapp.activities;
+package com.example.infopapp.Login;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,12 +9,9 @@ import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.example.infopapp.R;
-import com.example.infopapp.activities.fragments.ChooseAccountFragment;
-import com.example.infopapp.activities.fragments.CreateAccountFragment;
-import com.example.infopapp.activities.fragments.SignInFragment;
-import com.example.infopapp.presenters.LogPresenter;
-import com.example.infopapp.views.LoginView;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.infopapp.Login.fragments.ChooseAccountFragment;
+import com.example.infopapp.Login.fragments.CreateAccountFragment;
+import com.example.infopapp.Login.fragments.SignInFragment;
 
 public class MainActivity extends AppCompatActivity implements
         ChooseAccountFragment.CallBackChooseAccount,

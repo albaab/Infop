@@ -1,4 +1,4 @@
-package com.example.infopapp.activities;
+package com.example.infopapp.Login;
 
 import android.content.Intent;
 import android.os.Handler;

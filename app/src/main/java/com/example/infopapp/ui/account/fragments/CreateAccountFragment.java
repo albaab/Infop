@@ -1,4 +1,4 @@
-package com.example.infopapp.activities.fragments;
+package com.example.infopapp.Login.fragments;
 
 
 import android.content.Context;
@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import com.example.infopapp.R;
 import com.example.infopapp.presenters.LogPresenter;
-import com.example.infopapp.views.LoginView;
 
 
 /**

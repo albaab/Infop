@@ -1,10 +1,9 @@
 package com.example.infopapp.presenters;
 
 import android.util.Patterns;
-import android.widget.ProgressBar;
 
-import com.example.infopapp.models.LoginModel;
-import com.example.infopapp.views.LoginView;
+import com.example.infopapp.Login.fragments.LoginModel;
+import com.example.infopapp.Login.fragments.LoginView;
 
 public class LogPresenter {
 

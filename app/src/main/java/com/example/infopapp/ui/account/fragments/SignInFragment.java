@@ -1,4 +1,4 @@
-package com.example.infopapp.activities.fragments;
+package com.example.infopapp.Login.fragments;
 
 
 import android.content.Context;
@@ -18,11 +18,7 @@ import android.widget.TextView;
 
 import com.example.infopapp.R;
 import com.example.infopapp.presenters.LogPresenter;
-import com.example.infopapp.views.LoginView;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
-
-import java.io.FileInputStream;
 
 /**
  * A simple {@link Fragment} subclass.

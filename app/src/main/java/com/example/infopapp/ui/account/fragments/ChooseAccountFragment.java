@@ -1,4 +1,4 @@
-package com.example.infopapp.activities.fragments;
+package com.example.infopapp.Login.fragments;
 
 
 import android.content.Context;

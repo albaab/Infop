@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <g class="layer">
+  <title>Layer 1</title>
+  <rect fill="#ffcc00" height="153.600002" id="svg_88" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="null" width="6.4" x="360" y="43.626667"/>
+  <g id="svg_34">
+   <g id="svg_1">
+    <g id="svg_2">
+     <path d="m251.200014,87.002186c-44.939517,0 -81.49583,35.769541 -81.49583,78.678983c0,42.909442 36.556313,77.814379 81.49583,77.814379c44.939517,0 81.49583,-34.904937 81.49583,-77.814379c0,-42.909442 -36.556313,-78.678983 -81.49583,-78.678983z" fill="black" id="svg_3"/>
+    </g>
+   </g>
+   <g id="svg_4">
+    <g id="svg_5">
+     <path d="m272.320844,260.562216l-22.187499,0l-22.187499,0c-15.648103,0 -30.768884,4.083924 -44.515518,11.031598c23.347905,6.360736 45.331279,15.521749 66.703017,27.907188c21.372478,-12.385439 43.355112,-21.546452 66.703017,-27.907188c-13.746635,-6.947674 -28.867415,-11.031598 -44.515518,-11.031598z" fill="black" id="svg_6"/>
+    </g>
+   </g>
+   <g id="svg_7">
+    <g id="svg_8">
+     <path d="m417.279169,327.768865c-12.254156,0 -22.187499,10.029472 -22.187499,22.402216l0,44.804433c0,12.371251 9.933343,22.402216 22.187499,22.402216c12.254156,0 22.187499,-10.030966 22.187499,-22.402216l0,-44.804433c0,-12.372744 -9.933343,-22.402216 -22.187499,-22.402216z" id="svg_9"/>
+    </g>
+   </g>
+   <g id="svg_10">
+    <g id="svg_11">
+     <path d="m82.987522,327.768865c-12.254156,0 -22.187499,10.029472 -22.187499,22.402216l0,44.804433c0,12.371251 9.933343,22.402216 22.187499,22.402216c12.254156,0 22.187499,-10.030966 22.187499,-22.402216l0,-44.804433c0,-12.372744 -9.933343,-22.402216 -22.187499,-22.402216z" fill="black" id="svg_12"/>
+    </g>
+   </g>
+   <g id="svg_13">
+    <g id="svg_14">
+     <path d="m94.081271,282.964433c-6.131885,0 -11.093749,5.009882 -11.093749,11.201108l0,11.201108c24.473551,0 44.374997,20.094041 44.374997,44.804433l0,44.804433c0,24.710391 -19.901447,44.804433 -44.374997,44.804433l0,11.201108c0,6.191226 4.961864,11.201108 11.093749,11.201108c56.874694,0 102.350931,18.135341 144.958325,45.551173l0,-188.481793c-42.799685,-24.776851 -88.821734,-36.28711 -144.958325,-36.28711z" id="svg_15"/>
+    </g>
+   </g>
+   <g id="svg_16">
+    <g id="svg_17">
+     <path d="m417.279169,305.366649l0,-11.201108c0,-6.191226 -4.961864,-11.201108 -11.093749,-11.201108c-56.13659,0 -102.15864,11.510259 -144.958325,36.28711l0,188.481793c42.607393,-27.415832 88.08363,-45.551173 144.958325,-45.551173c6.131885,0 11.093749,-5.009882 11.093749,-11.201108l0,-11.201108c-24.473551,0 -44.374997,-20.094041 -44.374997,-44.804433l0,-44.804433c0,-24.710391 19.901447,-44.804433 44.374997,-44.804433z" id="svg_18"/>
+    </g>
+   </g>
+   <g id="svg_19"/>
+   <g id="svg_20"/>
+   <g id="svg_21"/>
+   <g id="svg_22"/>
+   <g id="svg_23"/>
+   <g id="svg_24"/>
+   <g id="svg_25"/>
+   <g id="svg_26"/>
+   <g id="svg_27"/>
+   <g id="svg_28"/>
+   <g id="svg_29"/>
+   <g id="svg_30"/>
+   <g id="svg_31"/>
+   <g id="svg_32"/>
+   <g id="svg_33"/>
+  </g>
+  <path d="m125.209786,43.749524l127.46668,-38.933331l127.46668,38.933331l-127.46668,38.933331l-127.46668,-38.933331z" fill="black" id="svg_35" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="null"/>
+  <polygon cx="-645.226667" cy="269.76" edge="86.232302" fill="#666666" id="svg_41" orient="x" points="-571.8730894205456,269.76000000000005 -622.5591646994199,339.52339763348346 -704.5709572569741,312.8761509081668 -704.5709572569741,226.64384909183335 -622.5591646994199,199.99660236651664 -571.8730894205456,269.76000000000005 " shape="regularPoly" sides="5" stroke-width="null" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-341.226667" cy="181.226667" edge="0" fill="#666666" id="svg_43" orient="x" points="-341.22666666666663,181.2266666666667 -341.22666666666663,181.2266666666667 -341.22666666666663,181.2266666666667 -341.22666666666663,181.2266666666667 -341.22666666666663,181.2266666666667 -341.22666666666663,181.2266666666667 " shape="regularPoly" sides="5" stroke-width="null" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-341.226667" cy="181.226667" edge="0" fill="#666666" id="svg_44" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-341.226667" cy="181.226667" edge="0" fill="#666666" id="svg_45" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-341.226667" cy="181.226667" edge="0" fill="#666666" id="svg_46" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-341.226667" cy="181.226667" edge="0" fill="#666666" id="svg_47" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-341.226667" cy="181.226667" edge="0" fill="#666666" id="svg_48" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-411.626667" cy="158.826667" edge="0" fill="#666666" id="svg_49" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-411.626667" cy="158.826667" edge="0" fill="#666666" id="svg_50" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-308.16" cy="221.76" edge="0" fill="#666666" id="svg_57" orient="x" points="-308.15999999999997,221.76000000000005 -308.15999999999997,221.76000000000005 -308.15999999999997,221.76000000000005 -308.15999999999997,221.76000000000005 -308.15999999999997,221.76000000000005 -308.15999999999997,221.76000000000005 " shape="regularPoly" sides="5" stroke-width="null" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-291.093333" cy="362.56" edge="0" fill="#666666" id="svg_58" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-384.96" cy="211.093333" edge="0" fill="#666666" id="svg_59" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-384.96" cy="210.026667" edge="0" fill="#666666" id="svg_60" orient="x" points="-384.96,210.0266666666667 -384.96,210.0266666666667 -384.96,210.0266666666667 -384.96,210.0266666666667 -384.96,210.0266666666667 -384.96,210.0266666666667 " shape="regularPoly" sides="5" stroke-width="null" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-384.96" cy="210.026667" edge="0" fill="#666666" id="svg_61" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-384.96" cy="210.026667" edge="0" fill="#666666" id="svg_62" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-384.96" cy="210.026667" edge="0" fill="#666666" id="svg_63" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-384.96" cy="208.96" edge="0" fill="#666666" id="svg_64" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-384.96" cy="208.96" edge="0" fill="#666666" id="svg_65" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-384.96" cy="208.96" edge="0" fill="#666666" id="svg_66" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-384.96" cy="208.96" edge="0" fill="#666666" id="svg_67" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-384.96" cy="208.96" edge="0" fill="#666666" id="svg_68" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-372.16" cy="191.893333" edge="0" fill="#666666" id="svg_69" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <polygon cx="-372.16" cy="191.893333" edge="0" fill="#666666" id="svg_70" orient="x" shape="regularPoly" sides="5" strokeWidth="null" strokecolor="none"/>
+  <path d="m257.83542,112.956699l-14.84427,-43.6707l-81.81325,3.6227l12.26326,40.0945l84.39426,-0.0465z" fill="#666666" id="svg_82" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="null" transform="rotate(-162.98 209.507 91.1446)"/>
+  <path d="m-371.355504,197.870946l1.066674,-1.066674l3.200021,0l-1.066674,1.066674l-3.200021,0z" fill="#666666" id="svg_83" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="null"/>
+  <path d="m242.820761,108.210841l12.28762,-39.81403l84.18517,4.47248l-13.69991,43.07285l-82.77288,-7.7313z" fill="#333333" id="svg_84" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="null" transform="rotate(-17.9344 291.057 92.1695)"/>
+  <ellipse cx="251.199959" cy="39.040001" fill="#ffcc00" id="svg_85" rx="23.466662" ry="12.266668" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="null"/>
+  <path d="m347.515671,226.325892l5.800001,-33.066671l19.333339,0l5.799999,33.066671l-30.933339,0z" fill="black" id="svg_89" stroke-dasharray="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="null"/>
+ </g>
+</svg>

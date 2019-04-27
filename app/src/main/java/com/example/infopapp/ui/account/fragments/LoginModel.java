@@ -1,10 +1,10 @@
-package com.example.infopapp.models;
+package com.example.infopapp.Login.fragments;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.ProgressBar;
 
-import com.example.infopapp.views.LoginView;
+import com.example.infopapp.Login.fragments.LoginView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
