@@ -1,4 +1,4 @@
-package com.example.infopapp.utils;
+package com.example.infopapp.entities;
 
 public class User {
     private String firstName, lastName, email, password;

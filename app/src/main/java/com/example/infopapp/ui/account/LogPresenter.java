@@ -1,9 +1,6 @@
-package com.example.infopapp.presenters;
+package com.example.infopapp.ui.account;
 
 import android.util.Patterns;
-
-import com.example.infopapp.Login.fragments.LoginModel;
-import com.example.infopapp.Login.fragments.LoginView;
 
 public class LogPresenter {
 
@@ -63,16 +60,21 @@ public class LogPresenter {
             loginView.setConfirmError("Mismatch! Please confirm your password");
             return false;
         }
-//
-//        if(loginModel.signUp(email,password) == true){
-//            loginView.setLoginStatus("Registration successful");
-//            return ;
-////
-//        }else{
-//            loginView.setLoginStatus("An error occured. Please Try again later");
-//            return;
-//        }
+
         return loginModel.signUp(email, password);
+    }
+
+    public boolean resetPassword(String email){
+        if (email.isEmpty()) {
+            loginView.setEmailError("Please enter an e-mail");
+            return false;
+
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            loginView.setEmailError("Invalid e-mail syntax");
+            return false;
+
+        }
+        return loginModel.resetPassword(email);
     }
 
 

@@ -1,13 +1,14 @@
-package com.example.infopapp.Login;
+package com.example.infopapp.ui;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.infopapp.R;
+import com.example.infopapp.ui.home_screens.HomeActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -24,7 +25,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent startIntent = new Intent(SplashScreenActivity.this, MainActivity.class);
+                Intent startIntent = new Intent(SplashScreenActivity.this, HomeActivity.class);
                 startActivity(startIntent);
                 finish();
             }

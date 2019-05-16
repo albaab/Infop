@@ -1,4 +1,4 @@
-package com.example.infopapp.utils;
+package com.example.infopapp.entities;
 
 public class Student extends User {
     private String userType, cohort;

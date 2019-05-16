@@ -1,4 +1,4 @@
-package com.example.infopapp.Login.fragments;
+package com.example.infopapp.ui.account;
 
 public interface LoginView {
     void setLoginStatus(String message);

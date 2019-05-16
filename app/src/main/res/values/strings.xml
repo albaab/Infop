@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Infop</string>
+    <string name="app_name">WorkLearning</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -7,9 +7,40 @@
     <string name="email_hint">example@mail.com</string>
     <string name="password_hint">password</string>
     <string name="sign_in">Sign in</string>
-    <string name="reset_password"><u>Forgot your password? Reset</u></string>
+    <string name="reset_password_link"><u>Forgot your password? Reset</u></string>
     <string name="create_account"><u>New user? Create an account</u></string>
     <string name="confirm_password">Confirm password</string>
     <string name="sign_up">Sign up</string>
     <string name="student">Student</string>
+    <string name="background">background</string>
+    <string name="other">Other</string>
+    <string name="instructor">Instructor</string>
+    <string name="staff">Staff</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="logo">App Logo</string>
+    <string name="Aspire_farther">Aspire farther...</string>
+    <string name="title_fragment_home">HOME</string>
+    <string name="title_fragment_sessions">SESSIONS</string>
+    <string name="title_fragment_messages">MESSAGE</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="action_logout">Log out</string>
+    <string name="action_search">Search</string>
+    <string name="HARD_SKILLS">HARD SKILLS</string>
+    <string name="SOFT_SKILLS">SOFT SKILLS</string>
+    <string name="EMPLOYABILITY">EMPLOYABILITY</string>
+    <string name="web_development">WEB DEVELOPMENT</string>
+    <string name="data_science">DATA SCIENCE</string>
+    <string name="mobile_development">MOBILE DEVELOPMENT</string>
+    <string name="Month">Month</string>
+    <string name="day">Day</string>
+    <string name="hour_text">12:00</string>
+    <string name="number_of_notifications">0</string>
+    <string name="description">Description:</string>
+    <string name="homework">Homework:</string>
+    <string name="resources">Resources: </string>
+    <string name="feedbacks">Feedbacks:</string>
 </resources>

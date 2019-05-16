@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradient"
+    tools:context=".ui.account.fragments.SignUpFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:contentDescription="@string/student"
+                android:id="@+id/rect_student"
+                android:layout_width="207dp"
+                android:layout_height="207dp"
+                android:layout_marginStart="101dp"
+                android:layout_marginLeft="101dp"
+                android:layout_marginEnd="101dp"
+                android:layout_marginRight="101dp"
+                android:src="@drawable/white_circle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sign_up_text_view" />
+
+
+            <ImageView
+                android:id="@+id/sign_in_image"
+                android:layout_width="133dp"
+                android:layout_height="133dp"
+                android:layout_marginTop="36dp"
+                android:contentDescription="@string/student"
+                android:src="@drawable/talent"
+                app:layout_constraintEnd_toEndOf="@+id/rect_student"
+                app:layout_constraintHorizontal_bias="0.513"
+                app:layout_constraintStart_toStartOf="@+id/rect_student"
+                app:layout_constraintTop_toBottomOf="@+id/sign_up_text_view" />
+
+            <TextView
+                android:id="@+id/sign_up_text_view"
+                android:layout_width="196dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:gravity="center"
+                android:text="@string/student"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                app:fontFamily="monospace"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/email_edit_sign_in"
+                android:layout_width="300sp"
+                android:layout_height="40sp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/text_field"
+                android:hint="@string/email_hint"
+                android:inputType="textEmailAddress"
+                android:padding="4dp"
+                android:paddingStart="20sp"
+                android:paddingEnd="0dp"
+                android:paddingLeft="20sp"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rect_student"
+                android:paddingRight="0dp" />
+
+            <EditText
+                android:id="@+id/password_edit"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/text_field"
+                android:ems="10"
+                android:hint="@string/password_hint"
+                android:inputType="textPassword"
+                android:padding="4dp"
+                android:paddingStart="20sp"
+                android:paddingLeft="20sp"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/email_edit_sign_in"
+                tools:ignore="RtlSymmetry" />
+
+            <EditText
+                android:id="@+id/confirm_password_edit"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/text_field"
+                android:ems="10"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
+                android:padding="4dp"
+                android:paddingStart="20sp"
+                android:paddingLeft="20sp"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/password_edit"
+                tools:ignore="RtlSymmetry" />
+
+            <Button
+                android:id="@+id/sign_up_button"
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_gradient"
+                app:fontFamily="monospace"
+                android:text="@string/sign_up"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/confirm_password_edit" />
+
+            <ProgressBar
+                android:id="@+id/progressBar_sign_up"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sign_up_button"
+                app:layout_constraintVertical_bias="0.096"
+                tools:visibility="visible" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

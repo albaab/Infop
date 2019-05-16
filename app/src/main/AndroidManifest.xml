@@ -9,15 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.SplashScreenActivity">
+        <activity android:name=".ui.sessions.SessionsActivity"></activity>
+        <activity android:name=".ui.HardSkillsActivity" />
+        <activity
+            android:name=".ui.home_screens.HomeActivity"
+            android:label="@string/title_fragment_home"
+            android:parentActivityName=".ui.account.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MainActivity">
+        <activity
+            android:name=".ui.account.MainActivity"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

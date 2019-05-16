@@ -1,28 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context=".activities.SplashScreenActivity">
+    tools:context=".ui.SplashScreenActivity">
 
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="244dp"
-        android:layout_height="232dp"
+        android:contentDescription="@string/logo"
+        android:id="@+id/app_logo_splash_screen"
+        android:layout_width="163dp"
+        android:layout_height="173dp"
         android:layout_marginStart="80dp"
         android:layout_marginLeft="80dp"
         android:layout_marginTop="240dp"
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
-        android:layout_marginBottom="240dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.473"
-        app:srcCompat="@drawable/ic_launcher_round" />
-</android.support.constraint.ConstraintLayout>
+        app:srcCompat="@drawable/edacy" />
+
+    <TextView
+        android:layout_width="252dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:gravity="center"
+        android:text="@string/Aspire_farther"
+        android:textColor="@android:color/background_dark"
+        android:textSize="19sp"
+        android:textStyle="italic"
+        app:fontFamily="monospace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_logo_splash_screen" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

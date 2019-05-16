@@ -1,11 +1,11 @@
-package com.example.infopapp.Login.fragments;
+package com.example.infopapp.ui.account.fragments;
 
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +33,7 @@ public class ChooseAccountFragment extends Fragment {
     }
 
     public interface CallBackChooseAccount {
-        void switchToSignInFragment(Bundle bundle);
+        void switchToSignUpFragment(Bundle bundle);
 }
 
 
@@ -57,28 +57,28 @@ public class ChooseAccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 bundleChooseAccount.putString("key","Student");
-                mCallBack.switchToSignInFragment(bundleChooseAccount);
+                mCallBack.switchToSignUpFragment(bundleChooseAccount);
             }
         });
         staffImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 bundleChooseAccount.putString("key","Staff");
-                mCallBack.switchToSignInFragment(bundleChooseAccount);
+                mCallBack.switchToSignUpFragment(bundleChooseAccount);
             }
         });
         instructorImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 bundleChooseAccount.putString("key","Instructor");
-                mCallBack.switchToSignInFragment(bundleChooseAccount);
+                mCallBack.switchToSignUpFragment(bundleChooseAccount);
             }
         });
         otherImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 bundleChooseAccount.putString("key","Other");
-                mCallBack.switchToSignInFragment(bundleChooseAccount);
+                mCallBack.switchToSignUpFragment(bundleChooseAccount);
             }
         });
     }
