@@ -8,6 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.infopapp.R;
+import com.example.infopapp.ui.account.ConnectToAccountActivity;
 import com.example.infopapp.ui.home_screens.HomeActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -25,7 +26,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent startIntent = new Intent(SplashScreenActivity.this, HomeActivity.class);
+                Intent startIntent = new Intent(SplashScreenActivity.this
+                                                            , ConnectToAccountActivity.class);
                 startActivity(startIntent);
                 finish();
             }

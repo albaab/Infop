@@ -13,6 +13,12 @@ import android.widget.ImageView;
 
 import com.example.infopapp.R;
 
+import static com.example.infopapp.utils.StringConstants.KEY;
+import static com.example.infopapp.utils.StringConstants.INSTRUCTOR;
+import static com.example.infopapp.utils.StringConstants.GUEST;
+import static com.example.infopapp.utils.StringConstants.STAFF;
+import static com.example.infopapp.utils.StringConstants.STUDENT;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -56,28 +62,28 @@ public class ChooseAccountFragment extends Fragment {
         talentImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bundleChooseAccount.putString("key","Student");
+                bundleChooseAccount.putString(KEY,STUDENT);
                 mCallBack.switchToSignUpFragment(bundleChooseAccount);
             }
         });
         staffImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bundleChooseAccount.putString("key","Staff");
+                bundleChooseAccount.putString(KEY,STAFF);
                 mCallBack.switchToSignUpFragment(bundleChooseAccount);
             }
         });
         instructorImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bundleChooseAccount.putString("key","Instructor");
+                bundleChooseAccount.putString(KEY,INSTRUCTOR);
                 mCallBack.switchToSignUpFragment(bundleChooseAccount);
             }
         });
         otherImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bundleChooseAccount.putString("key","Other");
+                bundleChooseAccount.putString(KEY, GUEST);
                 mCallBack.switchToSignUpFragment(bundleChooseAccount);
             }
         });

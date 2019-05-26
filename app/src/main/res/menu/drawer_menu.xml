@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:title="@string/my_space">
+    <menu>
+        <group android:checkableBehavior="single">
+
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_person"
+                android:title="@string/profile" />
+
+            <item
+                android:id="@+id/nav_dashboard"
+                android:icon="@drawable/ic_dashboard"
+                android:title="@string/dashboard" />
+
+            <item
+                android:id="@+id/nav_contacts"
+                android:icon="@drawable/ic_directory"
+                android:title="@string/directory" />
+
+        </group>
+    </menu>
+</item>
+
+
+    <item
+        android:title="@string/channels">
+        <menu>
+            <item
+                android:id="@+id/channel_1"
+                android:icon="@drawable/ic_forum"
+                android:title="@string/cohorte"/>
+            <item
+                android:id="@+id/channel_2"
+                android:icon="@drawable/ic_forum"
+                android:title="@string/cohorte"/>
+            <item
+                android:id="@+id/channel_3"
+                android:icon="@drawable/ic_forum"
+                android:title="@string/cohorte"/>
+
+            <item
+                android:id="@+id/channel_4"
+                android:icon="@drawable/ic_forum"
+                android:title="@string/cohorte"/>
+            <item
+                android:id="@+id/channel_5"
+                android:icon="@drawable/ic_forum"
+                android:title="@string/cohorte"/>
+            <item
+                android:id="@+id/channel_6"
+                android:icon="@drawable/ic_forum"
+                android:title="@string/cohorte"/>
+
+            <item
+                android:id="@+id/channel_7"
+                android:icon="@drawable/ic_forum"
+                android:title="@string/cohorte"/>
+            <item
+                android:id="@+id/channel_8"
+                android:icon="@drawable/ic_forum"
+                android:title="@string/cohorte"/>
+            <item
+                android:id="@+id/channel_9"
+                android:icon="@drawable/ic_forum"
+                android:title="@string/cohorte"/>
+
+        </menu>
+
+    </item>
+</menu>

@@ -12,6 +12,6 @@
         android:layout_height="match_parent"
         android:fontFamily="casual"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        android:text="Home Page" />
+        android:text="Home Page\n(under development)" />
 
 </FrameLayout>

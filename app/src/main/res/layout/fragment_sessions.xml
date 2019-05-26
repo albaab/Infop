@@ -26,13 +26,14 @@
                 <ImageView
                     android:id="@+id/soft_skills_image"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/soft_skills_faces"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/soft_touch"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/hard_skills_image" />
+                    app:layout_constraintTop_toBottomOf="@+id/hard_skills_image"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/soft_skills_text_view"
@@ -45,7 +46,7 @@
                     android:gravity="center"
                     android:text="@string/SOFT_SKILLS"
                     android:textColor="@android:color/white"
-                    android:textSize="40sp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/soft_skills_image"
                     app:layout_constraintEnd_toEndOf="@+id/soft_skills_image"
@@ -57,22 +58,24 @@
                 <ImageView
                     android:id="@+id/hard_skills_image"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:src="@drawable/hard_skills"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
 
                 <ImageView
                     android:id="@+id/employability_image"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:src="@drawable/employability"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/soft_skills_image" />
+                    app:layout_constraintTop_toBottomOf="@+id/soft_skills_image"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/employability_text_view"
@@ -83,7 +86,7 @@
                     android:gravity="center"
                     android:text="@string/EMPLOYABILITY"
                     android:textColor="@android:color/white"
-                    android:textSize="40sp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/employability_image"
                     app:layout_constraintEnd_toEndOf="@+id/employability_image"
@@ -101,7 +104,7 @@
                     android:gravity="center"
                     android:text="@string/HARD_SKILLS"
                     android:textColor="@android:color/white"
-                    android:textSize="40sp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/hard_skills_image"
                     app:layout_constraintEnd_toEndOf="@+id/hard_skills_image"

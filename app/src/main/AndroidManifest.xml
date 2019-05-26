@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.infopapp">
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,12 +8,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.sessions.SessionsActivity"></activity>
+        <activity android:name=".ui.ContactsActivity"></activity>
+        <activity android:name=".ui.DashBoardActivity" />
+        <activity android:name=".ui.profile.ProfileActivity" />
+        <activity android:name=".ui.sessions.SessionsActivity" />
         <activity android:name=".ui.HardSkillsActivity" />
         <activity
             android:name=".ui.home_screens.HomeActivity"
             android:label="@string/title_fragment_home"
-            android:parentActivityName=".ui.account.MainActivity"
+            android:parentActivityName=".ui.account.ConnectToAccountActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.SplashScreenActivity">
             <intent-filter>
@@ -24,14 +26,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.account.MainActivity"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".ui.account.ConnectToAccountActivity"
+            android:windowSoftInputMode="adjustResize" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>

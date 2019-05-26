@@ -1,5 +1,6 @@
 package com.example.infopapp.ui.account;
 
+import android.content.Context;
 import android.util.Patterns;
 
 public class LogPresenter {
@@ -7,6 +8,7 @@ public class LogPresenter {
     private static final int PASSWORD_LENGTH_MIN = 6;
     private LoginView loginView;
     private LoginModel loginModel;
+    private Context mContext;
 //    public ProgressBar logProgressbar;
 
 
@@ -76,6 +78,7 @@ public class LogPresenter {
         }
         return loginModel.resetPassword(email);
     }
+
 
 
 }

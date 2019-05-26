@@ -1,11 +1,13 @@
 package com.example.infopapp.ui.account.fragments;
 
-
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,24 +16,26 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.infopapp.db.FirebaseDb;
 import com.example.infopapp.ui.account.LoginView;
 import com.example.infopapp.R;
 import com.example.infopapp.ui.account.LogPresenter;
+import com.example.infopapp.ui.profile.ProfileView;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class SignInFragment extends Fragment implements LoginView {
+import static androidx.constraintlayout.widget.Constraints.TAG;
+import static com.example.infopapp.utils.StringConstants.STATUS_KEY;
 
-    //======================================Attributes=============================================//
+
+public class SignInFragment extends Fragment implements LoginView, ProfileView {
+
+//======================================Attributes=============================================//
 
     private EditText emailEdit, passwordEdit;
     private String emailSignIn, passwordSignIn;
     private ProgressBar progressBar;
     private LogPresenter logPresenter;
     private Bundle signInBundle = new Bundle();
-    public CallBackSignInListener mCreateAccountCallback;
-
+    private CallBackSignInListener mCreateAccountCallback;
 
     //=======================================constructor(s)========================================//
     public SignInFragment() {
@@ -41,10 +45,23 @@ public class SignInFragment extends Fragment implements LoginView {
     //========================================LoginView methods====================================//
 
     @Override
-    public void setLoginStatus(String message) {
-        signInBundle.putString("Sign_in_success_message", message);
+    public void setLoginStatus(boolean isSuccessful, boolean isEmailVerified) {
+        Log.d(TAG, "setLoginStatus: START LOGIN SUCCESSFUL");
+
+//        FirebaseDb firebaseDb = new FirebaseDb(this);
+//        firebaseDb.isUserInFirebaseDb();
+        progressBar.setVisibility(View.INVISIBLE);
+        signInBundle.putBoolean(STATUS_KEY, isSuccessful);
         progressBar.setVisibility(View.INVISIBLE);
         mCreateAccountCallback.startHomeActivityFromSingIn(signInBundle);
+
+//        if (isEmailVerified) {
+//            signInBundle.putBoolean(STATUS_KEY, isSuccessful);
+//            progressBar.setVisibility(View.INVISIBLE);
+//            mCreateAccountCallback.startHomeActivityFromSingIn(signInBundle);
+//        } else {
+//            Toast.makeText(getActivity(), verifyEmailMessage, Toast.LENGTH_SHORT).show();
+//        }
     }
 
     @Override
@@ -59,15 +76,34 @@ public class SignInFragment extends Fragment implements LoginView {
         emailEdit.requestFocus();
     }
 
+    //    /-----------------------------------unused login view methods ----------------------------
+    @Override
+    public void setSignUpStatus(boolean isSuccessful, boolean isUserAlready) {
+        //DO NOTHING
+    }
+
     @Override
     public void setConfirmError(String confirmError) {
-        // do nothing
+        //DO NOTHING
+    }
+
+    //-------------------------------------unused profile view method-------------------------------
+    @Override
+    public void setUploadProfilePic(boolean myBoolean, int visibility) {
+
+    }
+
+    @Override
+    public void setUploadUserToDbStatus(boolean myBoolean) {
+
     }
 
     //=========================================CallBack interface==================================//
     public interface CallBackSignInListener {
         void switchToChooseAccountFragment();
+
         void startHomeActivityFromSingIn(Bundle bundle);
+
         void switchToResetPasswordFragment();
     }
 
@@ -76,9 +112,9 @@ public class SignInFragment extends Fragment implements LoginView {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if(context instanceof CallBackSignInListener){
+        if (context instanceof CallBackSignInListener) {
             mCreateAccountCallback = (CallBackSignInListener) context;
-        }else{
+        } else {
             throw new RuntimeException(context.toString()
                     + " must implement SignInListener");
         }
@@ -87,7 +123,6 @@ public class SignInFragment extends Fragment implements LoginView {
     @Override
     public void onDetach() {
         super.onDetach();
-        mCreateAccountCallback = null;
     }
     //=====================================On create===============================================//
 
@@ -105,7 +140,7 @@ public class SignInFragment extends Fragment implements LoginView {
         super.onViewCreated(view, savedInstanceState);
         //retrieve bundle from createAccountFragment
         logPresenter = new LogPresenter(this);
-
+        String verifyEmailMessage = (String) getActivity().getResources().getText(R.string.verify_email);
         //retrieve view items of the fragment layout
 
         TextView createAccountLink = view.findViewById(R.id.create_account_link);
@@ -120,15 +155,13 @@ public class SignInFragment extends Fragment implements LoginView {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 emailSignIn = emailEdit.getText().toString().trim();
                 passwordSignIn = passwordEdit.getText().toString().trim();
-                signInBundle.putString("user_email", emailSignIn);
-                signInBundle.putString("user_password", passwordSignIn);
 
                 if (logPresenter.signUserIn(emailSignIn, passwordSignIn)) {
                     progressBar.setVisibility(View.VISIBLE);
-                    emailEdit.setText("");
-                    passwordEdit.setText("");
                 }
 
 
@@ -141,7 +174,6 @@ public class SignInFragment extends Fragment implements LoginView {
                 mCreateAccountCallback.switchToResetPasswordFragment();
             }
         });
-
 
 
         createAccountLink.setOnClickListener(new View.OnClickListener() {

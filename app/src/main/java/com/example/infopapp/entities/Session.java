@@ -2,7 +2,6 @@ package com.example.infopapp.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "sessions_table")
@@ -34,6 +33,9 @@ public class Session {
     @ColumnInfo(name = "session_homework")
     private String sessionHomework;
 
+    @ColumnInfo(name = "session_resources")
+    private String sessionResources;
+
     @ColumnInfo(name = "session_feedback")
     private Boolean sessionFeedback;
 
@@ -51,8 +53,8 @@ public class Session {
 
 
     public Session(String sessionTitle, int sessionType, String sessionInstructor,
-                   String sessionDescription, String sessionDate, String sessionHomework,
-                   Boolean sessionFeedback) {
+                   String sessionDescription, String sessionDate, String sessionHomework
+                   ,String sessionResources,Boolean sessionFeedback) {
         this.sessionTitle = sessionTitle;
         this.sessionType = sessionType;
         this.sessionInstructor = sessionInstructor;
@@ -60,6 +62,15 @@ public class Session {
         this.sessionMonth = sessionDate;
         this.sessionHomework = sessionHomework;
         this.sessionFeedback = sessionFeedback;
+        this.sessionResources = sessionResources;
+    }
+
+    public String getSessionResources() {
+        return sessionResources;
+    }
+
+    public void setSessionResources(String sessionResources) {
+        this.sessionResources = sessionResources;
     }
 
     public int getId() {

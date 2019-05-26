@@ -1,28 +1,82 @@
 package com.example.infopapp.ui.home_screens;
 
 import android.app.Application;
+import android.content.Context;
+import android.widget.Toast;
 
+import com.example.infopapp.db.FirebaseDb;
+import com.example.infopapp.entities.Cohort;
 import com.example.infopapp.entities.Session;
+import com.example.infopapp.entities.User;
 import com.example.infopapp.repositories.SessionsRepository;
+import com.example.infopapp.repositories.UserRepository;
+import com.example.infopapp.ui.home_screens.fragments.portfolios.PortoFolioAdapter;
+import com.example.infopapp.ui.profile.ProfileView;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class HomeViewModel extends AndroidViewModel {
+public class HomeViewModel extends AndroidViewModel implements ProfileView {
 
     private SessionsRepository repository;
+    private UserRepository userRepo;
 
 
-    public HomeViewModel(@NonNull Application application) {
+    HomeViewModel(@NonNull Application application) {
         super(application);
         repository = new SessionsRepository(application);
+        userRepo = new UserRepository(this);
     }
 
-    void insertSessionData(Session session){repository.insertSession(session);}
-    void updateSessionData(Session session){repository.updateSession(session);}
-    void deleteSessionData(Session session){repository.deleteSession(session);}
-    LiveData<List<Session>> getAllSessionsData(){return repository.getAllSessions();}
+    public void insertSessionData(Session session) {
+        repository.insertSession(session);
+    }
+
+    public void updateSessionData(Session session) {
+        repository.updateSession(session);
+    }
+
+    public void deleteSessionData(Session session) {
+        repository.deleteSession(session);
+    }
+
+    public LiveData<List<Session>> getAllSessionsData() {
+        return repository.getAllSessions();
+    }
+
+    public void getAllCohortsData(final PortoFolioAdapter portoFolioAdapter, final RecyclerView rv
+            , final Context context) {
+
+        userRepo.getAllCohorts(new UserRepository.UserRepoCallBackInterface() {
+            @Override
+            public void onCallBackRepo(List<Cohort> cohorts) {
+                portoFolioAdapter.setListOfCohorts(cohorts);
+                rv.setAdapter(portoFolioAdapter);
+                portoFolioAdapter.setOnItemClickListener(new PortoFolioAdapter.OnCohortClickListener() {
+                    @Override
+                    public void onCohortClicked(Cohort cohort) {
+                        Toast.makeText(context, cohort + " Clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+//    public void checkifUserInFirebaseDb() {
+//        userRepo.checkifUserInFirebase();
+//    }
+
+    @Override
+    public void setUploadProfilePic(boolean myBoolean, int visibility) {
+
+    }
+
+    @Override
+    public void setUploadUserToDbStatus(boolean myBoolean) {
+
+    }
 }

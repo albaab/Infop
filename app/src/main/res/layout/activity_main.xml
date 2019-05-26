@@ -6,4 +6,4 @@
     android:layout_gravity="center"
     android:foregroundGravity="center"
     android:id="@+id/main_activity"
-    tools:context=".ui.account.MainActivity"/>
+    tools:context=".ui.account.ConnectToAccountActivity"/>

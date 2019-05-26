@@ -28,7 +28,7 @@ public class SessionViewModel extends AndroidViewModel {
         repo.deleteSession(session);
     }
 
-    public LiveData<List<Session>> getAllJobsFromDatabase (){
+    public LiveData<List<Session>> getAllSessionsFromDatabase(){
         return repo.getAllSessions();
     }
 }

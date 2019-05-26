@@ -1,30 +1,37 @@
 package com.example.infopapp.ui.account;
 
 import android.content.Intent;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.infopapp.R;
+import com.example.infopapp.entities.User;
 import com.example.infopapp.ui.account.fragments.ChooseAccountFragment;
 import com.example.infopapp.ui.account.fragments.ResetPasswordFragment;
 import com.example.infopapp.ui.account.fragments.SignUpFragment;
 import com.example.infopapp.ui.account.fragments.SignInFragment;
 import com.example.infopapp.ui.home_screens.HomeActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity implements
+import static com.example.infopapp.utils.StringConstants.KEY;
+import static com.example.infopapp.utils.StringConstants.STATUS_KEY;
+
+public class ConnectToAccountActivity extends AppCompatActivity implements
         ChooseAccountFragment.CallBackChooseAccount,
-        SignInFragment.CallBackSignInListener, SignUpFragment.CallBackCreateAccount,
-        ResetPasswordFragment.ResetPasswordFragmentListener {
+        SignInFragment.CallBackSignInListener {
 
+    private static final String TAG = "Signing in";
     //=====================================private attributes======================================//
-    private Bundle mainBundle = new Bundle();
     //fragments
     private ChooseAccountFragment chooseAccountFragment = new ChooseAccountFragment();
     private SignInFragment signInFragment;
@@ -33,12 +40,14 @@ public class MainActivity extends AppCompatActivity implements
     //fragment manager
     private FragmentManager manager = getSupportFragmentManager();
 
-    //presenters
+    //static user attribute
+    public static User thisUser = new User();
 
     //=====================================On create method=======================================//
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: START ON CREATE METHOD");
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -47,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().hide();
-
         signInFragment = new SignInFragment();
         signUpFragment = new SignUpFragment();
         resetPasswordFragment = new ResetPasswordFragment();
@@ -56,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    protected void switchToFragment(Fragment fragment){
+    protected void switchToFragment(Fragment fragment) {
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.main_activity, fragment);
         transaction.commit();
@@ -74,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements
     public void getPreviousFragment() {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_activity);
         if (fragment instanceof ChooseAccountFragment
-          ||fragment instanceof ResetPasswordFragment ) {
+                || fragment instanceof ResetPasswordFragment) {
             switchToFragment(signInFragment);
         }
         if (fragment instanceof SignUpFragment) {
@@ -82,8 +90,7 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    //=====================================Switching from fragment to fragment methods==============//
-
+//=====================================Switching from fragment to fragment methods==============//
     @Override
     public void switchToSignUpFragment(Bundle bundle) {
         signUpFragment.setArguments(bundle);
@@ -96,43 +103,45 @@ public class MainActivity extends AppCompatActivity implements
         switchToFragment(chooseAccountFragment);
     }
 
-    @Override
-    public void startHomeActivityFromSingIn(Bundle bundle) {
-        String messageSignInSuccess = bundle.getString("Sign_in_success_message");
-//        String userEmail = bundle.getString("new_user_email");
-//        String userPassword = bundle.getString("new_user_password");
-        if (messageSignInSuccess != null){
-            Toast.makeText(this, messageSignInSuccess, Toast.LENGTH_SHORT).show();
-            bundle.clear();
-
-            startActivity( new Intent(this, HomeActivity.class));
-        }
-    }
 
     @Override
     public void switchToResetPasswordFragment() {
         switchToFragment(resetPasswordFragment);
     }
-    //=====================================send User info methods====================================//
 
+//=====================================Sign In and Sign up methods==================================
     @Override
-    public void startHomeActivityFromSignUp(Bundle bundle) {
+    public void startHomeActivityFromSingIn(Bundle bundle) {
 
-        String messageSuccess = bundle.getString("Registration_message");
-//        // email and password attributes
-//        String userEmail = bundle.getString("new_user_email");
-//        String userPassword = bundle.getString("new_user_password");
-        if (messageSuccess != (null)){
-            Toast.makeText(this, messageSuccess, Toast.LENGTH_SHORT).show();
-            bundle.clear();
-            startActivity(new Intent(this, HomeActivity.class));
+        Log.d(TAG, "startHomeActivityFromSingIn: START SIGNING IN");
+        boolean isSuccessful = bundle.getBoolean(STATUS_KEY);
+        String signInSuccessMessage = this.getResources().getString(R.string.login_success_message);
+        String signInFailMessage = this.getResources().getString(R.string.login_fail_message);
+
+        if (isSuccessful) {
+            Toast.makeText(this, signInSuccessMessage, Toast.LENGTH_SHORT).show();
+
+            Intent signInIntent = new Intent(this, HomeActivity.class);
+            signInIntent.putExtra(KEY,thisUser.getUserType());
+            Log.d(TAG, "START GO TO HOME ACTIVITY FROM SIGN IN: "+ FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+            startActivity(signInIntent);
+            finish();
+        } else {
+            Toast.makeText(this, signInFailMessage, Toast.LENGTH_SHORT).show();
         }
-
+        bundle.clear();
     }
 
-
+    //=====================================On start method==========================================
     @Override
-    public void goBackToSignInFragment() {
-        switchToFragment(signInFragment);
+    protected void onStart() {
+
+        Log.d(TAG, "onStart: START THE CONNECT TO ACCOUNT ACTIVITY");
+        super.onStart();
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+        }
     }
+
 }

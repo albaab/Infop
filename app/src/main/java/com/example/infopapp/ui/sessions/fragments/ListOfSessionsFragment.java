@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.infopapp.R;
 import com.example.infopapp.entities.Session;
@@ -64,7 +63,7 @@ public class ListOfSessionsFragment extends Fragment {
         sessionsRecyclerView.setLayoutManager(sessionsLayoutManager);
 
         sessionViewModel = ViewModelProviders.of(this).get(SessionViewModel.class);
-        sessionViewModel.getAllJobsFromDatabase().observe(this, new Observer<List<Session>>() {
+        sessionViewModel.getAllSessionsFromDatabase().observe(this, new Observer<List<Session>>() {
             @Override
             public void onChanged(List<Session> sessions) {
                 sessionAdapter.setListOfSessions(sessions);
@@ -79,8 +78,10 @@ public class ListOfSessionsFragment extends Fragment {
                 listOfsessionsBundle.putString("SESSION_TITLE",session.getSessionTitle());
                 listOfsessionsBundle.putString("SESSION_MONTH",session.getSessionMonth());
                 listOfsessionsBundle.putInt("SESSION_DAY",session.getSessionDay());
+                listOfsessionsBundle.putString("SESSION_HOUR",session.getSessionHour());
                 listOfsessionsBundle.putString("SESSION_DESCRIPTION",session.getSessionDescription());
                 listOfsessionsBundle.putString("SESSION_HOMEWORK",session.getSessionHomework());
+                listOfsessionsBundle.putString("SESSION_RESOURCES",session.getSessionResources());
 
                 mListOfSessionsListener.goToSelectedSession(listOfsessionsBundle);
             }

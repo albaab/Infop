@@ -40,6 +40,7 @@ public class SelectedSessionFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         title = view.findViewById(R.id.session_view_title);
+        hour = view.findViewById(R.id.session_view_hour);
         description = view.findViewById(R.id.description_text_view);
         homework = view.findViewById(R.id.homework_text_view);
         resources = view.findViewById(R.id.resources_text_view);
@@ -53,11 +54,12 @@ public class SelectedSessionFragment extends Fragment {
         Bundle selectedSessionBundle = getArguments();
 
         title.setText(selectedSessionBundle.getString("SESSION_TITLE"));
+        hour.setText(selectedSessionBundle.getString("SESSION_HOUR"));
         description.setText(selectedSessionBundle.getString("SESSION_DESCRIPTION"));
         homework.setText(selectedSessionBundle.getString("SESSION_HOMEWORK"));
+        resources.setText(selectedSessionBundle.getString("SESSION_RESOURCES"));
 
         showHideTextViews();
-
 
     }
 

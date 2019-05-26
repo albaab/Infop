@@ -1,19 +1,18 @@
 <resources>
-    <string name="app_name">WorkLearning</string>
+    <string name="app_name">E-dacy</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ChooseAccount">Choose Account</string>
     <string name="email_hint">example@mail.com</string>
     <string name="password_hint">password</string>
     <string name="sign_in">Sign in</string>
-    <string name="reset_password_link"><u>Forgot your password? Reset</u></string>
-    <string name="create_account"><u>New user? Create an account</u></string>
+    <string name="reset_password_link">Forgot your password? <u>Reset</u></string>
+    <string name="create_account">New user? <u>Create an account</u>></string>
     <string name="confirm_password">Confirm password</string>
     <string name="sign_up">Sign up</string>
     <string name="student">Student</string>
     <string name="background">background</string>
-    <string name="other">Other</string>
+    <string name="guest">Guest</string>
     <string name="instructor">Instructor</string>
     <string name="staff">Staff</string>
     <string name="reset_password">Reset Password</string>
@@ -38,9 +37,52 @@
     <string name="Month">Month</string>
     <string name="day">Day</string>
     <string name="hour_text">12:00</string>
-    <string name="number_of_notifications">0</string>
+    <string name="number">0</string>
     <string name="description">Description:</string>
     <string name="homework">Homework:</string>
     <string name="resources">Resources: </string>
     <string name="feedbacks">Feedbacks:</string>
+    <string name="feedback_form_link">Please fill out the <u>feedback form</u></string>
+    <string name="profile">Profile</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="directory">Directory</string>
+    <string name="channels">CHANNELS</string>
+    <string name="my_space">MY SPACE</string>
+    <string name="cohorte">\Cohort</string>
+    <string name="username">Username</string>
+    <string name="name">My Name</string>
+    <string name="specialization">Specialization</string>
+    <string name="open_drawer">Open navigation drawer</string>
+    <string name="close_drawer">Close navigation drawer</string>
+    <string name="login_success_message">Logged in</string>
+    <string name="login_fail_message">Error! Please Check the credentials you provided</string>
+    <string name="success">Success!</string>
+    <string name="user_already_registered">User already registered</string>
+    <string name="error_message">An error occured</string>
+    <string name="reset_password_message">Password reset! Please follow the instructions sent to the the email you provided</string>
+    <string name="phone_number">Phone number</string>
+    <string name="display_name">Display name</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Ok</string>
+    <string name="upload_success">Picture uploaded</string>
+    <string name="upload_failed">Failed to Upload! Please, try again later.</string>
+    <string name="profile_updated_message">Profile updated</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last name</string>
+    <string name="complete_profile_message">Please complete your profile</string>
+    <string name="user_token">user token</string>
+    <string name="token_message">Error! Please enter the correct key</string>
+    <string name="verify_email">Please confirm your credentials with the link sent to the email you provided</string>
+    <string name="job_title">Job title</string>
+    <string name="title_portfolios">PORTFOLIOS</string>
+
+    <array name="module_specialization">
+        <item name = "data_science">Data science</item>
+        <item name = "mobile_development">Mobile development</item>
+        <item name ="web_development">Web development</item>
+        <item name ="instructor">Instructor</item>
+        <item name = "student_success_coordinator">Student Success Coordinator</item>
+        <item name = "career_service_">Head of Career Services</item>
+    </array>
 </resources>
