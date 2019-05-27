@@ -1,13 +1,11 @@
 package com.example.infopapp.ui.home_screens.fragments.portfolios;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.infopapp.R;
 import com.example.infopapp.entities.Cohort;
@@ -20,7 +18,6 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -67,7 +64,7 @@ public class PortFoliosFragment extends Fragment {
 
         HomeViewModel homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
 
-        homeViewModel.getAllCohortsData(portoFolioAdapter,porfolioRv, mContext);
+        homeViewModel.getAllCohortsDataVm(portoFolioAdapter,porfolioRv, mContext, progressBar);
 
 //        portoFolioAdapter.setListOfCohorts(cohorts);
 //        porfolioRv.setAdapter(portoFolioAdapter);

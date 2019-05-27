@@ -15,6 +15,9 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.infopapp.R;
+import com.example.infopapp.entities.Instructor;
+import com.example.infopapp.entities.Staff;
+import com.example.infopapp.entities.Student;
 import com.example.infopapp.entities.User;
 import com.example.infopapp.ui.account.fragments.ChooseAccountFragment;
 import com.example.infopapp.ui.account.fragments.ResetPasswordFragment;
@@ -42,6 +45,10 @@ public class ConnectToAccountActivity extends AppCompatActivity implements
 
     //static user attribute
     public static User thisUser = new User();
+    public static Student thisStudent = new Student();
+    public static Staff thisStaff = new Staff();
+    public static Instructor thisInstructor = new Instructor();
+    public static String USERTYPE = "";
 
     //=====================================On create method=======================================//
 
@@ -120,10 +127,9 @@ public class ConnectToAccountActivity extends AppCompatActivity implements
 
         if (isSuccessful) {
             Toast.makeText(this, signInSuccessMessage, Toast.LENGTH_SHORT).show();
-
             Intent signInIntent = new Intent(this, HomeActivity.class);
-            signInIntent.putExtra(KEY,thisUser.getUserType());
-            Log.d(TAG, "START GO TO HOME ACTIVITY FROM SIGN IN: "+ FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+            Log.d(TAG, "START GO TO HOME ACTIVITY FROM SIGN IN: "
+                    + FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
             startActivity(signInIntent);
             finish();
         } else {

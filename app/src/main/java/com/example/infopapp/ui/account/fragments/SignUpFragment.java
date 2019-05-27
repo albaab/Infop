@@ -34,6 +34,10 @@ import com.example.infopapp.ui.home_screens.HomeActivity;
 import com.example.infopapp.ui.profile.ProfileView;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.USERTYPE;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisInstructor;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStaff;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStudent;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisUser;
 import static com.example.infopapp.utils.StringConstants.KEY;
 import static com.example.infopapp.utils.StringConstants.INSTRUCTOR;
@@ -55,11 +59,11 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
 
     private Bundle bundleCreateAccount = new Bundle();
 
-//    private CallBackCreateAccount callBackCreateAccount;
 
     private LogPresenter logPresenter;
 
     private String tokenMessage;
+    private String errorMessage;
     private String successMessage;
     private String userAlreadyRegisteredMessage;
     private String signUpFailMessage;
@@ -84,20 +88,13 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
         progressBar.setVisibility(View.INVISIBLE);
 
         if (isSuccessful) {
+            firebaseDb.uploadUserToFirebaseDb(thisUser);
 
             Toast.makeText(getActivity(), successMessage, Toast.LENGTH_SHORT).show();
             emailEdit.setText("");
             passwordEdit.setText("");
             confirmPasswordEdit.setText("");
             userTokenEdit.setText("");
-
-            firebaseDb.uploadUserToFirebaseDb(thisUser);
-
-            Intent connectIntent = new Intent(getActivity(), HomeActivity.class);
-            connectIntent.putExtra(KEY, thisUser.getUserType());
-            startActivity(connectIntent);
-            getActivity().finish();
-
 
         } else if (isUserAlreadyRegistered) {
             Toast.makeText(getActivity(), userAlreadyRegisteredMessage, Toast.LENGTH_SHORT).show();
@@ -158,6 +155,7 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
         logPresenter = new LogPresenter(this);
         firebaseDb = new FirebaseDb(this);
         successMessage = (String) getActivity().getResources().getText(R.string.success);
+        errorMessage = (String) getText(R.string.error_message);
         userAlreadyRegisteredMessage = getActivity().getResources()
                 .getString(R.string.user_already_registered);
         signUpFailMessage = getActivity().getResources().getString(R.string.error_message);
@@ -262,32 +260,42 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
         if (!TextUtils.isEmpty(token)) {
             switch (token) {
                 case STUDENT_TOKEN:
-                    thisUser = new Student();
+                    thisUser = thisStudent;
+                    USERTYPE = thisStudent.getUserType();
                     break;
                 case INSTRUCTOR_TOKEN:
-                    thisUser = new Instructor();
+                    thisUser = thisInstructor;
+                    USERTYPE = thisInstructor.getUserType();
                     break;
                 case STAFF_TOKEN:
-                    thisUser = new Staff();
-//                    FirebaseDb.getAllStudentsFromFirebase();
+                    thisUser = thisStaff;
+                    USERTYPE = thisStaff.getUserType();
                     break;
-               default:
-                   thisUser = new User();
-                   thisUser.setUserType(GUEST);
-                   break;
+                default:
+                    thisUser.setUserType(GUEST);
+                    USERTYPE = GUEST;
+                    break;
             }
         } else {
-            thisUser = null;
+            userTokenEdit.setError(getText(R.string.token_message));
+            userTokenEdit.requestFocus();
         }
     }
 
+    //-----------------------------------profile view methods-------------------------------------------
     @Override
     public void setUploadProfilePic(boolean myBoolean, int visibility) {
-
     }
 
     @Override
     public void setUploadUserToDbStatus(boolean myBoolean) {
+        if (myBoolean){
+            Intent connectIntent = new Intent(getActivity(), HomeActivity.class);
+            startActivity(connectIntent);
+            getActivity().finish();
+        }else{
+            Toast.makeText(getContext(), errorMessage , Toast.LENGTH_SHORT).show();
+        }
 
     }
 }

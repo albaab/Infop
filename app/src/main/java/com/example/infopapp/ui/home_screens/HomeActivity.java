@@ -1,7 +1,5 @@
 package com.example.infopapp.ui.home_screens;
 
-import com.example.infopapp.db.FirebaseDb;
-import com.example.infopapp.entities.Student;
 import com.example.infopapp.ui.ContactsActivity;
 import com.example.infopapp.ui.DashBoardActivity;
 import com.example.infopapp.ui.profile.ProfileActivity;
@@ -35,9 +33,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
-import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisUser;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.USERTYPE;
 import static com.example.infopapp.utils.StringConstants.STAFF;
 
 
@@ -56,7 +52,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         setContentView(R.layout.activity_home);
 
@@ -133,7 +128,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         homeTab.setIcon(R.drawable.ic_home);
                         middleTab.setIcon(R.drawable.ic_session_selected);
                         messageTab.setIcon(R.drawable.ic_message);
-                        if(firebaseUser.getDisplayName().equals(STAFF)){
+                        if(USERTYPE.equals(STAFF)){
                             setTitle(R.string.title_portfolios);
                         }else{
                             setTitle(R.string.title_fragment_sessions);

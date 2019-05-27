@@ -17,16 +17,30 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.infopapp.db.FirebaseDb;
+import com.example.infopapp.entities.Instructor;
+import com.example.infopapp.entities.Staff;
+import com.example.infopapp.entities.Student;
+import com.example.infopapp.entities.User;
 import com.example.infopapp.ui.account.LoginView;
 import com.example.infopapp.R;
 import com.example.infopapp.ui.account.LogPresenter;
-import com.example.infopapp.ui.profile.ProfileView;
+
+import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.USERTYPE;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisInstructor;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStaff;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStudent;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisUser;
+import static com.example.infopapp.utils.StringConstants.GUEST;
+import static com.example.infopapp.utils.StringConstants.INSTRUCTOR;
+import static com.example.infopapp.utils.StringConstants.STAFF;
 import static com.example.infopapp.utils.StringConstants.STATUS_KEY;
+import static com.example.infopapp.utils.StringConstants.STUDENT;
 
 
-public class SignInFragment extends Fragment implements LoginView, ProfileView {
+public class SignInFragment extends Fragment implements LoginView, FirebaseDb.FirebaseDbCallBack {
 
 //======================================Attributes=============================================//
 
@@ -48,12 +62,11 @@ public class SignInFragment extends Fragment implements LoginView, ProfileView {
     public void setLoginStatus(boolean isSuccessful, boolean isEmailVerified) {
         Log.d(TAG, "setLoginStatus: START LOGIN SUCCESSFUL");
 
-//        FirebaseDb firebaseDb = new FirebaseDb(this);
-//        firebaseDb.isUserInFirebaseDb();
-        progressBar.setVisibility(View.INVISIBLE);
-        signInBundle.putBoolean(STATUS_KEY, isSuccessful);
-        progressBar.setVisibility(View.INVISIBLE);
-        mCreateAccountCallback.startHomeActivityFromSingIn(signInBundle);
+        if (isSuccessful){
+            FirebaseDb.isUserInFirebaseDb(thisUser,this);
+        }else{
+
+        }
 
 //        if (isEmailVerified) {
 //            signInBundle.putBoolean(STATUS_KEY, isSuccessful);
@@ -87,18 +100,46 @@ public class SignInFragment extends Fragment implements LoginView, ProfileView {
         //DO NOTHING
     }
 
-    //-------------------------------------unused profile view method-------------------------------
+    //==============================Firebase Db Interface methods===================================
     @Override
-    public void setUploadProfilePic(boolean myBoolean, int visibility) {
-
+    public void onCallBack(List<Student> studentList) {
+        //do nothing
     }
 
     @Override
-    public void setUploadUserToDbStatus(boolean myBoolean) {
-
+    public void onCallBackGetUser(User user, Student student, Staff staff, Instructor instructor) {
+        if (user != null) {
+            thisUser = user;
+            USERTYPE = GUEST;
+            thisStudent = null;
+            thisStaff = null;
+            thisInstructor = null;
+        } else if (student != null) {
+            thisStudent = student;
+            USERTYPE = STUDENT;
+            thisUser = null;
+            thisStaff = null;
+            thisInstructor = null;
+        } else if (staff != null) {
+            thisStaff = staff;
+            USERTYPE = STAFF;
+            thisStudent = null;
+            thisUser = null;
+            thisInstructor = null;
+        } else if (instructor != null) {
+            thisInstructor = instructor;
+            USERTYPE = INSTRUCTOR;
+            thisStudent = null;
+            thisStaff = null;
+            thisUser = null;
+        }
+        progressBar.setVisibility(View.INVISIBLE);
+        signInBundle.putBoolean(STATUS_KEY, true);
+        mCreateAccountCallback.startHomeActivityFromSingIn(signInBundle);
     }
 
-    //=========================================CallBack interface==================================//
+
+    //================================CallBack Sign in Fragment interface===========================
     public interface CallBackSignInListener {
         void switchToChooseAccountFragment();
 
@@ -123,6 +164,7 @@ public class SignInFragment extends Fragment implements LoginView, ProfileView {
     @Override
     public void onDetach() {
         super.onDetach();
+        mCreateAccountCallback = null;
     }
     //=====================================On create===============================================//
 

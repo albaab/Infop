@@ -2,6 +2,8 @@ package com.example.infopapp.ui.home_screens;
 
 import android.app.Application;
 import android.content.Context;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.infopapp.db.FirebaseDb;
@@ -48,12 +50,13 @@ public class HomeViewModel extends AndroidViewModel implements ProfileView {
         return repository.getAllSessions();
     }
 
-    public void getAllCohortsData(final PortoFolioAdapter portoFolioAdapter, final RecyclerView rv
-            , final Context context) {
-
+    public void getAllCohortsDataVm(final PortoFolioAdapter portoFolioAdapter, final RecyclerView rv
+            , final Context context, final ProgressBar progressBar) {
+        progressBar.setVisibility(View.VISIBLE);
         userRepo.getAllCohorts(new UserRepository.UserRepoCallBackInterface() {
             @Override
             public void onCallBackRepo(List<Cohort> cohorts) {
+                progressBar.setVisibility(View.GONE);
                 portoFolioAdapter.setListOfCohorts(cohorts);
                 rv.setAdapter(portoFolioAdapter);
                 portoFolioAdapter.setOnItemClickListener(new PortoFolioAdapter.OnCohortClickListener() {

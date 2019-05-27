@@ -17,17 +17,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.infopapp.R;
-import com.example.infopapp.entities.Instructor;
-import com.example.infopapp.entities.Staff;
-import com.example.infopapp.entities.Student;
 import com.example.infopapp.utils.RoundPicasso;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.USERTYPE;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisInstructor;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStaff;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStudent;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisUser;
 import static com.example.infopapp.utils.StringConstants.COHORT;
 import static com.example.infopapp.utils.StringConstants.DISPLAY_PROFILE_NAME;
@@ -59,8 +59,7 @@ public class ProfileActivity extends AppCompatActivity implements
     private Bundle bundleForDialogFragment;
 
 
-//======================================ON CREATE METHOD ===========================================
-
+    //======================================ON CREATE METHOD ===========================================
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +83,7 @@ public class ProfileActivity extends AppCompatActivity implements
         profilePresenter = new ProfilePresenter(this);
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+
         editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +100,7 @@ public class ProfileActivity extends AppCompatActivity implements
 
 
         Log.d(TAG, "onCreate: profile view created");
+
 
     }
 
@@ -120,7 +121,8 @@ public class ProfileActivity extends AppCompatActivity implements
     @Override
     protected void onStart() {
         super.onStart();
-        loadProfileInfo();
+        loadProfilePic();
+        loadUserInfoFromUserType();
         Log.d(TAG, "onStart: Profile view success");
     }
 
@@ -131,7 +133,7 @@ public class ProfileActivity extends AppCompatActivity implements
         Log.d(TAG, "onDestroy: Profile View closed");
     }
 
-    ////======================================UTILITY METHODS===========================================
+    //======================================UTILITY METHODS===========================================
     public void chooseImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -142,7 +144,7 @@ public class ProfileActivity extends AppCompatActivity implements
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 
-    private void loadProfileInfo() {
+    private void loadProfilePic() {
 
         if (currentUser != null) {
             email.setText(currentUser.getEmail());
@@ -165,101 +167,34 @@ public class ProfileActivity extends AppCompatActivity implements
                                         , getText(R.string.error_message), Toast.LENGTH_SHORT).show();
                             }
                         });
-                Log.d(TAG, "loadProfileInfo: download Picture with Picasso");
+                Log.d(TAG, "loadProfilePic: download Picture with Picasso");
             } else {
-                profileImage.setImageResource(R.drawable.talent);
-                Log.d(TAG, "loadProfileInfo: Load talent icon");
+                switch (USERTYPE) {
+                    case STUDENT:
+                        profileImage.setPadding(10,10,10,10);
+                        profileImage.setImageResource(R.drawable.talent);
+                        break;
+                    case STAFF:
+                        profileImage.setPadding(10,10,10,10);
+                        profileImage.setImageResource(R.drawable.staff_edacy);
+                        break;
+                    case INSTRUCTOR:
+                        profileImage.setPadding(10,10,10,10);
+                        profileImage.setImageResource(R.drawable.ic_instructor);
+                        break;
+                    case GUEST:
+                        profileImage.setPadding(10,10,10,10);
+                        profileImage.setImageResource(R.drawable.ic_person);
+                        break;
+                    default:
+                        profileImage.setPadding(10,10,10,10);
+                        profileImage.setImageResource(R.drawable.ic_person);
+                        break;
+                }
+                Log.d(TAG, "loadProfilePic: Load talent icon");
             }
 
-            String userFullName = thisUser.getFirstName() + " " + thisUser.getLastName();
-            if (!TextUtils.isEmpty(userFullName)) {
-                Log.d(TAG, "loadProfileInfo: Name of user displayed on screen");
-                fullName.setText(userFullName);
-            } else {
-                fullName.setText(getText(R.string.name));
-            }
         }
-        if (thisUser.getDisplayName() != null) {
-            displayName.setText(thisUser.getDisplayName());
-        } else {
-            displayName.setText(getText(R.string.display_name));
-        }
-        if (thisUser.getPhone() != null) {
-            phoneNumber.setText(thisUser.getPhone());
-        } else {
-            phoneNumber.setText(getText(R.string.phone_number));
-        }
-        loadUserTypeInfo();
-    }
-
-
-    private void loadUserTypeInfo() {
-        switch (currentUser.getDisplayName()) {
-            case STUDENT:
-                cohort.setVisibility(View.VISIBLE);
-                cohortTv.setVisibility(View.VISIBLE);
-                Student thisStudent = (Student) thisUser;
-
-                if (thisStudent.getSpecialization() != null) {
-                    specialization.setText(thisStudent.getSpecialization());
-                    bundleForDialogFragment.putString(SPECILIZATION
-                            , thisStudent.getSpecialization());
-                } else {
-                    specialization.setText(getText(R.string.specialization));
-                    bundleForDialogFragment.putString(SPECILIZATION
-                            , (String) getText(R.string.specialization));
-                }
-                if (thisStudent.getCohort() != 0) {
-                    cohort.setText(String.valueOf(thisStudent.getCohort()));
-                    bundleForDialogFragment.putInt(COHORT, thisStudent.getCohort());
-                } else {
-                    cohort.setText(String.valueOf(ZERO));
-                    bundleForDialogFragment.putInt(COHORT, Integer.valueOf(ZERO));
-                }
-
-                break;
-
-            case STAFF:
-                Staff thisStaff = (Staff)thisUser;
-
-                if (thisStaff.getJobTitle() != null) {
-                    specialization.setText(thisStaff.getJobTitle());
-                    bundleForDialogFragment.putString(SPECILIZATION, thisStaff.getJobTitle());
-                } else {
-                    bundleForDialogFragment.putString(SPECILIZATION
-                            , (String) getText(R.string.job_title));
-                    specialization.setText(getText(R.string.job_title));
-                }
-                break;
-            case INSTRUCTOR:
-                Instructor thisInstructor = (Instructor) thisUser;
-
-                if (thisInstructor.getJobTitle() != null) {
-                    specialization.setText(thisInstructor.getJobTitle());
-                    bundleForDialogFragment.putString(SPECILIZATION, thisInstructor.getJobTitle());
-                } else {
-                    specialization.setText(getText(R.string.job_title));
-                    bundleForDialogFragment.putString(SPECILIZATION
-                            , (String)getText(R.string.job_title));
-
-                }
-                break;
-            case GUEST:
-                specialization.setVisibility(View.GONE);
-                //TODO DISPLAY GUEST INFO
-                break;
-            default:
-                displayName.setText(getText(R.string.display_name));
-                phoneNumber.setText(getText(R.string.phone_number));
-                specialization.setText(getText(R.string.specialization));
-        }
-
-        bundleForDialogFragment.putString(USER, thisUser.getFirstName());
-        bundleForDialogFragment.putString(USER_LAST_NAME, thisUser.getLastName());
-        bundleForDialogFragment.putString(DISPLAY_PROFILE_NAME, thisUser.getDisplayName());
-        bundleForDialogFragment.putString(USER_PHONE_KEY, thisUser.getPhone());
-
-        profileDialogFragment.setArguments(bundleForDialogFragment);
 
     }
 
@@ -270,52 +205,76 @@ public class ProfileActivity extends AppCompatActivity implements
 
         if (bundle != null) {
 
-            thisUser.setEmail(currentUser.getEmail());
-            thisUser.setFirstName(bundle.getString(USER));
-            thisUser.setLastName((bundle.getString(USER_LAST_NAME)));
-            thisUser.setDisplayName(bundle.getString(DISPLAY_PROFILE_NAME));
-            thisUser.setPhone(bundle.getString(USER_PHONE_KEY));
+            switch (currentUser.getDisplayName()) {
 
-            String fullNameString = thisUser.getFirstName() + " " + thisUser.getLastName();
-            fullName.setText(fullNameString);
-            displayName.setText(thisUser.getDisplayName());
-            phoneNumber.setText(thisUser.getPhone());
-
-            switch (thisUser.getUserType()) {
                 case STUDENT:
-                    Student thisStudent = (Student) thisUser;
+                    thisStudent.setFirstName(bundle.getString(USER));
+                    thisStudent.setLastName((bundle.getString(USER_LAST_NAME)));
+                    thisStudent.setDisplayName(bundle.getString(DISPLAY_PROFILE_NAME));
+                    thisStudent.setPhone(bundle.getString(USER_PHONE_KEY));
                     thisStudent.setCohort(bundle.getInt(COHORT));
                     thisStudent.setSpecialization(bundle.getString(SPECILIZATION));
+                    String fullNameString = thisStudent.getFirstName() + " " + thisStudent.getLastName();
+                    fullName.setText(fullNameString);
+                    displayName.setText(thisStudent.getDisplayName());
+                    phoneNumber.setText(thisStudent.getPhone());
                     cohort.setText(String.valueOf(thisStudent.getCohort()));
                     specialization.setText(thisStudent.getSpecialization());
+                    profilePresenter.updateDbStudentInfo(thisStudent);
 
                     break;
                 case STAFF:
-                    Staff thisStaff = (Staff) thisUser;
+                    thisStaff.setFirstName(bundle.getString(USER));
+                    thisStaff.setLastName((bundle.getString(USER_LAST_NAME)));
+                    thisStaff.setDisplayName(bundle.getString(DISPLAY_PROFILE_NAME));
+                    thisStaff.setPhone(bundle.getString(USER_PHONE_KEY));
                     thisStaff.setJobTitle(bundle.getString(SPECILIZATION));
+
+                    String staffFullNameString = thisStaff.getFirstName() + " " + thisStaff.getLastName();
+                    fullName.setText(staffFullNameString);
+                    displayName.setText(thisStaff.getDisplayName());
+                    phoneNumber.setText(thisStaff.getPhone());
                     specialization.setText(thisStaff.getJobTitle());
+                    profilePresenter.updateDbStudentInfo(thisStaff);
+
+                    break;
+                case INSTRUCTOR:
+                    thisInstructor.setFirstName(bundle.getString(USER));
+                    thisInstructor.setLastName((bundle.getString(USER_LAST_NAME)));
+                    thisInstructor.setDisplayName(bundle.getString(DISPLAY_PROFILE_NAME));
+                    thisInstructor.setPhone(bundle.getString(USER_PHONE_KEY));
+                    thisInstructor.setSpecialization(bundle.getString(SPECILIZATION));
+
+                    String insFullNameString = thisStudent.getFirstName() + " " + thisStudent.getLastName();
+                    fullName.setText(insFullNameString);
+                    displayName.setText(thisInstructor.getDisplayName());
+                    phoneNumber.setText(thisInstructor.getPhone());
+                    cohort.setText(String.valueOf(thisInstructor.getCohort()));
+                    specialization.setText(thisInstructor.getSpecialization());
+                    profilePresenter.updateDbStudentInfo(thisInstructor);
+
                     break;
                 case GUEST:
-                    //TODO handle guest display info
-                    break;
-            }
+                    thisUser.setFirstName(bundle.getString(USER));
+                    thisUser.setLastName((bundle.getString(USER_LAST_NAME)));
+                    thisUser.setDisplayName(bundle.getString(DISPLAY_PROFILE_NAME));
+                    thisUser.setPhone(bundle.getString(USER_PHONE_KEY));
 
-            // UPLOAD OR UPDATE USER IN FIREBASE DATABASE
-            if (thisUser.getId() == null) {
-                Log.d(TAG, "saveProfileInfo: UPLOADING USER INFO IN DATABASE");
-                profilePresenter.uploadDatabaseInfo(thisUser);
-            } else {
-                profilePresenter.updateDbStudentInfo(thisUser);
-                Log.d(TAG, "saveProfileInfo: UPDATING USER INFO IN DATABASE");
+                    String guestFullNameString = thisUser.getFirstName() + " " + thisUser.getLastName();
+                    fullName.setText(guestFullNameString);
+                    displayName.setText(thisUser.getDisplayName());
+                    phoneNumber.setText(thisUser.getPhone());
+                    profilePresenter.updateDbStudentInfo(thisUser);
+
+                    break;
             }
 
         } else {
             Toast.makeText(this, getText(R.string.error_message), Toast.LENGTH_SHORT).show();
         }
-
     }
 
-    //======================================VIEW INTERFACE METHODS======================================
+    //======================================VIEW INTERFACE METHODS==================================
     @Override
     public void setUploadProfilePic(boolean myBoolean, int visibility) {
 
@@ -323,7 +282,6 @@ public class ProfileActivity extends AppCompatActivity implements
         String uploadMessageFail = this.getResources().getString(R.string.upload_failed);
 
         uploadProgressBar.setVisibility(visibility);
-
         if (myBoolean) {
             Toast.makeText(this, uploadMessageSuccess, Toast.LENGTH_SHORT).show();
             Picasso.with(this)
@@ -351,5 +309,186 @@ public class ProfileActivity extends AppCompatActivity implements
         } else {
             Toast.makeText(this, this.getText(R.string.complete_profile_message), Toast.LENGTH_SHORT).show();
         }
+    }
+
+//==========================================UTILITY METHODS=========================================
+
+    private void loadUserInfoFromUserType() {
+
+        switch (USERTYPE) {
+            case STUDENT:
+                loadStudentInfo();
+                break;
+
+            case STAFF:
+                loadStaffInfo();
+                break;
+            case INSTRUCTOR:
+                loadInstructorInfo();
+                break;
+            case GUEST:
+                loadGuestInfo();
+                break;
+            default:
+                displayName.setText(getText(R.string.display_name));
+                phoneNumber.setText(getText(R.string.phone_number));
+                specialization.setText(getText(R.string.specialization));
+                break;
+        }
+
+
+    }
+
+    private void loadStudentInfo() {
+        if (thisStudent != null) {
+            if (thisStudent.getFirstName() != null && thisStudent.getLastName() != null) {
+                String userFullName = thisStudent.getFirstName() + " " + thisStudent.getLastName();
+                Log.d(TAG, "loadProfilePic: Name of user displayed on screen");
+                fullName.setText(userFullName);
+            } else {
+                fullName.setText(getText(R.string.name));
+            }
+            if (thisStudent.getDisplayName() != null) {
+                displayName.setText(thisStudent.getDisplayName());
+            } else {
+                displayName.setText(getText(R.string.display_name));
+            }
+            if (thisStudent.getPhone() != null) {
+                phoneNumber.setText(thisStudent.getPhone());
+            } else {
+                phoneNumber.setText(getText(R.string.phone_number));
+            }
+            cohort.setVisibility(View.VISIBLE);
+            cohortTv.setVisibility(View.VISIBLE);
+
+            if (thisStudent.getSpecialization() != null) {
+                specialization.setText(thisStudent.getSpecialization());
+                bundleForDialogFragment.putString(SPECILIZATION
+                        , thisStudent.getSpecialization());
+            } else {
+                specialization.setText(getText(R.string.specialization));
+                bundleForDialogFragment.putString(SPECILIZATION
+                        , (String) getText(R.string.specialization));
+            }
+            if (thisStudent.getCohort() != 0) {
+                cohort.setText(String.valueOf(thisStudent.getCohort()));
+                bundleForDialogFragment.putInt(COHORT, thisStudent.getCohort());
+            } else {
+                cohort.setText(String.valueOf(ZERO));
+                bundleForDialogFragment.putInt(COHORT, Integer.valueOf(ZERO));
+            }
+            bundleForDialogFragment.putString(USER, thisStudent.getFirstName());
+            bundleForDialogFragment.putString(USER_LAST_NAME, thisStudent.getLastName());
+            bundleForDialogFragment.putString(DISPLAY_PROFILE_NAME, thisStudent.getDisplayName());
+            bundleForDialogFragment.putString(USER_PHONE_KEY, thisStudent.getPhone());
+
+            profileDialogFragment.setArguments(bundleForDialogFragment);
+
+        }
+
+
+    }
+
+    private void loadStaffInfo() {
+        if (thisStaff != null) {
+            String staffFullName = thisStaff.getFirstName() + " " + thisStaff.getLastName();
+            if (!TextUtils.isEmpty(staffFullName)) {
+                Log.d(TAG, "loadProfilePic: Name of user displayed on screen");
+                fullName.setText(staffFullName);
+            } else {
+                fullName.setText(getText(R.string.name));
+            }
+            if (thisStaff.getDisplayName() != null) {
+                displayName.setText(thisStaff.getDisplayName());
+            } else {
+                displayName.setText(getText(R.string.display_name));
+            }
+            if (thisStaff.getPhone() != null) {
+                phoneNumber.setText(thisStaff.getPhone());
+            } else {
+                phoneNumber.setText(getText(R.string.phone_number));
+            }
+
+            if (thisStaff.getJobTitle() != null) {
+                specialization.setText(thisStaff.getJobTitle());
+                bundleForDialogFragment.putString(SPECILIZATION, thisStaff.getJobTitle());
+            } else {
+                bundleForDialogFragment.putString(SPECILIZATION
+                        , (String) getText(R.string.job_title));
+                specialization.setText(getText(R.string.job_title));
+            }
+            bundleForDialogFragment.putString(USER, thisStaff.getFirstName());
+            bundleForDialogFragment.putString(USER_LAST_NAME, thisStaff.getLastName());
+            bundleForDialogFragment.putString(DISPLAY_PROFILE_NAME, thisStaff.getDisplayName());
+            bundleForDialogFragment.putString(USER_PHONE_KEY, thisStaff.getPhone());
+
+            profileDialogFragment.setArguments(bundleForDialogFragment);
+        }
+    }
+
+    private void loadInstructorInfo() {
+        if (thisInstructor != null) {
+            String instructorFullName = thisInstructor.getFirstName() + " " + thisInstructor.getLastName();
+            if (!TextUtils.isEmpty(instructorFullName)) {
+                Log.d(TAG, "loadProfilePic: Name of user displayed on screen");
+                fullName.setText(instructorFullName);
+            } else {
+                fullName.setText(getText(R.string.name));
+            }
+            if (thisInstructor.getDisplayName() != null) {
+                displayName.setText(thisInstructor.getDisplayName());
+            } else {
+                displayName.setText(getText(R.string.display_name));
+            }
+            if (thisInstructor.getPhone() != null) {
+                phoneNumber.setText(thisInstructor.getPhone());
+            } else {
+                phoneNumber.setText(getText(R.string.phone_number));
+            }
+            if (thisInstructor.getSpecialization() != null) {
+                specialization.setText(thisInstructor.getSpecialization());
+                bundleForDialogFragment.putString(SPECILIZATION, thisInstructor.getSpecialization());
+            } else {
+                specialization.setText(getText(R.string.job_title));
+                bundleForDialogFragment.putString(SPECILIZATION
+                        , (String) getText(R.string.job_title));
+            }
+            bundleForDialogFragment.putString(USER, thisInstructor.getFirstName());
+            bundleForDialogFragment.putString(USER_LAST_NAME, thisInstructor.getLastName());
+            bundleForDialogFragment.putString(DISPLAY_PROFILE_NAME, thisInstructor.getDisplayName());
+            bundleForDialogFragment.putString(USER_PHONE_KEY, thisInstructor.getPhone());
+
+            profileDialogFragment.setArguments(bundleForDialogFragment);
+
+        }
+    }
+
+    private void loadGuestInfo() {
+        if (thisUser != null) {
+            String guestFullName = thisUser.getFirstName() + " " + thisUser.getLastName();
+            if (!TextUtils.isEmpty(guestFullName)) {
+                Log.d(TAG, "loadProfilePic: Name of user displayed on screen");
+                fullName.setText(guestFullName);
+            } else {
+                fullName.setText(getText(R.string.name));
+            }
+            if (thisUser.getDisplayName() != null) {
+                displayName.setText(thisUser.getDisplayName());
+            } else {
+                displayName.setText(getText(R.string.display_name));
+            }
+            if (thisUser.getPhone() != null) {
+                phoneNumber.setText(thisUser.getPhone());
+            } else {
+                phoneNumber.setText(getText(R.string.phone_number));
+            }
+            specialization.setVisibility(View.GONE);
+        }
+        bundleForDialogFragment.putString(USER, thisUser.getFirstName());
+        bundleForDialogFragment.putString(USER_LAST_NAME, thisUser.getLastName());
+        bundleForDialogFragment.putString(DISPLAY_PROFILE_NAME, thisUser.getDisplayName());
+        bundleForDialogFragment.putString(USER_PHONE_KEY, thisUser.getPhone());
+
+        profileDialogFragment.setArguments(bundleForDialogFragment);
     }
 }
