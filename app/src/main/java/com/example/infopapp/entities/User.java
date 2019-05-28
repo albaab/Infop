@@ -50,7 +50,6 @@ public class User {
         return phone;
     }
 
-    @Exclude
     public String getProfileImageurl() {
         return profileImageurl;
     }
@@ -89,7 +88,6 @@ public class User {
         this.phone = phone;
     }
 
-    @Exclude
     public void setProfileImageurl(String profileImageurl) {
         this.profileImageurl = profileImageurl;
     }

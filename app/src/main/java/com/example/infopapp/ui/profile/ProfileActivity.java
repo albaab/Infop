@@ -63,10 +63,11 @@ public class ProfileActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile);
 
         bundleForDialogFragment = new Bundle();
         profileDialogFragment = new ProfileDialogFragment();
-        setContentView(R.layout.activity_profile);
+        setTitle(getText(R.string.profile));
         profileImage = findViewById(R.id.profile_image);
         FloatingActionButton uploadImageButton = findViewById(R.id.upload_image_button);
         FloatingActionButton editProfileButton = findViewById(R.id.edit_profile_button);
@@ -138,65 +139,12 @@ public class ProfileActivity extends AppCompatActivity implements
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
+        profileImage.setImageDrawable(null);
         startActivityForResult(Intent.createChooser(intent, "Select Profile Picture"), CHOOSE_IMAGE);
     }
 
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-
-    private void loadProfilePic() {
-
-        if (currentUser != null) {
-            email.setText(currentUser.getEmail());
-            if (currentUser.getPhotoUrl() != null) {
-
-                uploadProgressBar.setVisibility(View.VISIBLE);
-                Picasso.with(this)
-                        .load(currentUser.getPhotoUrl().toString())
-                        .transform(new RoundPicasso(profileImage.getMaxHeight(), 0))
-                        .into(profileImage, new Callback() {
-                            @Override
-                            public void onSuccess() {
-                                uploadProgressBar.setVisibility(View.GONE);
-                            }
-
-                            @Override
-                            public void onError() {
-                                uploadProgressBar.setVisibility(View.GONE);
-                                Toast.makeText(ProfileActivity.this
-                                        , getText(R.string.error_message), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                Log.d(TAG, "loadProfilePic: download Picture with Picasso");
-            } else {
-                switch (USERTYPE) {
-                    case STUDENT:
-                        profileImage.setPadding(10,10,10,10);
-                        profileImage.setImageResource(R.drawable.talent);
-                        break;
-                    case STAFF:
-                        profileImage.setPadding(10,10,10,10);
-                        profileImage.setImageResource(R.drawable.staff_edacy);
-                        break;
-                    case INSTRUCTOR:
-                        profileImage.setPadding(10,10,10,10);
-                        profileImage.setImageResource(R.drawable.ic_instructor);
-                        break;
-                    case GUEST:
-                        profileImage.setPadding(10,10,10,10);
-                        profileImage.setImageResource(R.drawable.ic_person);
-                        break;
-                    default:
-                        profileImage.setPadding(10,10,10,10);
-                        profileImage.setImageResource(R.drawable.ic_person);
-                        break;
-                }
-                Log.d(TAG, "loadProfilePic: Load talent icon");
-            }
-
-        }
-
-    }
 
 
     //----------------------------Profile dialog fragment interface method--------------------------
@@ -283,9 +231,11 @@ public class ProfileActivity extends AppCompatActivity implements
 
         uploadProgressBar.setVisibility(visibility);
         if (myBoolean) {
-            Toast.makeText(this, uploadMessageSuccess, Toast.LENGTH_SHORT).show();
+            saveImageUrlToFirebaseDatabase(currentUser.getPhotoUrl().toString());
             Picasso.with(this)
                     .load(profileImageUri)
+                    .resize(1444,1444)
+                    .centerCrop()
                     .transform(new RoundPicasso(profileImage.getHeight(), 0))
                     .into(profileImage);
             Log.d(TAG, "viewMethod: SETUPLOAD Picture uploadead");
@@ -299,19 +249,74 @@ public class ProfileActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void setUploadUserToDbStatus(boolean myBoolean) {
+    public void setUpdateUserInFirebaseDbStatus(boolean myBoolean) {
         if (myBoolean) {
             Toast.makeText(this, this.getText(R.string.profile_updated_message), Toast.LENGTH_SHORT).show();
-
-            if (currentUser.getPhotoUrl() != null) {
-                thisUser.setProfileImageurl(currentUser.getPhotoUrl().toString());
-            }
         } else {
             Toast.makeText(this, this.getText(R.string.complete_profile_message), Toast.LENGTH_SHORT).show();
         }
     }
 
 //==========================================UTILITY METHODS=========================================
+
+    private void loadProfilePic() {
+
+        if (currentUser != null) {
+            email.setText(currentUser.getEmail());
+            if (currentUser.getPhotoUrl() != null) {
+
+                uploadProgressBar.setVisibility(View.VISIBLE);
+                Picasso.with(this)
+                        .load(currentUser.getPhotoUrl().toString())
+                        .centerCrop()
+                        .resize(1444,1444)
+                        .transform(new RoundPicasso(profileImage.getMaxHeight(), 0))
+                        .into(profileImage, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                uploadProgressBar.setVisibility(View.GONE);
+                            }
+
+                            @Override
+                            public void onError() {
+                                uploadProgressBar.setVisibility(View.GONE);
+                                Toast.makeText(ProfileActivity.this
+                                        , getText(R.string.error_message), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                Log.d(TAG, "loadProfilePic: download Picture with Picasso");
+            } else {
+                float pixelDensity = getResources().getDisplayMetrics().density;
+                int pixelValue = (int)pixelDensity*50;
+
+                switch (USERTYPE) {
+                    case STUDENT:
+                        profileImage.setPadding(pixelValue,pixelValue,pixelValue,pixelValue);
+                        profileImage.setImageResource(R.drawable.talent);
+                        break;
+                    case STAFF:
+                        profileImage.setPadding(pixelValue,pixelValue,pixelValue,pixelValue);
+                        profileImage.setImageResource(R.drawable.staff_edacy);
+                        break;
+                    case INSTRUCTOR:
+                        profileImage.setPadding(pixelValue,pixelValue,pixelValue,pixelValue);
+                        profileImage.setImageResource(R.drawable.ic_instructor);
+                        break;
+                    case GUEST:
+                        profileImage.setPadding(pixelValue,pixelValue,pixelValue,pixelValue);
+                        profileImage.setImageResource(R.drawable.ic_person);
+                        break;
+                    default:
+                        profileImage.setPadding(pixelValue,pixelValue,pixelValue,pixelValue);
+                        profileImage.setImageResource(R.drawable.ic_person);
+                        break;
+                }
+                Log.d(TAG, "loadProfilePic: Load talent icon");
+            }
+
+        }
+
+    }
 
     private void loadUserInfoFromUserType() {
 
@@ -490,5 +495,41 @@ public class ProfileActivity extends AppCompatActivity implements
         bundleForDialogFragment.putString(USER_PHONE_KEY, thisUser.getPhone());
 
         profileDialogFragment.setArguments(bundleForDialogFragment);
+    }
+
+    private void saveImageUrlToFirebaseDatabase(String imageUrl){
+        switch (USERTYPE) {
+            case STUDENT:
+                if(thisStudent != null){
+                    thisStudent.setProfileImageurl(imageUrl);
+                    profilePresenter.updateDbStudentInfo(thisStudent);
+                }
+                break;
+
+            case STAFF:
+                if(thisStaff != null){
+                    thisStaff.setProfileImageurl(imageUrl);
+                    profilePresenter.updateDbStudentInfo(thisStaff);
+                }
+                break;
+            case INSTRUCTOR:
+                if(thisInstructor != null){
+                    thisInstructor.setProfileImageurl(imageUrl);
+                    profilePresenter.updateDbStudentInfo(thisInstructor);
+                }
+                break;
+            case GUEST:
+                if(thisUser != null){
+                    thisUser.setProfileImageurl(imageUrl);
+                    profilePresenter.updateDbStudentInfo(thisUser);
+                }
+                break;
+            default:
+                if(thisUser != null){
+                    thisUser.setProfileImageurl(imageUrl);
+                    profilePresenter.updateDbStudentInfo(thisUser);
+                }
+                break;
+        }
     }
 }

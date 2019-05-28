@@ -34,6 +34,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.USERTYPE;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisInstructor;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStaff;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStudent;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisUser;
 import static com.example.infopapp.utils.StringConstants.STAFF;
 
 
@@ -41,8 +45,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 //======================================private attributes==========================================
     private DrawerLayout drawerLayout;
-    private ImageView profileHeaderImage;
-    private TextView headerUsernameTv;
     public static FirebaseUser firebaseUser;
 
 //    public static Student currentStudent = new Student();
@@ -71,8 +73,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         //---------------------------------navigation VIEW----------------------------------------
         NavigationView navigationView = findViewById(R.id.nav_view);
-        profileHeaderImage = navigationView.getHeaderView(0).findViewById(R.id.nav_profile_image);
-        headerUsernameTv = navigationView.getHeaderView(0).findViewById(R.id.header_username_tv);
         navigationView.setNavigationItemSelectedListener(this);
 
         //---------------------------------View pager and adapter-----------------------------------
@@ -169,18 +169,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
         if (firebaseUser == null) {
             startActivity(new Intent(this, ConnectToAccountActivity.class));
+            thisUser = null;
+            thisStaff = null;
+            thisStudent = null;
+            thisInstructor = null;
             finish();
         }
-        Picasso.with(this)
-                .load(firebaseUser.getPhotoUrl())
-                .transform(new RoundPicasso(profileHeaderImage.getMaxHeight(), 5))
-                .into(profileHeaderImage);
 
-        if (firebaseUser != null) {
-            if (firebaseUser.getDisplayName() != null) {
-                headerUsernameTv.setText(firebaseUser.getDisplayName());
-            }
-        }
     }
 
     //=================================Create Option Menu===========================================
@@ -199,6 +194,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.action_logout:
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
+                thisUser = null;
+                thisStudent = null;
+                thisStaff = null;
+                thisInstructor = null;
                 finish();
                 startActivity(new Intent(this, ConnectToAccountActivity.class));
                 break;

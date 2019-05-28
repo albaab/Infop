@@ -43,9 +43,9 @@
     <string name="resources">Resources: </string>
     <string name="feedbacks">Feedbacks:</string>
     <string name="feedback_form_link">Please fill out the <u>feedback form</u></string>
-    <string name="profile">Profile</string>
-    <string name="dashboard">Dashboard</string>
-    <string name="directory">Directory</string>
+    <string name="profile">PROFILE</string>
+    <string name="dashboard">DASHBOARD</string>
+    <string name="directory">DIRECTORY</string>
     <string name="channels">CHANNELS</string>
     <string name="my_space">MY SPACE</string>
     <string name="cohorte">\Cohort</string>
@@ -76,13 +76,17 @@
     <string name="verify_email">Please confirm your credentials with the link sent to the email you provided</string>
     <string name="job_title">Job title</string>
     <string name="title_portfolios">PORTFOLIOS</string>
+    <string name="edacy">EDACY</string>
+    <string name="view_resume">View Resumé</string>
+    <string name="at_sign">\@</string>
+    <string name="student_deleted">Student Deleted</string>
 
     <array name="module_specialization">
-        <item name = "data_science">Data science</item>
-        <item name = "mobile_development">Mobile development</item>
-        <item name ="web_development">Web development</item>
-        <item name ="instructor">Instructor</item>
-        <item name = "student_success_coordinator">Student Success Coordinator</item>
-        <item name = "career_service_">Head of Career Services</item>
+        <item name="data_science">Data science</item>
+        <item name="mobile_development">Mobile development</item>
+        <item name="web_development">Web development</item>
+        <item name="instructor">Instructor</item>
+        <item name="student_success_coordinator">Student Success Coordinator</item>
+        <item name="career_service_">Head of Career Services</item>
     </array>
 </resources>

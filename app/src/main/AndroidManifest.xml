@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.infopapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -8,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.ContactsActivity"></activity>
+        <activity android:name=".ui.cohort_clicked.CohortClickeActivity"></activity>
+        <activity android:name=".ui.ContactsActivity" />
         <activity android:name=".ui.DashBoardActivity" />
         <activity android:name=".ui.profile.ProfileActivity" />
         <activity android:name=".ui.sessions.SessionsActivity" />
@@ -29,6 +33,5 @@
             android:name=".ui.account.ConnectToAccountActivity"
             android:windowSoftInputMode="adjustResize" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>

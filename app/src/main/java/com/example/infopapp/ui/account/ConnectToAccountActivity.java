@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.infopapp.R;
+import com.example.infopapp.db.FirebaseDb;
 import com.example.infopapp.entities.Instructor;
 import com.example.infopapp.entities.Staff;
 import com.example.infopapp.entities.Student;
@@ -25,13 +26,19 @@ import com.example.infopapp.ui.account.fragments.SignUpFragment;
 import com.example.infopapp.ui.account.fragments.SignInFragment;
 import com.example.infopapp.ui.home_screens.HomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-import static com.example.infopapp.utils.StringConstants.KEY;
+import java.util.List;
+
+import static com.example.infopapp.utils.StringConstants.GUEST;
+import static com.example.infopapp.utils.StringConstants.INSTRUCTOR;
+import static com.example.infopapp.utils.StringConstants.STAFF;
 import static com.example.infopapp.utils.StringConstants.STATUS_KEY;
+import static com.example.infopapp.utils.StringConstants.STUDENT;
 
 public class ConnectToAccountActivity extends AppCompatActivity implements
         ChooseAccountFragment.CallBackChooseAccount,
-        SignInFragment.CallBackSignInListener {
+        SignInFragment.CallBackSignInListener, FirebaseDb.FirebaseDbCallBack {
 
     private static final String TAG = "Signing in";
     //=====================================private attributes======================================//
@@ -44,10 +51,10 @@ public class ConnectToAccountActivity extends AppCompatActivity implements
     private FragmentManager manager = getSupportFragmentManager();
 
     //static user attribute
-    public static User thisUser = new User();
-    public static Student thisStudent = new Student();
-    public static Staff thisStaff = new Staff();
-    public static Instructor thisInstructor = new Instructor();
+    public static User thisUser;
+    public static Student thisStudent;
+    public static Staff thisStaff;
+    public static Instructor thisInstructor;
     public static String USERTYPE = "";
 
     //=====================================On create method=======================================//
@@ -61,6 +68,11 @@ public class ConnectToAccountActivity extends AppCompatActivity implements
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_main);
+
+        thisUser = new User();
+        thisStudent = new Student();
+        thisStaff = new Staff();
+        thisInstructor = new Instructor();
 
         getSupportActionBar().hide();
         signInFragment = new SignInFragment();
@@ -141,13 +153,50 @@ public class ConnectToAccountActivity extends AppCompatActivity implements
     //=====================================On start method==========================================
     @Override
     protected void onStart() {
-
+        FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
         Log.d(TAG, "onStart: START THE CONNECT TO ACCOUNT ACTIVITY");
         super.onStart();
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+        if (fbUser != null) {
+            thisUser.setId(fbUser.getUid());
+            thisUser.setUserType(fbUser.getDisplayName());
+            USERTYPE = fbUser.getDisplayName();
+            FirebaseDb.isUserInFirebaseDb(thisUser,this);
             startActivity(new Intent(this, HomeActivity.class));
             finish();
         }
     }
 
+    @Override
+    public void onCallBack(List<Student> studentList) {
+
+    }
+
+    @Override
+    public void onCallBackGetUser(User user, Student student, Staff staff, Instructor instructor) {
+        if (user != null) {
+            thisUser = user;
+            USERTYPE = GUEST;
+            thisStudent = null;
+            thisStaff = null;
+            thisInstructor = null;
+        } else if (student != null) {
+            thisStudent = student;
+            USERTYPE = STUDENT;
+            thisUser = null;
+            thisStaff = null;
+            thisInstructor = null;
+        } else if (staff != null) {
+            thisStaff = staff;
+            USERTYPE = STAFF;
+            thisStudent = null;
+            thisUser = null;
+            thisInstructor = null;
+        } else if (instructor != null) {
+            thisInstructor = instructor;
+            USERTYPE = INSTRUCTOR;
+            thisStudent = null;
+            thisStaff = null;
+            thisUser = null;
+        }
+    }
 }

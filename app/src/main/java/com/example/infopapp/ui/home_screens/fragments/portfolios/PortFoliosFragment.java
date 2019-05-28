@@ -1,6 +1,7 @@
 package com.example.infopapp.ui.home_screens.fragments.portfolios;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ProgressBar;
 
 import com.example.infopapp.R;
 import com.example.infopapp.entities.Cohort;
+import com.example.infopapp.ui.cohort_clicked.CohortClickeActivity;
 import com.example.infopapp.ui.home_screens.HomeViewModel;
 
 import java.util.ArrayList;
@@ -22,13 +24,13 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static com.example.infopapp.utils.StringConstants.COHORT;
+
 
 public class PortFoliosFragment extends Fragment {
 
-    private RecyclerView porfolioRv;
     private PortoFolioAdapter portoFolioAdapter;
     private List<Cohort> cohorts = new ArrayList<>();
-    private ProgressBar progressBar;
 
     private Context mContext;
 
@@ -53,9 +55,9 @@ public class PortFoliosFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        porfolioRv = view.findViewById(R.id.list_of_cohorts_rv);
+        final RecyclerView porfolioRv = view.findViewById(R.id.list_of_cohorts_rv);
         porfolioRv.setHasFixedSize(true);
-        progressBar = view.findViewById(R.id.firebase_progress_bar);
+        ProgressBar progressBar = view.findViewById(R.id.firebase_progress_bar);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
         portoFolioAdapter = new PortoFolioAdapter();
@@ -64,7 +66,23 @@ public class PortFoliosFragment extends Fragment {
 
         HomeViewModel homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
 
-        homeViewModel.getAllCohortsDataVm(portoFolioAdapter,porfolioRv, mContext, progressBar);
+        homeViewModel.getAllCohortsDataVm(progressBar,new HomeViewModel.HomeViewModelCallbackListener() {
+            @Override
+            public void OnHomeViewModelCallback(List<Cohort> cohorts) {
+                portoFolioAdapter.setListOfCohorts(cohorts);
+                porfolioRv.setAdapter(portoFolioAdapter);
+                portoFolioAdapter.setOnItemClickListener(new PortoFolioAdapter.OnCohortClickListener() {
+                    @Override
+                    public void onCohortClicked(Cohort cohort) {
+                        //todo go to respective cohort
+                        Intent intent = new Intent(mContext, CohortClickeActivity.class);
+                        intent.putExtra(COHORT,cohort.getCohortNumber());
+                        startActivity(intent);
+                    }
+                });
+
+            }
+        });
 
 //        portoFolioAdapter.setListOfCohorts(cohorts);
 //        porfolioRv.setAdapter(portoFolioAdapter);
@@ -74,6 +92,7 @@ public class PortFoliosFragment extends Fragment {
 //                Toast.makeText(mContext, cohort + " Clicked", Toast.LENGTH_SHORT).show();
 //            }
 //        });
+
 
 
     }

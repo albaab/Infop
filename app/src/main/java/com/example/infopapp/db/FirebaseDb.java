@@ -7,6 +7,8 @@ import com.example.infopapp.entities.Staff;
 import com.example.infopapp.entities.Student;
 import com.example.infopapp.entities.User;
 import com.example.infopapp.ui.profile.ProfileView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +36,7 @@ public class FirebaseDb {
             .getInstance().getReference();
     private static DatabaseReference userTypeReference;
 
-    private static List<Student> students = new ArrayList<>();
+    private static List<Student> students;
 //    private List<Cohort> cohorts = new ArrayList<>();
 //===================================PUBLIC CONSTRUCTOR=============================================
 
@@ -59,12 +61,12 @@ public class FirebaseDb {
                     .setValue(user, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                            profileView.setUploadUserToDbStatus(true);
+                            profileView.setUpdateUserInFirebaseDbStatus(true);
                             Log.d(TAG, "ThisUser: STUDENT ADDED TO FIRE BASE DATABASE");
                         }
                     });
         } else {
-            profileView.setUploadUserToDbStatus(false);
+            profileView.setUpdateUserInFirebaseDbStatus(false);
         }
     }
 
@@ -75,7 +77,7 @@ public class FirebaseDb {
                 .setValue(user, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                        profileView.setUploadUserToDbStatus(true);
+                        profileView.setUpdateUserInFirebaseDbStatus(true);
                         Log.d(TAG, "onComplete: STUDENT UPDATED TO FIRE BASE DATABASE");
                     }
                 });
@@ -88,47 +90,48 @@ public class FirebaseDb {
 
         userTypeReference = listOfStudentsDatabaseReference.child(user.getUserType());
         userTypeReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                        for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                            Log.d(TAG, "onDataChange: START SEARCHING IN RESPECTIVE DATABASE" + snapshot.getKey() +
-                                    " " + user.getId());
-                            if(snapshot.getKey().equals(user.getId())){
-                                Log.d(TAG, "onDataChange: START " + snapshot.getKey());
-                                switch (user.getUserType()) {
-                                    case STUDENT:
-                                        Student student = snapshot.getValue(Student.class);
-                                    Log.d(TAG, "START USER IN STUDENT DATABASE "+ student.getUserType());
-                                        fbCallback.onCallBackGetUser(null, student, null, null);
-                                        break;
-                                    case STAFF:
-                                        Staff staff = snapshot.getValue(Staff.class);
-                                        fbCallback.onCallBackGetUser(null, null, staff, null);
-                                        break;
-                                    case INSTRUCTOR:
-                                        Instructor instructor = snapshot.getValue(Instructor.class);
-                                        fbCallback.onCallBackGetUser(null, null, null, instructor);
-                                        break;
-                                    case GUEST:
-                                        User user1 = snapshot.getValue(User.class);
-                                        fbCallback.onCallBackGetUser(user1,null,null,null);
-                                    default:
-                                        fbCallback.onCallBackGetUser(new User(),null,null,null);
-                                        break;
-                                }
-                            }else{
-
-                                Log.d(TAG, "onDataChange: START USER ID AND SNAPSHOT KEY DO NOT MATCH");
-                            }
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Log.d(TAG, "onDataChange: START SEARCHING IN RESPECTIVE DATABASE" + snapshot.getKey() +
+                            " " + user.getId());
+                    if (snapshot.getKey().equals(user.getId())) {
+                        Log.d(TAG, "onDataChange: START " + snapshot.getKey());
+                        switch (user.getUserType()) {
+                            case STUDENT:
+                                Student student = snapshot.getValue(Student.class);
+                                Log.d(TAG, "START USER IN STUDENT DATABASE " + student.getUserType());
+                                fbCallback.onCallBackGetUser(null, student, null, null);
+                                break;
+                            case STAFF:
+                                Staff staff = snapshot.getValue(Staff.class);
+                                fbCallback.onCallBackGetUser(null, null, staff, null);
+                                break;
+                            case INSTRUCTOR:
+                                Instructor instructor = snapshot.getValue(Instructor.class);
+                                fbCallback.onCallBackGetUser(null, null, null, instructor);
+                                break;
+                            case GUEST:
+                                User user1 = snapshot.getValue(User.class);
+                                fbCallback.onCallBackGetUser(user1, null, null, null);
+                            default:
+                                fbCallback.onCallBackGetUser(new User(), null, null, null);
+                                break;
                         }
+                    } else {
+
+                        Log.d(TAG, "onDataChange: START USER ID AND SNAPSHOT KEY DO NOT MATCH");
                     }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Log.d(TAG, "START: FIREBASE ERROR DURING VERIFICATION");
-                        //todo handle database entry check error
-                    }
-                });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG, "START: FIREBASE ERROR DURING VERIFICATION");
+                //todo handle database entry check error
+            }
+        });
     }
 
     //---------------------------------get all students in firebase---------------------------------
@@ -139,6 +142,7 @@ public class FirebaseDb {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        students = new ArrayList<>();
                         Log.d(TAG, "onDataChange: START GET ALL STUDENTS FROM DATABASE");
                         for (DataSnapshot studentSnapshot : dataSnapshot.getChildren()) {
                             Student talent = studentSnapshot.getValue(Student.class);
@@ -154,10 +158,36 @@ public class FirebaseDb {
                 });
     }
 
+    public void deleteEntry(Student student) {
+        if (student.getUserType() != null) {
+
+            userTypeReference = listOfStudentsDatabaseReference
+                    .child(student.getUserType());
+//            String currentUserId = userTypeReference.push().getKey();
+
+//            user.setId(currentUserId);
+            userTypeReference.child(student.getId())
+                    .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        profileView.setUpdateUserInFirebaseDbStatus(true);
+                    }else {
+                        profileView.setUpdateUserInFirebaseDbStatus(false);
+                    }
+
+                }
+            });
+        } else {
+            profileView.setUpdateUserInFirebaseDbStatus(false);
+        }
+    }
+
 
     //==========================================Firebase CallBack Interface=============================
     public interface FirebaseDbCallBack {
         void onCallBack(List<Student> studentList);
+
         void onCallBackGetUser(User user, Student student, Staff staff, Instructor instructor);
     }
 }

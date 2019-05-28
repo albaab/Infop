@@ -50,28 +50,17 @@ public class HomeViewModel extends AndroidViewModel implements ProfileView {
         return repository.getAllSessions();
     }
 
-    public void getAllCohortsDataVm(final PortoFolioAdapter portoFolioAdapter, final RecyclerView rv
-            , final Context context, final ProgressBar progressBar) {
+    public void getAllCohortsDataVm(final ProgressBar progressBar, final HomeViewModelCallbackListener listener) {
         progressBar.setVisibility(View.VISIBLE);
         userRepo.getAllCohorts(new UserRepository.UserRepoCallBackInterface() {
             @Override
             public void onCallBackRepo(List<Cohort> cohorts) {
-                progressBar.setVisibility(View.GONE);
-                portoFolioAdapter.setListOfCohorts(cohorts);
-                rv.setAdapter(portoFolioAdapter);
-                portoFolioAdapter.setOnItemClickListener(new PortoFolioAdapter.OnCohortClickListener() {
-                    @Override
-                    public void onCohortClicked(Cohort cohort) {
-                        Toast.makeText(context, cohort + " Clicked", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                progressBar.setVisibility(View.INVISIBLE);
+                listener.OnHomeViewModelCallback(cohorts);
             }
         });
     }
 
-//    public void checkifUserInFirebaseDb() {
-//        userRepo.checkifUserInFirebase();
-//    }
 
     @Override
     public void setUploadProfilePic(boolean myBoolean, int visibility) {
@@ -79,7 +68,12 @@ public class HomeViewModel extends AndroidViewModel implements ProfileView {
     }
 
     @Override
-    public void setUploadUserToDbStatus(boolean myBoolean) {
+    public void setUpdateUserInFirebaseDbStatus(boolean myBoolean) {
 
     }
+
+    public interface HomeViewModelCallbackListener{
+        void OnHomeViewModelCallback(List<Cohort> cohorts);
+    }
+
 }

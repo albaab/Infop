@@ -4,5 +4,5 @@ import android.net.Uri;
 
 public interface ProfileView {
     void setUploadProfilePic(boolean myBoolean, int visibility);
-    void setUploadUserToDbStatus(boolean myBoolean);
+    void setUpdateUserInFirebaseDbStatus(boolean myBoolean);
 }

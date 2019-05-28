@@ -261,15 +261,15 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
             switch (token) {
                 case STUDENT_TOKEN:
                     thisUser = thisStudent;
-                    USERTYPE = thisStudent.getUserType();
+                    USERTYPE = STUDENT;
                     break;
                 case INSTRUCTOR_TOKEN:
                     thisUser = thisInstructor;
-                    USERTYPE = thisInstructor.getUserType();
+                    USERTYPE = INSTRUCTOR;
                     break;
                 case STAFF_TOKEN:
                     thisUser = thisStaff;
-                    USERTYPE = thisStaff.getUserType();
+                    USERTYPE = STAFF;
                     break;
                 default:
                     thisUser.setUserType(GUEST);
@@ -288,7 +288,7 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
     }
 
     @Override
-    public void setUploadUserToDbStatus(boolean myBoolean) {
+    public void setUpdateUserInFirebaseDbStatus(boolean myBoolean) {
         if (myBoolean){
             Intent connectIntent = new Intent(getActivity(), HomeActivity.class);
             startActivity(connectIntent);

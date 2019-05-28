@@ -14,6 +14,6 @@
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:fontFamily="casual"
         android:layout_height="match_parent"
-        android:text="Messages" />
+        android:text="Messages\n (under development)"  />
 
 </FrameLayout>
