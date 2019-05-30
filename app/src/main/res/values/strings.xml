@@ -65,7 +65,7 @@
     <string name="edit_profile">Edit profile</string>
     <string name="cancel">Cancel</string>
     <string name="save">Ok</string>
-    <string name="upload_success">Picture uploaded</string>
+    <string name="upload_success">File uploaded</string>
     <string name="upload_failed">Failed to Upload! Please, try again later.</string>
     <string name="profile_updated_message">Profile updated</string>
     <string name="first_name">First Name</string>
@@ -76,10 +76,20 @@
     <string name="verify_email">Please confirm your credentials with the link sent to the email you provided</string>
     <string name="job_title">Job title</string>
     <string name="title_portfolios">PORTFOLIOS</string>
+    <string name="portfolios">PortFolios</string>
     <string name="edacy">EDACY</string>
     <string name="view_resume">View Resumé</string>
     <string name="at_sign">\@</string>
     <string name="student_deleted">Student Deleted</string>
+    <string name="choose_resume">Choose file</string>
+    <string name="talent_resume">Resumé</string>
+    <string name="payments">Payments</string>
+    <string name="grades">Grades</string>
+    <string name="events">Events</string>
+    <string name="remove">Remove</string>
+    <string name="upload_file">Upload a PDF</string>
+    <string name="no_resume">No Resume Avalaible</string>
+    <string name="grant_access">Please grant permission to select file</string>
 
     <array name="module_specialization">
         <item name="data_science">Data science</item>

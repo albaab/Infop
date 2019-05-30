@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import com.example.infopapp.ui.home_screens.fragments.MessagesFragment;
 import com.example.infopapp.ui.home_screens.fragments.ModulesFragment;
 import com.example.infopapp.ui.home_screens.fragments.HomeFragment;
-import com.example.infopapp.ui.home_screens.fragments.portfolios.PortFoliosFragment;
 
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.USERTYPE;
 
@@ -53,10 +52,12 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
             case STUDENT:
                 return new ModulesFragment();
             case STAFF:
-                return new PortFoliosFragment();
+                return new ModulesFragment();
             case INSTRUCTOR:
+                //TODO return the list of cohorts or list of sessions
                 return new HomeFragment();
             case GUEST:
+                //todo return a text "You do not have access to the courses"
                 return new HomeFragment();
             default:
                 return new HomeFragment();

@@ -1,10 +1,9 @@
 package com.example.infopapp.ui.home_screens;
 
 import com.example.infopapp.ui.ContactsActivity;
-import com.example.infopapp.ui.DashBoardActivity;
+import com.example.infopapp.ui.dashboard.DashActivity;
 import com.example.infopapp.ui.profile.ProfileActivity;
 import com.example.infopapp.ui.account.ConnectToAccountActivity;
-import com.example.infopapp.utils.RoundPicasso;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -24,14 +23,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.infopapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.squareup.picasso.Picasso;
 
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.USERTYPE;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisInstructor;
@@ -223,7 +219,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, ProfileActivity.class));
                 break;
             case R.id.nav_dashboard:
-                startActivity(new Intent(this, DashBoardActivity.class));
+                startActivity(new Intent(this, DashActivity.class));
                 break;
             case R.id.nav_contacts:
                 startActivity(new Intent(this, ContactsActivity.class));

@@ -74,7 +74,6 @@ public class ConnectToAccountActivity extends AppCompatActivity implements
         thisStaff = new Staff();
         thisInstructor = new Instructor();
 
-        getSupportActionBar().hide();
         signInFragment = new SignInFragment();
         signUpFragment = new SignUpFragment();
         resetPasswordFragment = new ResetPasswordFragment();

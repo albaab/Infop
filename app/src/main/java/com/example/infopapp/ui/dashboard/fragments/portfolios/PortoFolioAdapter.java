@@ -1,4 +1,4 @@
-package com.example.infopapp.ui.home_screens.fragments.portfolios;
+package com.example.infopapp.ui.dashboard.fragments.portfolios;
 
 import android.view.LayoutInflater;
 import android.view.View;

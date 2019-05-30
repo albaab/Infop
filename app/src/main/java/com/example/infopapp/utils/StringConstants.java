@@ -5,6 +5,7 @@ public class StringConstants {
 
     public static final String KEY = "key";
     public static final String STUDENT = "Student";
+    public static final String STUDENT_RESUME = "Student_resume";
     public static final String STUDENT_TOKEN = "EdacyTalent@2019";
 
     public static final String USER_LAST_NAME = "Last_name";

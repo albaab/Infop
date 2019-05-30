@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.USERTYPE;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisUser;
 import static com.example.infopapp.utils.StringConstants.COHORT;
 import static com.example.infopapp.utils.StringConstants.DATA_SCIENCE;
@@ -142,7 +143,7 @@ public class ProfileDialogFragment extends DialogFragment {
                     break;
 
             }
-            switch (thisUser.getUserType()) {
+            switch (USERTYPE) {
                 case STUDENT:
                     cohortNumberPicker.setValue(profileBundle.getInt(COHORT));
                     cohortLayout.setVisibility(View.VISIBLE);

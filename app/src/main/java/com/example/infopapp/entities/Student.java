@@ -8,6 +8,7 @@ public class Student extends User {
 
     private int cohort = 0;
     private String specialization;
+    private String resumeUrl;
 
     // empty constructor
     public Student(){
@@ -19,17 +20,15 @@ public class Student extends User {
         setUserType(STUDENT);
     }
 
-    public Student(String firstName, String lastName, int cohort, String specialization) {
-        super(firstName, lastName);
-        this.cohort = cohort;
-        this.specialization = specialization;
-        setUserType(STUDENT);
-    }
 
 
     //==========================================getters=============================================
     public int getCohort() {
         return cohort;
+    }
+
+    public String getResumeUrl() {
+        return resumeUrl;
     }
 
     public String getSpecialization() {
@@ -44,6 +43,10 @@ public class Student extends User {
 
     public void setCohort(int cohort) {
         this.cohort = cohort;
+    }
+
+    public void setResumeUrl(String resumeUrl) {
+        this.resumeUrl = resumeUrl;
     }
 
     @NonNull

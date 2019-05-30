@@ -1,4 +1,4 @@
-package com.example.infopapp.ui.home_screens.fragments.portfolios;
+package com.example.infopapp.ui.dashboard.fragments.portfolios;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 
 import com.example.infopapp.R;
 import com.example.infopapp.entities.Cohort;
-import com.example.infopapp.ui.cohort_clicked.CohortClickeActivity;
+import com.example.infopapp.ui.cohort_clicked.CohortClickedActivity;
 import com.example.infopapp.ui.home_screens.HomeViewModel;
 
 import java.util.ArrayList;
@@ -75,7 +75,7 @@ public class PortFoliosFragment extends Fragment {
                     @Override
                     public void onCohortClicked(Cohort cohort) {
                         //todo go to respective cohort
-                        Intent intent = new Intent(mContext, CohortClickeActivity.class);
+                        Intent intent = new Intent(mContext, CohortClickedActivity.class);
                         intent.putExtra(COHORT,cohort.getCohortNumber());
                         startActivity(intent);
                     }

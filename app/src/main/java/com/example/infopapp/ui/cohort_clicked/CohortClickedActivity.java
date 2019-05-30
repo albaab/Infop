@@ -9,20 +9,26 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 
 import com.example.infopapp.R;
 import com.example.infopapp.entities.Cohort;
 import com.example.infopapp.entities.Student;
+import com.example.infopapp.ui.cohort_clicked.fragments.StudentResumeFragment;
 import com.example.infopapp.ui.cohort_clicked.fragments.list_of_students.ListOfStudentsInCohortFragment;
 import com.example.infopapp.ui.cohort_clicked.fragments.StudentProfileFragment;
+import com.example.infopapp.ui.home_screens.HomeActivity;
 
 import static com.example.infopapp.utils.StringConstants.COHORT;
+import static com.example.infopapp.utils.StringConstants.STUDENT_RESUME;
 
-public class CohortClickeActivity extends AppCompatActivity
-        implements ListOfStudentsInCohortFragment.OnListOfStudentsFragmentListener {
+public class CohortClickedActivity extends AppCompatActivity
+        implements ListOfStudentsInCohortFragment.OnListOfStudentsFragmentListener,
+                    StudentProfileFragment.OnStudentProfileListener{
 
-    private ListOfStudentsInCohortFragment lisfOfStudents = new ListOfStudentsInCohortFragment();
-    private StudentProfileFragment studentProfileFragment = new StudentProfileFragment();
+    private ListOfStudentsInCohortFragment lisfOfStudents;
+    private StudentProfileFragment studentProfileFragment;
+    private StudentResumeFragment studentResumeFragment;
 
     private FragmentManager manager = getSupportFragmentManager();
 
@@ -31,6 +37,9 @@ public class CohortClickeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cohort_clicked);
 
+        lisfOfStudents = new ListOfStudentsInCohortFragment();
+        studentProfileFragment = new StudentProfileFragment();
+        studentResumeFragment = new StudentResumeFragment();
         //get the cohort number clicked from the intent of the portfolios fragment
         Intent intent = getIntent();
         int cohortclicked = intent.getIntExtra(COHORT,1);
@@ -46,7 +55,12 @@ public class CohortClickeActivity extends AppCompatActivity
     private void goToSelectedFragment(Fragment fragment){
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.cohort_clicked_container,fragment);
-        transaction.commit();
+        if(fragment instanceof ListOfStudentsInCohortFragment){
+            transaction.commit();
+        }else{
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
     }
 
     @Override
@@ -55,10 +69,20 @@ public class CohortClickeActivity extends AppCompatActivity
         goToSelectedFragment(studentProfileFragment);
     }
 
+
     @Override
     public void finish() {
         super.finish();
         studentProfileFragment = null;
         lisfOfStudents = null;
+    }
+
+    @Override
+    public void sendResumeUrlToFragment(String url) {
+        Bundle bundle = new Bundle();
+        bundle.putString(STUDENT_RESUME,url);
+        studentResumeFragment.setArguments(bundle);
+        goToSelectedFragment(studentResumeFragment);
+
     }
 }

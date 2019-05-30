@@ -127,18 +127,18 @@
                     android:layout_width="155dp"
                     android:layout_height="155dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="19dp"
-                    android:layout_marginRight="19dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
                     android:layout_marginBottom="50dp"
+                    android:layout_toEndOf="@id/rect_student"
                     android:layout_toRightOf="@id/rect_student"
-                    android:src="@drawable/white_circle"
                     android:contentDescription="@string/background"
+                    android:src="@drawable/white_circle"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/other_rect"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/staff_rect"
-                    app:layout_constraintVertical_bias="1.0"
-                    android:layout_toEndOf="@id/rect_student" />
+                    app:layout_constraintVertical_bias="1.0" />
 
                 <TextView
                     android:id="@+id/textView2"

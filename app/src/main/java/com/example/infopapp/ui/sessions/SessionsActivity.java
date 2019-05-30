@@ -19,7 +19,6 @@ import static com.example.infopapp.utils.StringConstants.MOBILE_DEV_TITLE;
 public class SessionsActivity extends AppCompatActivity implements ListOfSessionsFragment.ListOfSessionsFragmentListener {
 
     private SelectedSessionFragment selectedSessionFragment;
-    private ListOfSessionsFragment listOfSessionsFragment;
 
     private FragmentManager manager = getSupportFragmentManager();
 
@@ -29,7 +28,7 @@ public class SessionsActivity extends AppCompatActivity implements ListOfSession
         setContentView(R.layout.activity_sessions);
         setTitle(MOBILE_DEV_TITLE);
         setTitleColor(Color.BLACK);
-        listOfSessionsFragment = new ListOfSessionsFragment();
+        ListOfSessionsFragment listOfSessionsFragment = new ListOfSessionsFragment();
         goToFragment(listOfSessionsFragment);
         selectedSessionFragment = new SelectedSessionFragment();
 
@@ -61,7 +60,6 @@ public class SessionsActivity extends AppCompatActivity implements ListOfSession
 
     @Override
     public void goToSelectedSession(Bundle bundle) {
-        // TODO go to selected Session Fragment
         selectedSessionFragment.setArguments(bundle);
         goToFragment(selectedSessionFragment);
 

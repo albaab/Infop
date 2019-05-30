@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:id="@+id/cohort_clicked_container"
     android:layout_height="match_parent"
-    tools:context=".ui.cohort_clicked.CohortClickeActivity">
+    tools:context=".ui.cohort_clicked.CohortClickedActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

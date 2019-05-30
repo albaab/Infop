@@ -1,6 +1,7 @@
 package com.example.infopapp.ui.cohort_clicked.fragments.list_of_students;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ListOfStudentsAdapter extends ListAdapter<Student, ListOfStudentsAdapter.StudentViewHolder> {
 
+    private static final String TAG = "LIST OF STUDENT ADAPTER" ;
     private List<Student> students = new ArrayList<>();
     private OnStudentClickListener mListener;
     private Context context;
@@ -58,6 +60,9 @@ public class ListOfStudentsAdapter extends ListAdapter<Student, ListOfStudentsAd
         notifyDataSetChanged();
         return students.get(position);
     }
+//    void deleteStudentAt(int position){
+//        students.remove(position);
+//    }
 
     @NonNull
     @Override
@@ -99,7 +104,7 @@ public class ListOfStudentsAdapter extends ListAdapter<Student, ListOfStudentsAd
     void setListOfStudents(Context context, List<Student> students) {
         this.context = context;
         this.students = students;
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
     }
 
     private static final DiffUtil.ItemCallback<Student> DIFF_CALLBACK = new DiffUtil.ItemCallback<Student>() {

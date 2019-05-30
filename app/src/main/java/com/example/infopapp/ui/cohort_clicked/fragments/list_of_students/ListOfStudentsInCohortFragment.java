@@ -1,7 +1,6 @@
 package com.example.infopapp.ui.cohort_clicked.fragments.list_of_students;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,13 +52,13 @@ public class ListOfStudentsInCohortFragment extends Fragment implements ProfileV
         listRecyclerView.setHasFixedSize(true);
         listRecyclerView.setLayoutManager(linearLayoutManager);
 
+
         Bundle listOfStudentsFragmentBundle = getArguments();
+        assert listOfStudentsFragmentBundle != null;
         int cohortclicked = listOfStudentsFragmentBundle.getInt(COHORT);
 
         final CohortViewModel cohortViewModel = ViewModelProviders.of(this).get(CohortViewModel.class);
         cohortViewModel.getTheCohort(cohortclicked, new CohortViewModel.HomeViewModelCallbackListener() {
-            private static final String TAG = "COHORT CLICKED" ;
-
             @Override
             public void OnCohortViewModelCallback(Cohort cohort) {
                 listOfStudentsAdapter.setListOfStudents(getContext(),cohort.getStudentList());
@@ -84,13 +82,11 @@ public class ListOfStudentsInCohortFragment extends Fragment implements ProfileV
                     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                         cohortViewModel.deleteStudentDbEntry(
                                 listOfStudentsAdapter.getStudentAt(viewHolder.getAdapterPosition()));
+                        Toast.makeText(getActivity(), getText(R.string.student_deleted), Toast.LENGTH_SHORT).show();
                     }
                 }).attachToRecyclerView(listRecyclerView);
-
             }
         });
-
-
 
 
     }
@@ -109,7 +105,6 @@ public class ListOfStudentsInCohortFragment extends Fragment implements ProfileV
     @Override
     public void onDetach() {
         super.onDetach();
-        listRecyclerView = null;
         mListener = null;
     }
 
@@ -120,16 +115,14 @@ public class ListOfStudentsInCohortFragment extends Fragment implements ProfileV
 
     @Override
     public void setUpdateUserInFirebaseDbStatus(boolean myBoolean) {
-        if (myBoolean){
-            Toast.makeText(getActivity(), getText(R.string.student_deleted), Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(getActivity(), getText(R.string.error_message), Toast.LENGTH_SHORT).show();
-        }
+//        if (myBoolean){
+//        }else{
+//            Toast.makeText(getActivity(), getText(R.string.error_message), Toast.LENGTH_SHORT).show();
+//        }
     }
 
 
     public interface OnListOfStudentsFragmentListener {
-        // TODO: Update argument type and name
         void onListOfStudentCallBack(Student student);
     }
 }

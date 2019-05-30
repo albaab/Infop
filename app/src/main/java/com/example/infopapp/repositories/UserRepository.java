@@ -12,39 +12,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository {
+
+//====================================PRIVATE ATTRIBUTES============================================
     private FirebaseDb firebaseDb;
 
+//========================================CONSTRUCTORS==============================================
     public UserRepository(ProfileView profileView) {
         firebaseDb = new FirebaseDb(profileView);
     }
 
-
-    public void saveStudentToFireBase(User user) {
-        firebaseDb.uploadUserToFirebaseDb(user);
+    public UserRepository(){
+        //empty constructor
     }
+
+//    public void saveStudentToFireBase(User user) {
+//        firebaseDb.uploadUserToFirebaseDb(user);
+//    }
+
+//=====================================REPOSITORY METHODS ==========================================
 
     public void updateStudentInFireBase(User user) {
         firebaseDb.updateUserInFirebaseDb(user);
     }
-
 
     public void getAllCohorts(final UserRepoCallBackInterface repoCallBackInterface) {
 
         firebaseDb.getAllStudentsFromFirebase(new FirebaseDb.FirebaseDbCallBack() {
                     @Override
                     public void onCallBack(List<Student> studentList) {
-                        List<Cohort> cohorts = new ArrayList<>();
-                        Cohort firstCohortfound = new Cohort(studentList.get(0));
 
-                        //set the number of the cohort
-                        firstCohortfound.setCohortNumber(studentList.get(0).getCohort());
+                        if(studentList.size() > 0){
+                            List<Cohort> cohorts = new ArrayList<>();
+                            Cohort firstCohortfound = new Cohort(studentList.get(0));
 
-                        //add that cohort to the list of cohorts
-                        cohorts.add(firstCohortfound);
+                            //set the number of the cohort
+                            firstCohortfound.setCohortNumber(studentList.get(0).getCohort());
 
-                        //if the lisf of students has more than one student
+                            //add that cohort to the list of cohorts
+                            cohorts.add(firstCohortfound);
+
                             arrangeStudentsInCohort(studentList, cohorts);
                             repoCallBackInterface.onCallBackRepo(cohorts);
+                        }
+
                     }
 
                       @Override
@@ -56,8 +66,8 @@ public class UserRepository {
         );
     }
 
-    public interface UserRepoCallBackInterface {
-        void onCallBackRepo(List<Cohort> cohorts);
+    public void deteleStudentInFirebase(Student student){
+        firebaseDb.deleteEntry(student);
     }
 
     private void arrangeStudentsInCohort(List<Student> studentList, List<Cohort> cohorts) {
@@ -71,10 +81,8 @@ public class UserRepository {
 
                 for (int cohortIndex = 0; cohortIndex <= (cohorts.size() - 1); cohortIndex++) {
 
-                    if (cohorts.get(cohortIndex).getCohortNumber()
-                            == std2.getCohort()) {
-                        cohorts.get(cohortIndex)
-                                .addStudentToCohort(std2);
+                    if (cohorts.get(cohortIndex).getCohortNumber() == std2.getCohort()) {
+                        cohorts.get(cohortIndex).addStudentToCohort(std2);
                         break;
 
                     } else if (cohortIndex == (cohorts.size() - 1) ) {
@@ -84,6 +92,7 @@ public class UserRepository {
                         nextCohort.setCohortNumber(std2.getCohort());
                         //add cohort to the list of cohorts
                         cohorts.add(nextCohort);
+                        break;
                     }
                 }
 
@@ -95,16 +104,21 @@ public class UserRepository {
                         cohorts.get(cohortIndex).addStudentToCohort(std2);
                         break;
                     } else if (cohortIndex == cohorts.size() - 1) {
-                        cohorts.get(cohortIndex).addStudentToCohort(std2);
+                        cohorts.get(i).addStudentToCohort(std2);
+                        break;
                     }
                 }
             }
         }
     }
 
-    public void deteleStudentInFirebase(Student student){
-        firebaseDb.deleteEntry(student);
+
+//=================================interface callback ==============================================
+
+    public interface UserRepoCallBackInterface {
+        void onCallBackRepo(List<Cohort> cohorts);
     }
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.example.infopapp.ui.cohort_clicked;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.example.infopapp.entities.Cohort;
 import com.example.infopapp.entities.Student;
@@ -11,6 +12,8 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class CohortViewModel extends AndroidViewModel implements ProfileView {
 
@@ -37,6 +40,7 @@ public class CohortViewModel extends AndroidViewModel implements ProfileView {
                 //go through the cohorts
                 for (Cohort currentCohort : cohorts) {
                     if (cohortNumber == currentCohort.getCohortNumber()) {
+                        Log.d(TAG, "onCallBackRepo: START " + currentCohort);
                         listener.OnCohortViewModelCallback(currentCohort);
                         break;
                     }

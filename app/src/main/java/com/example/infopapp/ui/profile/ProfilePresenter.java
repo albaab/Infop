@@ -19,9 +19,9 @@ class ProfilePresenter {
         profileModel.uploadImageToFireBaseStorage(imageUri);
     }
 
-    void uploadDatabaseInfo(User user) {
-        userRepository.saveStudentToFireBase(user);
-    }
+////    void uploadDatabaseInfo(User user) {
+//        userRepository.saveStudentToFireBase(user);
+////    }
 
     void updateDbStudentInfo(User user) {
         userRepository.updateStudentInFireBase(user);

@@ -3,6 +3,8 @@
     package="com.example.infopapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -11,9 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.cohort_clicked.CohortClickeActivity"></activity>
+        <activity android:name=".ui.dashboard.DashActivity"></activity>
+        <activity android:name=".ui.cohort_clicked.CohortClickedActivity" />
         <activity android:name=".ui.ContactsActivity" />
-        <activity android:name=".ui.DashBoardActivity" />
         <activity android:name=".ui.profile.ProfileActivity" />
         <activity android:name=".ui.sessions.SessionsActivity" />
         <activity android:name=".ui.HardSkillsActivity" />
@@ -22,7 +24,9 @@
             android:label="@string/title_fragment_home"
             android:parentActivityName=".ui.account.ConnectToAccountActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.SplashScreenActivity">
+        <activity
+            android:name=".ui.SplashScreenActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,6 +35,7 @@
         </activity>
         <activity
             android:name=".ui.account.ConnectToAccountActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
     </application>
 

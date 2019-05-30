@@ -164,7 +164,6 @@ public class SignInFragment extends Fragment implements LoginView, FirebaseDb.Fi
     @Override
     public void onDetach() {
         super.onDetach();
-        mCreateAccountCallback = null;
     }
     //=====================================On create===============================================//
 

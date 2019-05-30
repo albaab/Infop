@@ -6,6 +6,7 @@ import com.example.infopapp.entities.Instructor;
 import com.example.infopapp.entities.Staff;
 import com.example.infopapp.entities.Student;
 import com.example.infopapp.entities.User;
+import com.example.infopapp.ui.dashboard.DashboardView;
 import com.example.infopapp.ui.profile.ProfileView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,6 +33,7 @@ public class FirebaseDb {
 //====================================PRIVATE ATTRIBUTES============================================
 
     private ProfileView profileView;
+    private DashboardView dashboardView;
     private static DatabaseReference listOfStudentsDatabaseReference = FirebaseDatabase
             .getInstance().getReference();
     private static DatabaseReference userTypeReference;
@@ -42,6 +44,9 @@ public class FirebaseDb {
 
     public FirebaseDb(ProfileView profileView) {
         this.profileView = profileView;
+    }
+    public FirebaseDb(DashboardView dashboardView){
+        this.dashboardView = dashboardView;
     }
 
 
@@ -78,6 +83,18 @@ public class FirebaseDb {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                         profileView.setUpdateUserInFirebaseDbStatus(true);
+                        Log.d(TAG, "onComplete: STUDENT UPDATED TO FIRE BASE DATABASE");
+                    }
+                });
+    }
+
+    public void updateStudentResume(Student student){
+        userTypeReference = listOfStudentsDatabaseReference.child(STUDENT);
+        userTypeReference.child(student.getId())
+                .setValue(student, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        dashboardView.setUploadResumeStatus(true);
                         Log.d(TAG, "onComplete: STUDENT UPDATED TO FIRE BASE DATABASE");
                     }
                 });
@@ -170,6 +187,7 @@ public class FirebaseDb {
                     .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
+                    Log.d(TAG, "onComplete: START STUDENT REMOVED FROM DATABASE");
                     if (task.isSuccessful()) {
                         profileView.setUpdateUserInFirebaseDbStatus(true);
                     }else {
@@ -182,7 +200,6 @@ public class FirebaseDb {
             profileView.setUpdateUserInFirebaseDbStatus(false);
         }
     }
-
 
     //==========================================Firebase CallBack Interface=============================
     public interface FirebaseDbCallBack {
