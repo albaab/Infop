@@ -22,11 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.infopapp.db.FirebaseDb;
-import com.example.infopapp.entities.Instructor;
-import com.example.infopapp.entities.Staff;
-import com.example.infopapp.entities.Student;
-import com.example.infopapp.entities.User;
+import com.example.infopapp.databases.FirebaseUserDb;
 import com.example.infopapp.ui.account.LoginView;
 import com.example.infopapp.R;
 import com.example.infopapp.ui.account.LogPresenter;
@@ -39,14 +35,14 @@ import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisInstr
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStaff;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStudent;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisUser;
-import static com.example.infopapp.utils.StringConstants.KEY;
-import static com.example.infopapp.utils.StringConstants.INSTRUCTOR;
-import static com.example.infopapp.utils.StringConstants.INSTRUCTOR_TOKEN;
-import static com.example.infopapp.utils.StringConstants.GUEST;
-import static com.example.infopapp.utils.StringConstants.STAFF;
-import static com.example.infopapp.utils.StringConstants.STAFF_TOKEN;
-import static com.example.infopapp.utils.StringConstants.STUDENT;
-import static com.example.infopapp.utils.StringConstants.STUDENT_TOKEN;
+import static com.example.infopapp.utils.Constants.KEY;
+import static com.example.infopapp.utils.Constants.INSTRUCTOR;
+import static com.example.infopapp.utils.Constants.INSTRUCTOR_TOKEN;
+import static com.example.infopapp.utils.Constants.GUEST;
+import static com.example.infopapp.utils.Constants.STAFF;
+import static com.example.infopapp.utils.Constants.STAFF_TOKEN;
+import static com.example.infopapp.utils.Constants.STUDENT;
+import static com.example.infopapp.utils.Constants.STUDENT_TOKEN;
 
 
 public class SignUpFragment extends Fragment implements LoginView, ProfileView {
@@ -68,7 +64,7 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
     private String userAlreadyRegisteredMessage;
     private String signUpFailMessage;
 
-    private FirebaseDb firebaseDb;
+    private FirebaseUserDb firebaseUserDb;
 
 
     //============================================ public constructor================================//
@@ -88,7 +84,7 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
         progressBar.setVisibility(View.INVISIBLE);
 
         if (isSuccessful) {
-            firebaseDb.uploadUserToFirebaseDb(thisUser);
+            firebaseUserDb.uploadUserToFirebaseDb(thisUser);
 
             Toast.makeText(getActivity(), successMessage, Toast.LENGTH_SHORT).show();
             emailEdit.setText("");
@@ -153,7 +149,7 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
         Log.d(TAG, "onViewCreated: START SIGN UP SUCCESSFUL");
         super.onViewCreated(view, savedInstanceState);
         logPresenter = new LogPresenter(this);
-        firebaseDb = new FirebaseDb(this);
+        firebaseUserDb = new FirebaseUserDb(this);
         successMessage = (String) getActivity().getResources().getText(R.string.success);
         errorMessage = (String) getText(R.string.error_message);
         userAlreadyRegisteredMessage = getActivity().getResources()

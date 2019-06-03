@@ -1,4 +1,4 @@
-package com.example.infopapp.db;
+package com.example.infopapp.databases;
 
 import com.example.infopapp.entities.Session;
 

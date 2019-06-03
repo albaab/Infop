@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="360dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/Base.V14.ThemeOverlay.MaterialComponents.MaterialAlertDialog"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:text="@string/feedbacks"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="italic" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="4dp"
+            android:paddingRight="12dp"
+            android:paddingEnd="12dp"
+            tools:ignore="RtlSymmetry">
+
+            <!--The instructor was on time?-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:text="@string/student_q_1"
+                android:textColor="@android:color/black" />
+
+            <RadioGroup
+                android:id="@+id/student_q_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/student_q_1_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/student_q_1_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:text="No" />
+
+            </RadioGroup>
+
+
+            <!--The instructor shared clearly the content and the concepts of the formation-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_3"
+                android:textColor="@android:color/black" />
+
+            <include
+                android:id="@+id/student_q_3"
+                layout="@layout/radio_group_1_to_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <!--The instructor encouraged me to think critically and cultivate autonomy-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_4"
+                android:textColor="@android:color/black" />
+
+            <include
+                android:id="@+id/student_q_4"
+                layout="@layout/radio_group_1_to_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <!--The methodology of the course was relevant-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_5"
+                android:textColor="@android:color/black" />
+
+            <include
+                android:id="@+id/student_q_5"
+                layout="@layout/radio_group_1_to_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+
+            <!--The instructor mastered his subject-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_6"
+                android:textColor="@android:color/black" />
+
+            <include
+                android:id="@+id/student_q_6"
+                layout="@layout/radio_group_1_to_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <!--The Objectives of the session was clear to me-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_7"
+                android:textColor="@android:color/black" />
+
+            <include
+                android:id="@+id/student_q_7"
+                layout="@layout/radio_group_1_to_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+
+            <!--This session helped me discover new research paths to know more about the subject-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_8"
+                android:textColor="@android:color/black" />
+
+            <include
+                android:id="@+id/student_q_8"
+                layout="@layout/radio_group_1_to_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <!--This session interested me and encouraged me to actively participate-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_9"
+                android:textColor="@android:color/black" />
+
+            <include
+                android:id="@+id/student_q_9"
+                layout="@layout/radio_group_1_to_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <!--The instructor was available to answer our questions-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_10"
+                android:textColor="@android:color/black" />
+            <include
+                android:id="@+id/student_q_10"
+                layout="@layout/radio_group_1_to_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <!--The instructor favored everyone's participation-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_11"
+                android:textColor="@android:color/black" />
+            <include
+                android:id="@+id/student_q_11"
+                layout="@layout/radio_group_1_to_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <!--I felt heard and respected when I spoke during the session-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_12"
+                android:textColor="@android:color/black" />
+
+            <include
+                android:id="@+id/student_q_12"
+                layout="@layout/radio_group_1_to_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <!--I appreciated the methods and tools used in this course-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_13"
+                android:textColor="@android:color/black" />
+
+            <include
+                android:id="@+id/student_q_13"
+                layout="@layout/radio_group_1_to_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <!--The documents shared and the methods adopted were coherent with the objectives of the course-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_14"
+                android:textColor="@android:color/black" />
+
+            <include
+                android:id="@+id/student_q_14"
+                layout="@layout/radio_group_1_to_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <!--The instructor incited us to ask questions and interrupt him when necessary-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_15"
+                android:textColor="@android:color/black" />
+            <include
+                android:id="@+id/student_q_15"
+                layout="@layout/radio_group_1_to_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <!--How would you rate this course, from 1 to 10:-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_16"
+                android:textColor="@android:color/black" />
+
+                <include
+                    android:id="@+id/student_q_16"
+                    layout="@layout/radio_group_1_to_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
+
+
+            <!--How would you rate this instructor, from 1 to 10:-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_17"
+                android:textColor="@android:color/black" />
+
+                <include
+                    android:id="@+id/student_q_17"
+                    layout="@layout/radio_group_1_to_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
+
+            <!--What improvements do you suggest?-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_18"
+                android:textColor="@android:color/black" />
+
+            <EditText
+                android:id="@+id/student_q_18"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="12dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="4dp"
+                android:background="@drawable/text_field"
+                android:gravity="center"
+                android:hint="Your answer..."
+                 />
+
+
+            <!--Overall, what are your general impressions regarding this makersday session?-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/student_q_19"
+                android:textColor="@android:color/black" />
+
+            <EditText
+                android:id="@+id/student_q_19"
+                android:layout_width="250dp"
+                android:padding="12dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="4dp"
+                android:background="@drawable/text_field"
+                android:gravity="center"
+                android:hint="Your answer..." />
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

@@ -22,7 +22,7 @@ import com.example.infopapp.entities.Student;
 import com.example.infopapp.ui.cohort_clicked.CohortViewModel;
 import com.example.infopapp.ui.profile.ProfileView;
 
-import static com.example.infopapp.utils.StringConstants.COHORT;
+import static com.example.infopapp.utils.Constants.COHORT;
 
 
 public class ListOfStudentsInCohortFragment extends Fragment implements ProfileView {

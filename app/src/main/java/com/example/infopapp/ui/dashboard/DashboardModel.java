@@ -6,7 +6,7 @@ import android.os.Build;
 import android.util.Log;
 import android.view.View;
 
-import com.example.infopapp.db.FirebaseDb;
+import com.example.infopapp.databases.FirebaseUserDb;
 import com.example.infopapp.ui.cohort_clicked.fragments.StudentResumeFragment;
 import com.example.infopapp.ui.dashboard.fragments.thisStudentResumeFragment;
 import com.example.infopapp.utils.DownloadPdfAsyncTask;
@@ -31,11 +31,11 @@ class DashboardModel {
 
 //======================================ATTRIBUTES==================================================
     private String resumeUrl;
-    private FirebaseDb firebaseDb;
+    private FirebaseUserDb firebaseUserDb;
 
 //======================================CONSTRUCTOR=================================================
     DashboardModel(DashboardView dashboardView) {
-        firebaseDb = new FirebaseDb(dashboardView);
+        firebaseUserDb = new FirebaseUserDb(dashboardView);
     }
 //======================================MODEL METHODS===============================================
     void uploadResumeTofirebaseStorage(final Uri resumeUri, thisStudentResumeFragment thisStudentResumeFragment) {
@@ -71,7 +71,7 @@ class DashboardModel {
                     thisStudentResumeFragment1.progressBar.setVisibility(View.GONE);
                     resumeUrl = task.getResult().toString();
                     thisStudent.setResumeUrl(resumeUrl);
-                    firebaseDb.updateStudentResume(thisStudent);
+                    firebaseUserDb.updateStudentResume(thisStudent);
                     //todo update the current student info in firebase database
                 } else {
                     Log.d(TAG, "onComplete: DEBUG -> COULD NOT GET DOWNLOAD URL");

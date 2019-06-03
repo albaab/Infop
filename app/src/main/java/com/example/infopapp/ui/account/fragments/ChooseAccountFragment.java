@@ -13,11 +13,11 @@ import android.widget.ImageView;
 
 import com.example.infopapp.R;
 
-import static com.example.infopapp.utils.StringConstants.KEY;
-import static com.example.infopapp.utils.StringConstants.INSTRUCTOR;
-import static com.example.infopapp.utils.StringConstants.GUEST;
-import static com.example.infopapp.utils.StringConstants.STAFF;
-import static com.example.infopapp.utils.StringConstants.STUDENT;
+import static com.example.infopapp.utils.Constants.KEY;
+import static com.example.infopapp.utils.Constants.INSTRUCTOR;
+import static com.example.infopapp.utils.Constants.GUEST;
+import static com.example.infopapp.utils.Constants.STAFF;
+import static com.example.infopapp.utils.Constants.STUDENT;
 
 /**
  * A simple {@link Fragment} subclass.

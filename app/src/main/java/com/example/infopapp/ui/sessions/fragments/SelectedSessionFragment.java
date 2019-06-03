@@ -14,15 +14,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.infopapp.R;
+import com.example.infopapp.entities.Session;
+
+import static com.example.infopapp.utils.Constants.SESSION;
 
 
 public class SelectedSessionFragment extends Fragment {
 
-    private TextView title,day, hour, description, homework,resources,feedBacks;
+    private TextView description;
+    private TextView homework;
+    private TextView resources;
+    private TextView feedBacks;
     private LinearLayout layout_description, layout_homework, layout_resources,layout_feedBacks;
 
+    private FeedbackDialogFragment feedbackDialogFragment;
 
-//    private OnFragmentInteractionListener mListener;
+
 
     public SelectedSessionFragment() {
         // Required empty public constructor
@@ -39,8 +46,7 @@ public class SelectedSessionFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        title = view.findViewById(R.id.session_view_title);
-        hour = view.findViewById(R.id.session_view_hour);
+        TextView title = view.findViewById(R.id.session_view_title);
         description = view.findViewById(R.id.description_text_view);
         homework = view.findViewById(R.id.homework_text_view);
         resources = view.findViewById(R.id.resources_text_view);
@@ -51,19 +57,24 @@ public class SelectedSessionFragment extends Fragment {
         layout_resources = view.findViewById(R.id.resources_layout);
         layout_feedBacks = view.findViewById(R.id.feedback_layout);
 
+        feedbackDialogFragment = new FeedbackDialogFragment();
+
         Bundle selectedSessionBundle = getArguments();
+        assert selectedSessionBundle != null;
+        Session thisSession = selectedSessionBundle.getParcelable(SESSION);
 
-        title.setText(selectedSessionBundle.getString("SESSION_TITLE"));
-        hour.setText(selectedSessionBundle.getString("SESSION_HOUR"));
-        description.setText(selectedSessionBundle.getString("SESSION_DESCRIPTION"));
-        homework.setText(selectedSessionBundle.getString("SESSION_HOMEWORK"));
-        resources.setText(selectedSessionBundle.getString("SESSION_RESOURCES"));
 
-        showHideTextViews();
+        assert thisSession != null;
+        title.setText(thisSession.getSessionTitle());
+        description.setText(thisSession.getSessionDescription());
+        homework.setText(thisSession.getSessionHomework());
+        resources.setText(thisSession.getSessionResources());
+
+        showHideTextViews(thisSession);
 
     }
 
-    private void showHideTextViews(){
+    private void showHideTextViews(final Session session){
 
         layout_description.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +113,17 @@ public class SelectedSessionFragment extends Fragment {
             public void onClick(View v) {
                 if(feedBacks.getVisibility() == View.GONE){
                     feedBacks.setVisibility(View.VISIBLE);
+                    feedBacks.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            assert getFragmentManager() != null;
+                            Bundle bundle = new Bundle();
+
+                            bundle.putParcelable(SESSION,session);
+                            feedbackDialogFragment.setArguments(bundle);
+                            feedbackDialogFragment.show(getFragmentManager(),"Feedback Dialog");
+                        }
+                    });
                 }else if(feedBacks.getVisibility() == View.VISIBLE){
                     feedBacks.setVisibility(View.GONE);
                 }
@@ -110,7 +132,7 @@ public class SelectedSessionFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 //        if (context instanceof OnFragmentInteractionListener) {
 //            mListener = (OnFragmentInteractionListener) context;
@@ -126,19 +148,6 @@ public class SelectedSessionFragment extends Fragment {
 //        mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        void onFragmentInteraction(Uri uri);
-//    }
+
 
 }

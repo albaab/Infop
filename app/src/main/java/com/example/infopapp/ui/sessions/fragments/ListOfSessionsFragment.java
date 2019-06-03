@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,12 +22,12 @@ import com.example.infopapp.ui.sessions.SessionAdapter;
 
 import java.util.List;
 
+import static com.example.infopapp.utils.Constants.SESSION;
+
 
 public class ListOfSessionsFragment extends Fragment {
 
-    private SessionViewModel sessionViewModel;
-
-    private LiveData<List<Session>> listOfSessionsLive;
+//    private LiveData<List<Session>> listOfSessionsLive;
 
     private RecyclerView sessionsRecyclerView;
     private SessionAdapter sessionAdapter;
@@ -62,7 +61,7 @@ public class ListOfSessionsFragment extends Fragment {
         sessionsRecyclerView.setHasFixedSize(true);
         sessionsRecyclerView.setLayoutManager(sessionsLayoutManager);
 
-        sessionViewModel = ViewModelProviders.of(this).get(SessionViewModel.class);
+        SessionViewModel sessionViewModel = ViewModelProviders.of(this).get(SessionViewModel.class);
         sessionViewModel.getAllSessionsFromDatabase().observe(this, new Observer<List<Session>>() {
             @Override
             public void onChanged(List<Session> sessions) {
@@ -74,15 +73,7 @@ public class ListOfSessionsFragment extends Fragment {
         sessionAdapter.setOnItemClickListener(new SessionAdapter.OnSessionClickListener() {
             @Override
             public void onItemClicked(Session session) {
-
-                listOfsessionsBundle.putString("SESSION_TITLE",session.getSessionTitle());
-                listOfsessionsBundle.putString("SESSION_MONTH",session.getSessionMonth());
-                listOfsessionsBundle.putInt("SESSION_DAY",session.getSessionDay());
-                listOfsessionsBundle.putString("SESSION_HOUR",session.getSessionHour());
-                listOfsessionsBundle.putString("SESSION_DESCRIPTION",session.getSessionDescription());
-                listOfsessionsBundle.putString("SESSION_HOMEWORK",session.getSessionHomework());
-                listOfsessionsBundle.putString("SESSION_RESOURCES",session.getSessionResources());
-
+                listOfsessionsBundle.putParcelable(SESSION,session);
                 mListOfSessionsListener.goToSelectedSession(listOfsessionsBundle);
             }
         });
@@ -90,7 +81,7 @@ public class ListOfSessionsFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mContext = context;
         if (context instanceof ListOfSessionsFragmentListener) {

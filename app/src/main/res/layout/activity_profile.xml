@@ -23,7 +23,7 @@
                 android:background="@drawable/white_circle"
                 android:contentDescription="@string/student"
                 android:maxHeight="277dp"
-                android:padding="2dp"
+                android:padding="0.5dp"
                 android:src="@drawable/talent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.487"

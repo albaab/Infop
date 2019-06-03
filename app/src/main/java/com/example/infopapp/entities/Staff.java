@@ -1,6 +1,6 @@
 package com.example.infopapp.entities;
 
-import static com.example.infopapp.utils.StringConstants.STAFF;
+import static com.example.infopapp.utils.Constants.STAFF;
 
 public class Staff extends User {
     private String jobTitle;

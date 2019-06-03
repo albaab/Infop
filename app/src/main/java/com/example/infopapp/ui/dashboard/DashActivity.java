@@ -16,10 +16,10 @@ import com.example.infopapp.ui.dashboard.fragments.thisStudentResumeFragment;
 import com.example.infopapp.ui.dashboard.fragments.portfolios.PortFoliosFragment;
 
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.USERTYPE;
-import static com.example.infopapp.utils.StringConstants.GUEST;
-import static com.example.infopapp.utils.StringConstants.INSTRUCTOR;
-import static com.example.infopapp.utils.StringConstants.STAFF;
-import static com.example.infopapp.utils.StringConstants.STUDENT;
+import static com.example.infopapp.utils.Constants.GUEST;
+import static com.example.infopapp.utils.Constants.INSTRUCTOR;
+import static com.example.infopapp.utils.Constants.STAFF;
+import static com.example.infopapp.utils.Constants.STUDENT;
 
 public class DashActivity extends AppCompatActivity {
 
@@ -81,6 +81,7 @@ public class DashActivity extends AppCompatActivity {
     private void goToThisFragment(Fragment fragment) {
         FragmentTransaction ts = manager.beginTransaction();
         ts.replace(R.id.activity_test_container, fragment);
+        ts.addToBackStack(null);
         ts.commit();
     }
 

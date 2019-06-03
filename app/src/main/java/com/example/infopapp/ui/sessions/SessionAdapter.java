@@ -27,17 +27,16 @@ public class SessionAdapter extends ListAdapter<Session, SessionAdapter.SessionV
         super(DIFF_CALLBACK);
     }
 
-    public class SessionViewHolder extends RecyclerView.ViewHolder{
+    class SessionViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView sessionTitle, sessionMonth, sessionDay, sessionHour, sessionInstrutor;
+        private TextView sessionTitle, sessionMonth, sessionDay, sessionHour;
 
-        public SessionViewHolder(@NonNull View itemView) {
+        SessionViewHolder(@NonNull View itemView) {
             super(itemView);
             sessionTitle = itemView.findViewById(R.id.session_title);
             sessionMonth = itemView.findViewById(R.id.session_month);
             sessionDay = itemView.findViewById(R.id.session_day);
             sessionHour = itemView.findViewById(R.id.session_hour);
-            sessionInstrutor = itemView.findViewById(R.id.session_instructor);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -68,7 +67,6 @@ public class SessionAdapter extends ListAdapter<Session, SessionAdapter.SessionV
         holder.sessionMonth.setText(currentSession.getSessionMonth());
         holder.sessionDay.setText(String.valueOf(currentSession.getSessionDay()));
         holder.sessionHour.setText(currentSession.getSessionHour());
-        holder.sessionInstrutor.setText(currentSession.getSessionInstructor());
 
     }
 

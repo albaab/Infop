@@ -20,22 +20,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.USERTYPE;
-import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisUser;
-import static com.example.infopapp.utils.StringConstants.COHORT;
-import static com.example.infopapp.utils.StringConstants.DATA_SCIENCE;
-import static com.example.infopapp.utils.StringConstants.DISPLAY_PROFILE_NAME;
-import static com.example.infopapp.utils.StringConstants.GUEST;
-import static com.example.infopapp.utils.StringConstants.HCS;
-import static com.example.infopapp.utils.StringConstants.INSTRUCTOR;
-import static com.example.infopapp.utils.StringConstants.MOBILE_DEV;
-import static com.example.infopapp.utils.StringConstants.SPECILIZATION;
-import static com.example.infopapp.utils.StringConstants.SSC;
-import static com.example.infopapp.utils.StringConstants.STAFF;
-import static com.example.infopapp.utils.StringConstants.STUDENT;
-import static com.example.infopapp.utils.StringConstants.USER;
-import static com.example.infopapp.utils.StringConstants.USER_LAST_NAME;
-import static com.example.infopapp.utils.StringConstants.USER_PHONE_KEY;
-import static com.example.infopapp.utils.StringConstants.WEB_DEV;
+import static com.example.infopapp.utils.Constants.COHORT;
+import static com.example.infopapp.utils.Constants.DATA_SCIENCE;
+import static com.example.infopapp.utils.Constants.DISPLAY_PROFILE_NAME;
+import static com.example.infopapp.utils.Constants.GUEST;
+import static com.example.infopapp.utils.Constants.HCS;
+import static com.example.infopapp.utils.Constants.INSTRUCTOR;
+import static com.example.infopapp.utils.Constants.MOBILE_DEV;
+import static com.example.infopapp.utils.Constants.SPECILIZATION;
+import static com.example.infopapp.utils.Constants.SSC;
+import static com.example.infopapp.utils.Constants.STAFF;
+import static com.example.infopapp.utils.Constants.STUDENT;
+import static com.example.infopapp.utils.Constants.USER;
+import static com.example.infopapp.utils.Constants.USER_LAST_NAME;
+import static com.example.infopapp.utils.Constants.USER_PHONE_KEY;
+import static com.example.infopapp.utils.Constants.WEB_DEV;
 
 public class ProfileDialogFragment extends DialogFragment {
     private Bundle profileDialogBundle = new Bundle();

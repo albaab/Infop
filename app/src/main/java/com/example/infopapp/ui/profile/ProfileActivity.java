@@ -29,17 +29,17 @@ import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisInstr
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStaff;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStudent;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisUser;
-import static com.example.infopapp.utils.StringConstants.COHORT;
-import static com.example.infopapp.utils.StringConstants.DISPLAY_PROFILE_NAME;
-import static com.example.infopapp.utils.StringConstants.INSTRUCTOR;
-import static com.example.infopapp.utils.StringConstants.GUEST;
-import static com.example.infopapp.utils.StringConstants.SPECILIZATION;
-import static com.example.infopapp.utils.StringConstants.STAFF;
-import static com.example.infopapp.utils.StringConstants.STUDENT;
-import static com.example.infopapp.utils.StringConstants.USER;
-import static com.example.infopapp.utils.StringConstants.USER_LAST_NAME;
-import static com.example.infopapp.utils.StringConstants.USER_PHONE_KEY;
-import static com.example.infopapp.utils.StringConstants.ZERO;
+import static com.example.infopapp.utils.Constants.COHORT;
+import static com.example.infopapp.utils.Constants.DISPLAY_PROFILE_NAME;
+import static com.example.infopapp.utils.Constants.INSTRUCTOR;
+import static com.example.infopapp.utils.Constants.GUEST;
+import static com.example.infopapp.utils.Constants.SPECILIZATION;
+import static com.example.infopapp.utils.Constants.STAFF;
+import static com.example.infopapp.utils.Constants.STUDENT;
+import static com.example.infopapp.utils.Constants.USER;
+import static com.example.infopapp.utils.Constants.USER_LAST_NAME;
+import static com.example.infopapp.utils.Constants.USER_PHONE_KEY;
+import static com.example.infopapp.utils.Constants.ZERO;
 
 public class ProfileActivity extends AppCompatActivity implements
         ProfileDialogFragment.ProfileDialogListener, ProfileView {

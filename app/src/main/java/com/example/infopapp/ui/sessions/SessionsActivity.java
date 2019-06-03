@@ -14,7 +14,7 @@ import com.example.infopapp.R;
 import com.example.infopapp.ui.sessions.fragments.ListOfSessionsFragment;
 import com.example.infopapp.ui.sessions.fragments.SelectedSessionFragment;
 
-import static com.example.infopapp.utils.StringConstants.MOBILE_DEV_TITLE;
+import static com.example.infopapp.utils.Constants.MOBILE_DEV_TITLE;
 
 public class SessionsActivity extends AppCompatActivity implements ListOfSessionsFragment.ListOfSessionsFragmentListener {
 
@@ -37,25 +37,12 @@ public class SessionsActivity extends AppCompatActivity implements ListOfSession
     private void goToFragment(Fragment fragment){
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.session_activity_container,fragment);
+        if(!(fragment instanceof ListOfSessionsFragment)){
+            transaction.addToBackStack(null);
+        }
+
         transaction.commit();
     }
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-//            getPreviousFragment();
-//        }
-//        return true;
-//    }
-
-//    public void getPreviousFragment() {
-//        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.session_activity_container);
-//        if (fragment instanceof SelectedSessionFragment) {
-//            goToFragment(listOfSessionsFragment);
-//        }else if (fragment instanceof ListOfSessionsFragment){
-//            startActivity(new Intent(this, HomeActivity.class));
-//        }
-//
-//    }
 
 
     @Override

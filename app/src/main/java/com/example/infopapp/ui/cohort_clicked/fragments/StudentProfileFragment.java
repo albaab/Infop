@@ -23,8 +23,6 @@ import com.example.infopapp.utils.RoundPicasso;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import static com.example.infopapp.utils.StringConstants.STUDENT_RESUME;
-
 /**
  * A simple {@link Fragment} subclass.
  */

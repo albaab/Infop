@@ -34,7 +34,7 @@ import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisInstr
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStaff;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStudent;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisUser;
-import static com.example.infopapp.utils.StringConstants.STAFF;
+import static com.example.infopapp.utils.Constants.STAFF;
 
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

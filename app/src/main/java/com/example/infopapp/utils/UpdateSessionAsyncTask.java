@@ -2,7 +2,7 @@ package com.example.infopapp.utils;
 
 import android.os.AsyncTask;
 
-import com.example.infopapp.db.SessionDao;
+import com.example.infopapp.databases.SessionDao;
 import com.example.infopapp.entities.Session;
 
 public class UpdateSessionAsyncTask extends AsyncTask <Session, Void, Void>{

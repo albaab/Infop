@@ -90,6 +90,26 @@
     <string name="upload_file">Upload a PDF</string>
     <string name="no_resume">No Resume Avalaible</string>
     <string name="grant_access">Please grant permission to select file</string>
+    <string name="student_q_1">The instructor was on time?</string>
+    <!--<string name="student_q_2">The instructor shared clearly the content and the concepts of the formation:</string>-->
+    <string name="student_q_3">The instructor shared clearly the content and the concepts of the formation:</string>
+    <string name="student_q_4">The instructor encouraged me to think critically and cultivate autonomy:</string>
+    <string name="student_q_5">The methodology of the course was relevant:</string>
+    <string name="student_q_6">The instructor mastered his subject:</string>
+    <string name="student_q_7">The Objectives of the session was clear to me:</string>
+    <string name="student_q_8">This session helped me discover new research paths to know more about the subject:</string>
+    <string name="student_q_9">This session interested me and encouraged me to actively participate:</string>
+    <string name="student_q_10">The instructor was available to answer our questions:</string>
+    <string name="student_q_11">The instructor favored everyone\'s participation:</string>
+    <string name="student_q_12">I felt heard and respected when I spoke during the session:</string>
+    <string name="student_q_13">I appreciated the methods and tools used in this course:</string>
+    <string name="student_q_14">The documents shared and the methods adopted were coherent with the objectives of the course:</string>
+    <string name="student_q_15">The instructor incited us to ask questions and interrupt him when necessary:</string>
+    <string name="student_q_16">How would you rate this course</string>
+    <string name="student_q_17">How would you rate this instructor</string>
+    <string name="student_q_18">What improvements do you suggest?</string>
+    <string name="student_q_19">Overall, what are your general impressions regarding this makersday session?</string>
+    <string name="feedback_sent">Feedback Sent</string>
 
     <array name="module_specialization">
         <item name="data_science">Data science</item>

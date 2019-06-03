@@ -15,8 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.infopapp.db.FirebaseDb;
+import com.example.infopapp.databases.FirebaseUserDb;
 import com.example.infopapp.entities.Instructor;
 import com.example.infopapp.entities.Staff;
 import com.example.infopapp.entities.Student;
@@ -33,14 +34,14 @@ import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisInstr
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStaff;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStudent;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisUser;
-import static com.example.infopapp.utils.StringConstants.GUEST;
-import static com.example.infopapp.utils.StringConstants.INSTRUCTOR;
-import static com.example.infopapp.utils.StringConstants.STAFF;
-import static com.example.infopapp.utils.StringConstants.STATUS_KEY;
-import static com.example.infopapp.utils.StringConstants.STUDENT;
+import static com.example.infopapp.utils.Constants.GUEST;
+import static com.example.infopapp.utils.Constants.INSTRUCTOR;
+import static com.example.infopapp.utils.Constants.STAFF;
+import static com.example.infopapp.utils.Constants.STATUS_KEY;
+import static com.example.infopapp.utils.Constants.STUDENT;
 
 
-public class SignInFragment extends Fragment implements LoginView, FirebaseDb.FirebaseDbCallBack {
+public class SignInFragment extends Fragment implements LoginView, FirebaseUserDb.FirebaseDbCallBack {
 
 //======================================Attributes=============================================//
 
@@ -63,9 +64,10 @@ public class SignInFragment extends Fragment implements LoginView, FirebaseDb.Fi
         Log.d(TAG, "setLoginStatus: START LOGIN SUCCESSFUL");
 
         if (isSuccessful){
-            FirebaseDb.isUserInFirebaseDb(thisUser,this);
+            FirebaseUserDb.isUserInFirebaseDb(thisUser,this);
         }else{
-
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(getActivity(),getText(R.string.login_fail_message) , Toast.LENGTH_SHORT).show();
         }
 
 //        if (isEmailVerified) {
@@ -73,7 +75,6 @@ public class SignInFragment extends Fragment implements LoginView, FirebaseDb.Fi
 //            progressBar.setVisibility(View.INVISIBLE);
 //            mCreateAccountCallback.startHomeActivityFromSingIn(signInBundle);
 //        } else {
-//            Toast.makeText(getActivity(), verifyEmailMessage, Toast.LENGTH_SHORT).show();
 //        }
     }
 
@@ -151,7 +152,7 @@ public class SignInFragment extends Fragment implements LoginView, FirebaseDb.Fi
     //==========================================On Attach==========================================//
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof CallBackSignInListener) {
             mCreateAccountCallback = (CallBackSignInListener) context;
@@ -181,7 +182,6 @@ public class SignInFragment extends Fragment implements LoginView, FirebaseDb.Fi
         super.onViewCreated(view, savedInstanceState);
         //retrieve bundle from createAccountFragment
         logPresenter = new LogPresenter(this);
-        String verifyEmailMessage = (String) getActivity().getResources().getText(R.string.verify_email);
         //retrieve view items of the fragment layout
 
         TextView createAccountLink = view.findViewById(R.id.create_account_link);
@@ -193,11 +193,11 @@ public class SignInFragment extends Fragment implements LoginView, FirebaseDb.Fi
 
         final Button signInButton = view.findViewById(R.id.sign_in_button);
 
+
+//------------------------------SIGN IN BUTTON CLICK LISTENER---------------------------------------
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 emailSignIn = emailEdit.getText().toString().trim();
                 passwordSignIn = passwordEdit.getText().toString().trim();
 
@@ -205,10 +205,9 @@ public class SignInFragment extends Fragment implements LoginView, FirebaseDb.Fi
                     progressBar.setVisibility(View.VISIBLE);
                 }
 
-
             }
         });
-
+//------------------------------RESET PASSWORD LINK CLICK LISTENER----------------------------------
         resetPasswordLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -216,6 +215,7 @@ public class SignInFragment extends Fragment implements LoginView, FirebaseDb.Fi
             }
         });
 
+//------------------------------CREATE ACCOUNT LINK CLICK LISTENER----------------------------------
 
         createAccountLink.setOnClickListener(new View.OnClickListener() {
             @Override

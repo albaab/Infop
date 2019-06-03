@@ -2,7 +2,7 @@ package com.example.infopapp.entities;
 
 import androidx.annotation.NonNull;
 
-import static com.example.infopapp.utils.StringConstants.STUDENT;
+import static com.example.infopapp.utils.Constants.STUDENT;
 
 public class Student extends User {
 

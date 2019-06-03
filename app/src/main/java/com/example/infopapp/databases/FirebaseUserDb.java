@@ -1,4 +1,4 @@
-package com.example.infopapp.db;
+package com.example.infopapp.databases;
 
 import android.util.Log;
 
@@ -23,12 +23,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
-import static com.example.infopapp.utils.StringConstants.GUEST;
-import static com.example.infopapp.utils.StringConstants.INSTRUCTOR;
-import static com.example.infopapp.utils.StringConstants.STAFF;
-import static com.example.infopapp.utils.StringConstants.STUDENT;
+import static com.example.infopapp.utils.Constants.GUEST;
+import static com.example.infopapp.utils.Constants.INSTRUCTOR;
+import static com.example.infopapp.utils.Constants.STAFF;
+import static com.example.infopapp.utils.Constants.STUDENT;
 
-public class FirebaseDb {
+public class FirebaseUserDb {
 
 //====================================PRIVATE ATTRIBUTES============================================
 
@@ -39,13 +39,13 @@ public class FirebaseDb {
     private static DatabaseReference userTypeReference;
 
     private static List<Student> students;
-//    private List<Cohort> cohorts = new ArrayList<>();
-//===================================PUBLIC CONSTRUCTOR=============================================
 
-    public FirebaseDb(ProfileView profileView) {
+
+//===================================PUBLIC CONSTRUCTOR=============================================
+    public FirebaseUserDb(ProfileView profileView) {
         this.profileView = profileView;
     }
-    public FirebaseDb(DashboardView dashboardView){
+    public FirebaseUserDb(DashboardView dashboardView){
         this.dashboardView = dashboardView;
     }
 
@@ -75,6 +75,8 @@ public class FirebaseDb {
         }
     }
 
+
+
     //    ---------------------------------Update user in database----------------------------------
     public void updateUserInFirebaseDb(User user) {
         userTypeReference = listOfStudentsDatabaseReference.child(user.getUserType());
@@ -88,6 +90,9 @@ public class FirebaseDb {
                 });
     }
 
+
+
+    //--------------------------------------update student resume method----------------------------
     public void updateStudentResume(Student student){
         userTypeReference = listOfStudentsDatabaseReference.child(STUDENT);
         userTypeReference.child(student.getId())
@@ -100,7 +105,9 @@ public class FirebaseDb {
                 });
     }
 
-    //--------------------------------------is user in database?----------------------------------------
+
+
+    //--------------------------------------is user in database?------------------------------------
     public static void isUserInFirebaseDb(final User user, final FirebaseDbCallBack fbCallback) {
 
         Log.d(TAG, "isUserInFirebaseDb: START SEARCHING IN DATABASE");
@@ -151,8 +158,9 @@ public class FirebaseDb {
         });
     }
 
-    //---------------------------------get all students in firebase---------------------------------
 
+
+    //---------------------------------get all students in firebase---------------------------------
     public void getAllStudentsFromFirebase(final FirebaseDbCallBack firebaseDbCallBack) {
 //        userTypeReference = listOfStudentsDatabaseReference.child(STUDENT);
         listOfStudentsDatabaseReference.child(STUDENT)
@@ -175,6 +183,9 @@ public class FirebaseDb {
                 });
     }
 
+
+
+    //---------------------------------delete a student in firebase---------------------------------
     public void deleteEntry(Student student) {
         if (student.getUserType() != null) {
 
@@ -200,6 +211,11 @@ public class FirebaseDb {
             profileView.setUpdateUserInFirebaseDbStatus(false);
         }
     }
+
+
+
+
+
 
     //==========================================Firebase CallBack Interface=============================
     public interface FirebaseDbCallBack {

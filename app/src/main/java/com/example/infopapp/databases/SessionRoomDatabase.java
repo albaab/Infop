@@ -1,4 +1,4 @@
-package com.example.infopapp.db;
+package com.example.infopapp.databases;
 
 import android.app.Application;
 import android.os.AsyncTask;
@@ -11,12 +11,13 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import static com.example.infopapp.utils.Constants.MOBILE_DEV;
+
 @Database(entities = {Session.class}, version = 1)
 public abstract class SessionRoomDatabase extends RoomDatabase {
 
     public abstract SessionDao sessionDao();
-
-    public static SessionRoomDatabase instance;
+    private static SessionRoomDatabase instance;
 
     public static synchronized SessionRoomDatabase getInstance(Application application) {
 
@@ -65,6 +66,8 @@ public abstract class SessionRoomDatabase extends RoomDatabase {
 
             activitiesSession.setSessionResources("www.edacy.com");
 
+            activitiesSession.setSessionType(MOBILE_DEV);
+
             sessionDao.insert(activitiesSession);
 
             sessionDao.insert(new Session("Shared Preferences", "April"
@@ -91,5 +94,5 @@ public abstract class SessionRoomDatabase extends RoomDatabase {
             return null;
         }
     }
-}
 
+}

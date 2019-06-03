@@ -4,23 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 
 import com.example.infopapp.R;
-import com.example.infopapp.entities.Cohort;
 import com.example.infopapp.entities.Student;
 import com.example.infopapp.ui.cohort_clicked.fragments.StudentResumeFragment;
 import com.example.infopapp.ui.cohort_clicked.fragments.list_of_students.ListOfStudentsInCohortFragment;
 import com.example.infopapp.ui.cohort_clicked.fragments.StudentProfileFragment;
-import com.example.infopapp.ui.home_screens.HomeActivity;
 
-import static com.example.infopapp.utils.StringConstants.COHORT;
-import static com.example.infopapp.utils.StringConstants.STUDENT_RESUME;
+import static com.example.infopapp.utils.Constants.COHORT;
+import static com.example.infopapp.utils.Constants.STUDENT_RESUME;
 
 public class CohortClickedActivity extends AppCompatActivity
         implements ListOfStudentsInCohortFragment.OnListOfStudentsFragmentListener,

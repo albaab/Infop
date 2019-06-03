@@ -24,7 +24,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static com.example.infopapp.utils.StringConstants.COHORT;
+import static com.example.infopapp.utils.Constants.COHORT;
 
 
 public class PortFoliosFragment extends Fragment {

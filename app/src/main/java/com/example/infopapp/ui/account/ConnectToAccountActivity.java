@@ -15,7 +15,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.infopapp.R;
-import com.example.infopapp.db.FirebaseDb;
+import com.example.infopapp.databases.FirebaseUserDb;
 import com.example.infopapp.entities.Instructor;
 import com.example.infopapp.entities.Staff;
 import com.example.infopapp.entities.Student;
@@ -30,15 +30,15 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
-import static com.example.infopapp.utils.StringConstants.GUEST;
-import static com.example.infopapp.utils.StringConstants.INSTRUCTOR;
-import static com.example.infopapp.utils.StringConstants.STAFF;
-import static com.example.infopapp.utils.StringConstants.STATUS_KEY;
-import static com.example.infopapp.utils.StringConstants.STUDENT;
+import static com.example.infopapp.utils.Constants.GUEST;
+import static com.example.infopapp.utils.Constants.INSTRUCTOR;
+import static com.example.infopapp.utils.Constants.STAFF;
+import static com.example.infopapp.utils.Constants.STATUS_KEY;
+import static com.example.infopapp.utils.Constants.STUDENT;
 
 public class ConnectToAccountActivity extends AppCompatActivity implements
         ChooseAccountFragment.CallBackChooseAccount,
-        SignInFragment.CallBackSignInListener, FirebaseDb.FirebaseDbCallBack {
+        SignInFragment.CallBackSignInListener, FirebaseUserDb.FirebaseDbCallBack {
 
     private static final String TAG = "Signing in";
     //=====================================private attributes======================================//
@@ -159,7 +159,7 @@ public class ConnectToAccountActivity extends AppCompatActivity implements
             thisUser.setId(fbUser.getUid());
             thisUser.setUserType(fbUser.getDisplayName());
             USERTYPE = fbUser.getDisplayName();
-            FirebaseDb.isUserInFirebaseDb(thisUser,this);
+            FirebaseUserDb.isUserInFirebaseDb(thisUser,this);
             startActivity(new Intent(this, HomeActivity.class));
             finish();
         }

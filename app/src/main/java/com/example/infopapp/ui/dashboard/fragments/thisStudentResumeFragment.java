@@ -35,7 +35,8 @@ import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStude
 public class thisStudentResumeFragment extends Fragment implements DashboardView {
 
     private static final int READ_REQUEST = 707;
-//=======================================ATTRIBUTESS============================================
+    private  TextView noResumeTv;
+    //=======================================ATTRIBUTESS============================================
     public PDFView resumePdfView;
     public ProgressBar progressBar;
 
@@ -65,7 +66,7 @@ public class thisStudentResumeFragment extends Fragment implements DashboardView
         Log.d(TAG, "onViewCreated: DEBUG -> RESUME FRAGMENT CREATED");
         resumePdfView = view.findViewById(R.id.resume_pdf_view);
         progressBar = view.findViewById(R.id.loading_resume_progressbar);
-        TextView noResumeTv = view.findViewById(R.id.no_resume_tv);
+        noResumeTv = view.findViewById(R.id.no_resume_tv);
         FloatingActionButton uploadButton = view.findViewById(R.id.upload_resume_button);
 
         dashboardPresenter = new DashboardPresenter(this);
@@ -113,7 +114,7 @@ public class thisStudentResumeFragment extends Fragment implements DashboardView
 
         if(requestCode == RESUME_REQUEST_CODE && resultCode == RESULT_OK && data != null
                 && data.getData() != null){
-
+            noResumeTv.setVisibility(View.GONE);
             //upload the resume selected to firebase reference storage
             dashboardPresenter.uploadResume(data.getData(), this);
 

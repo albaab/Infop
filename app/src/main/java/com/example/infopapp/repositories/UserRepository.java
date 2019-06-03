@@ -1,6 +1,6 @@
 package com.example.infopapp.repositories;
 
-import com.example.infopapp.db.FirebaseDb;
+import com.example.infopapp.databases.FirebaseUserDb;
 import com.example.infopapp.entities.Cohort;
 import com.example.infopapp.entities.Instructor;
 import com.example.infopapp.entities.Staff;
@@ -14,11 +14,11 @@ import java.util.List;
 public class UserRepository {
 
 //====================================PRIVATE ATTRIBUTES============================================
-    private FirebaseDb firebaseDb;
+    private FirebaseUserDb firebaseUserDb;
 
 //========================================CONSTRUCTORS==============================================
     public UserRepository(ProfileView profileView) {
-        firebaseDb = new FirebaseDb(profileView);
+        firebaseUserDb = new FirebaseUserDb(profileView);
     }
 
     public UserRepository(){
@@ -26,18 +26,18 @@ public class UserRepository {
     }
 
 //    public void saveStudentToFireBase(User user) {
-//        firebaseDb.uploadUserToFirebaseDb(user);
+//        firebaseUserDb.uploadUserToFirebaseDb(user);
 //    }
 
 //=====================================REPOSITORY METHODS ==========================================
 
     public void updateStudentInFireBase(User user) {
-        firebaseDb.updateUserInFirebaseDb(user);
+        firebaseUserDb.updateUserInFirebaseDb(user);
     }
 
     public void getAllCohorts(final UserRepoCallBackInterface repoCallBackInterface) {
 
-        firebaseDb.getAllStudentsFromFirebase(new FirebaseDb.FirebaseDbCallBack() {
+        firebaseUserDb.getAllStudentsFromFirebase(new FirebaseUserDb.FirebaseDbCallBack() {
                     @Override
                     public void onCallBack(List<Student> studentList) {
 
@@ -67,7 +67,7 @@ public class UserRepository {
     }
 
     public void deteleStudentInFirebase(Student student){
-        firebaseDb.deleteEntry(student);
+        firebaseUserDb.deleteEntry(student);
     }
 
     private void arrangeStudentsInCohort(List<Student> studentList, List<Cohort> cohorts) {

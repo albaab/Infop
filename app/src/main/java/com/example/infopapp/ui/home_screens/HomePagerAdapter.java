@@ -11,10 +11,10 @@ import com.example.infopapp.ui.home_screens.fragments.HomeFragment;
 
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.USERTYPE;
 
-import static com.example.infopapp.utils.StringConstants.INSTRUCTOR;
-import static com.example.infopapp.utils.StringConstants.GUEST;
-import static com.example.infopapp.utils.StringConstants.STAFF;
-import static com.example.infopapp.utils.StringConstants.STUDENT;
+import static com.example.infopapp.utils.Constants.INSTRUCTOR;
+import static com.example.infopapp.utils.Constants.GUEST;
+import static com.example.infopapp.utils.Constants.STAFF;
+import static com.example.infopapp.utils.Constants.STUDENT;
 
 public class HomePagerAdapter extends FragmentStatePagerAdapter {
 

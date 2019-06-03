@@ -1,21 +1,28 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#ffcc00"
-        />
+    <solid android:color="#ffcc00" />
 
-    <corners android:bottomRightRadius="45dp"
+    <corners
         android:bottomLeftRadius="45dp"
+        android:bottomRightRadius="45dp"
         android:topLeftRadius="45dp"
         android:topRightRadius="45dp" />
-    <padding android:left="2dp" android:top="2dp" android:right="2dp" android:bottom="2dp" />
+    <padding
+        android:bottom="2dp"
+        android:left="2dp"
+        android:right="2dp"
+        android:top="2dp" />
     <gradient
-        android:startColor="#ffff"
+        android:angle="45"
 
         android:centerColor="#ffff"
 
         android:endColor="#ffff"
-        android:angle="45"
-        >
-
+        android:startColor="#ffff">
+s
     </gradient>
+
+    <stroke android:width="1px" android:color="#000000"/>
+
+
 
 </shape>

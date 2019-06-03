@@ -1,6 +1,6 @@
 package com.example.infopapp.utils;
 
-public class StringConstants {
+public abstract class Constants {
 
 
     public static final String KEY = "key";
@@ -20,6 +20,7 @@ public class StringConstants {
     public static final String GUEST = "Guest";
 
     public static final String COHORT = "Cohort";
+    public static final String SESSION = "Session";
     public static final String DISPLAY_PROFILE_NAME = "display_name";
 
     public static final String SPECILIZATION = "Specialization";
@@ -31,15 +32,18 @@ public class StringConstants {
 
 
 
-    public static final String USER_EMAIL_KEY = "user_email";
     public static final String USER_PHONE_KEY = "user_phone";
 
-    public static final String USER_PASSWORD_KEY = "user_password";
     public static final String STATUS_KEY = "status_key";
-    public static final String SIGN_UP_STATUS_KEY = "sign_up_status_key";
     public static final String MOBILE_DEV_TITLE = "MOBILE DEVELOPMENT";
 
     public static final String ZERO = String.valueOf(0);
 
+    public enum SessionType{
+        MOBILE,WEB,DATA_SCIENCE;
+    }
+    public enum Module{
+        SOFT_SKILLS,HARD_SKILLS,EMPLOYABILITY;
+    }
 
 }

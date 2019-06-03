@@ -1,0 +1,80 @@
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:width="152dp"
+    android:height="152dp"
+    android:viewportWidth="152"
+    android:viewportHeight="152"
+    >
+
+    <group>
+
+        <clip-path
+            android:pathData="M76 1C117.421 1 151 34.5786 151 76C151 117.421 117.421 151 76 151C34.5786 151 1 117.421 1 76C1 34.5786 34.5786 1 76 1Z"
+            tools:ignore="VectorRaster" />
+
+        <group
+            android:translateX="0.585"
+            android:translateY="-0.232"
+            android:pivotX="76"
+            android:pivotY="76"
+            android:scaleX="2.019"
+            android:scaleY="2.019"
+            android:rotation="50.897"
+            >
+
+            <path
+                android:pathData="M1 1V151H151V1"
+                >
+
+                <aapt:attr name="android:fillColor">
+
+                    <gradient
+                        android:type="linear"
+                        android:startX="38.5"
+                        android:startY="76"
+                        android:endX="113.5"
+                        android:endY="76"
+                        tools:targetApi="n">
+
+                        <item
+                            android:color="#F7FFCC00"
+                            android:offset="0"
+                            />
+
+                        <item
+                            android:color="#E5E5E5"
+                            android:offset="0.51"
+                            />
+
+                        <item
+                            android:color="#7D61BFAD"
+                            android:offset="1"
+                            />
+
+                    </gradient>
+
+                </aapt:attr>
+
+            </path>
+
+        </group>
+
+    </group>
+
+    <group>
+
+        <clip-path
+            android:pathData="M0 0V152H152V0M76 1C117.421 1 151 34.5786 151 76C151 117.421 117.421 151 76 151C34.5786 151 1 117.421 1 76C1 34.5786 34.5786 1 76 1Z"
+            tools:ignore="VectorRaster" />
+
+        <path
+            android:pathData="M76 1C117.421 1 151 34.5786 151 76C151 117.421 117.421 151 76 151C34.5786 151 1 117.421 1 76C1 34.5786 34.5786 1 76 1Z"
+            android:strokeWidth="1"
+            android:strokeColor="#000000"
+            />
+
+    </group>
+
+</vector>

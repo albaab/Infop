@@ -2,8 +2,8 @@ package com.example.infopapp.repositories;
 
 import android.app.Application;
 
-import com.example.infopapp.db.SessionDao;
-import com.example.infopapp.db.SessionRoomDatabase;
+import com.example.infopapp.databases.SessionDao;
+import com.example.infopapp.databases.SessionRoomDatabase;
 import com.example.infopapp.entities.Session;
 import com.example.infopapp.utils.DeleteSessionAsyncTask;
 import com.example.infopapp.utils.InsertSessionAsyncTask;

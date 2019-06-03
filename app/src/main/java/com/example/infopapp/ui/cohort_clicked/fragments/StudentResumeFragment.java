@@ -21,7 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
-import static com.example.infopapp.utils.StringConstants.STUDENT_RESUME;
+import static com.example.infopapp.utils.Constants.STUDENT_RESUME;
 
 
 public class StudentResumeFragment extends Fragment implements DashboardView {
