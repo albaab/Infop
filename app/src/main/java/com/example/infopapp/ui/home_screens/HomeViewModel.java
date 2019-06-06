@@ -41,7 +41,7 @@ public class HomeViewModel extends AndroidViewModel implements ProfileView {
     }
 
     public LiveData<List<Session>> getAllSessionsData() {
-        return repository.getAllSessions();
+        return repository.getAllSessionsFromRoomDb();
     }
 
     public void getAllCohortsDataVm(final ProgressBar progressBar, final HomeViewModelCallbackListener listener) {
@@ -63,6 +63,11 @@ public class HomeViewModel extends AndroidViewModel implements ProfileView {
 
     @Override
     public void setUpdateUserInFirebaseDbStatus(boolean myBoolean) {
+
+    }
+
+    @Override
+    public void setUploadUserInFirebaseDbStatus(boolean myBoolean) {
 
     }
 

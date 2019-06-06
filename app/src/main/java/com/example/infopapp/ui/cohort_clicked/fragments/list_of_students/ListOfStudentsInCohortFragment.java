@@ -25,7 +25,7 @@ import com.example.infopapp.ui.profile.ProfileView;
 import static com.example.infopapp.utils.Constants.COHORT;
 
 
-public class ListOfStudentsInCohortFragment extends Fragment implements ProfileView {
+public class ListOfStudentsInCohortFragment extends Fragment {
 
     private OnListOfStudentsFragmentListener mListener;
     private RecyclerView listRecyclerView;
@@ -92,7 +92,7 @@ public class ListOfStudentsInCohortFragment extends Fragment implements ProfileV
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnListOfStudentsFragmentListener) {
             mListener = (OnListOfStudentsFragmentListener) context;
@@ -108,18 +108,23 @@ public class ListOfStudentsInCohortFragment extends Fragment implements ProfileV
         mListener = null;
     }
 
-    @Override
-    public void setUploadProfilePic(boolean myBoolean, int visibility) {
-
-    }
-
-    @Override
-    public void setUpdateUserInFirebaseDbStatus(boolean myBoolean) {
-//        if (myBoolean){
-//        }else{
-//            Toast.makeText(getActivity(), getText(R.string.error_message), Toast.LENGTH_SHORT).show();
-//        }
-    }
+//    @Override
+//    public void setUploadProfilePic(boolean myBoolean, int visibility) {
+//
+//    }
+//
+//    @Override
+//    public void setUpdateUserInFirebaseDbStatus(boolean myBoolean) {
+////        if (myBoolean){
+////        }else{
+////            Toast.makeText(getActivity(), getText(R.string.error_message), Toast.LENGTH_SHORT).show();
+////        }
+//    }
+//
+//    @Override
+//    public void setUploadUserInFirebaseDbStatus(boolean myBoolean) {
+//
+//    }
 
 
     public interface OnListOfStudentsFragmentListener {

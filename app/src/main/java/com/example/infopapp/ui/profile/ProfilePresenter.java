@@ -23,7 +23,7 @@ class ProfilePresenter {
 //        userRepository.saveStudentToFireBase(user);
 ////    }
 
-    void updateDbStudentInfo(User user) {
+    void updateDbUserInfo(User user) {
         userRepository.updateStudentInFireBase(user);
     }
 

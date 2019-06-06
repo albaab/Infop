@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/profile_activity"
@@ -7,184 +7,178 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileActivity">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="278dp"
+            android:layout_height="278dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/white_circle"
+            android:contentDescription="@string/student"
+            android:maxHeight="277dp"
+            android:padding="0.5dp"
+            android:src="@drawable/talent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/profile_image"
-                android:layout_width="278dp"
-                android:layout_height="278dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/white_circle"
-                android:contentDescription="@string/student"
-                android:maxHeight="277dp"
-                android:padding="0.5dp"
-                android:src="@drawable/talent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.487"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/upload_image_button"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="224dp"
+            android:layout_marginLeft="224dp"
+            android:layout_marginTop="220dp"
+            android:src="@drawable/ic_photo"
+            app:fabCustomSize="33dp"
+            app:layout_constraintStart_toStartOf="@+id/profile_image"
+            app:layout_constraintTop_toTopOf="@+id/profile_image" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/upload_image_button"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
-                android:layout_marginStart="224dp"
-                android:layout_marginLeft="224dp"
-                android:layout_marginTop="220dp"
-                android:src="@drawable/ic_photo"
-                app:fabCustomSize="33dp"
-                app:layout_constraintStart_toStartOf="@+id/profile_image"
-                app:layout_constraintTop_toTopOf="@+id/profile_image" />
+        <LinearLayout
+            android:id="@+id/profile_linear_layout"
+            android:layout_width="269dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/text_field_gray"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_image">
 
-            <LinearLayout
-                android:id="@+id/profile_linear_layout"
-                android:layout_width="269dp"
+            <!--User Full name-->
+            <TextView
+                android:id="@+id/profile_name_tv"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="50dp"
-                android:background="@drawable/text_field_gray"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_image">
+                android:text="@string/username"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                tools:layout_editor_absoluteX="173dp"
+                tools:layout_editor_absoluteY="346dp" />
 
-                <!--User Full name-->
+            <!--Username or Display Name-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:orientation="horizontal">
+
                 <TextView
-                    android:id="@+id/profile_name_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/username"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginRight="2dp"
                     android:gravity="center"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:text="@string/at_sign" />
+
+                <TextView
+                    android:id="@+id/profile_display_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/display_name"
                     tools:layout_editor_absoluteX="173dp"
-                    tools:layout_editor_absoluteY="346dp" />
-
-                <!--Username or Display Name-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="2dp"
-                        android:layout_marginRight="2dp"
-                        android:gravity="center"
-                        android:text="@string/at_sign" />
-
-                    <TextView
-                        android:id="@+id/profile_display_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/display_name"
-                        tools:layout_editor_absoluteX="173dp"
-                        tools:layout_editor_absoluteY="378dp" />
+                    tools:layout_editor_absoluteY="378dp" />
 
 
-                </LinearLayout>
-
-                <!--Cohort-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/profile_cohort_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:text="@string/cohorte"
-                        android:visibility="gone"
-                        tools:layout_editor_absoluteX="173dp"
-                        tools:layout_editor_absoluteY="378dp" />
-
-                    <TextView
-                        android:id="@+id/profile_cohort_num_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginBottom="2dp"
-                        android:text="@string/number"
-                        android:visibility="gone"
-                        tools:ignore="RtlCompat"
-                        tools:layout_editor_absoluteX="173dp"
-                        tools:layout_editor_absoluteY="378dp" />
-
-                </LinearLayout>
-
-                <!--Specialization-->
-                <TextView
-                    android:id="@+id/profile_specialization_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:text="@string/specialization"
-                    android:visibility="visible"
-                    tools:layout_editor_absoluteX="161dp"
-                    tools:layout_editor_absoluteY="412dp" />
-
-                <!--Email-->
-                <TextView
-                    android:id="@+id/profile_email_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:text="@string/email_hint"
-                    tools:layout_editor_absoluteX="142dp"
-                    tools:layout_editor_absoluteY="445dp" />
-
-                <!--Phone Number-->
-                <TextView
-                    android:id="@+id/profile_phone_number_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:text="@string/phone_number"
-                    tools:layout_editor_absoluteX="161dp"
-                    tools:layout_editor_absoluteY="482dp" />
             </LinearLayout>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/edit_profile_button"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
-                android:layout_marginTop="140dp"
-                android:src="@drawable/ic_edit"
-                app:fabCustomSize="33dp"
-                app:layout_constraintEnd_toEndOf="@+id/profile_linear_layout"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/profile_linear_layout"
-                app:layout_constraintTop_toTopOf="@+id/profile_linear_layout" />
-
-            <ProgressBar
-                android:id="@+id/upload_progress_bar"
-                style="?android:attr/progressBarStyle"
+            <!--Cohort-->
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/profile_image"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/profile_image" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/profile_cohort_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="@string/cohorte"
+                    android:visibility="gone"
+                    tools:layout_editor_absoluteX="173dp"
+                    tools:layout_editor_absoluteY="378dp" />
+
+                <TextView
+                    android:id="@+id/profile_cohort_num_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:text="@string/number"
+                    android:visibility="gone"
+                    tools:ignore="RtlCompat"
+                    tools:layout_editor_absoluteX="173dp"
+                    tools:layout_editor_absoluteY="378dp" />
+
+            </LinearLayout>
+
+            <!--Specialization-->
+            <TextView
+                android:id="@+id/profile_specialization_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="@string/specialization"
+                android:visibility="visible"
+                tools:layout_editor_absoluteX="161dp"
+                tools:layout_editor_absoluteY="412dp" />
+
+            <!--Email-->
+            <TextView
+                android:id="@+id/profile_email_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="@string/email_hint"
+                tools:layout_editor_absoluteX="142dp"
+                tools:layout_editor_absoluteY="445dp" />
+
+            <!--Phone Number-->
+            <TextView
+                android:id="@+id/profile_phone_number_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="@string/phone_number"
+                tools:layout_editor_absoluteX="161dp"
+                tools:layout_editor_absoluteY="482dp" />
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/edit_profile_button"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="140dp"
+            android:src="@drawable/ic_edit"
+            app:fabCustomSize="33dp"
+            app:layout_constraintEnd_toEndOf="@+id/profile_linear_layout"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/profile_linear_layout"
+            app:layout_constraintTop_toTopOf="@+id/profile_linear_layout" />
+
+        <ProgressBar
+            android:id="@+id/upload_progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/profile_image" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

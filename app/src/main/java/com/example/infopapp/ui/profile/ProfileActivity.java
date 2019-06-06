@@ -33,6 +33,7 @@ import static com.example.infopapp.utils.Constants.COHORT;
 import static com.example.infopapp.utils.Constants.DISPLAY_PROFILE_NAME;
 import static com.example.infopapp.utils.Constants.INSTRUCTOR;
 import static com.example.infopapp.utils.Constants.GUEST;
+import static com.example.infopapp.utils.Constants.JOB_TITLE;
 import static com.example.infopapp.utils.Constants.SPECILIZATION;
 import static com.example.infopapp.utils.Constants.STAFF;
 import static com.example.infopapp.utils.Constants.STUDENT;
@@ -44,7 +45,7 @@ import static com.example.infopapp.utils.Constants.ZERO;
 public class ProfileActivity extends AppCompatActivity implements
         ProfileDialogFragment.ProfileDialogListener, ProfileView {
 
-    //======================================PRIVATE ATTRIBUTES==========================================
+//======================================PRIVATE ATTRIBUTES==========================================
     private static final String TAG = "ProfileActivity";
     private static final int CHOOSE_IMAGE = 111;
     private ImageView profileImage;
@@ -98,10 +99,7 @@ public class ProfileActivity extends AppCompatActivity implements
                 chooseImage();
             }
         });
-
-
         Log.d(TAG, "onCreate: profile view created");
-
 
     }
 
@@ -127,10 +125,11 @@ public class ProfileActivity extends AppCompatActivity implements
         Log.d(TAG, "onStart: Profile view success");
     }
 
-    //=========================================ON DESTROY METHOD========================================
+     //=========================================ON DESTROY METHOD====================================
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        bundleForDialogFragment = null;
         Log.d(TAG, "onDestroy: Profile View closed");
     }
 
@@ -168,7 +167,7 @@ public class ProfileActivity extends AppCompatActivity implements
                     phoneNumber.setText(thisStudent.getPhone());
                     cohort.setText(String.valueOf(thisStudent.getCohort()));
                     specialization.setText(thisStudent.getSpecialization());
-                    profilePresenter.updateDbStudentInfo(thisStudent);
+                    profilePresenter.updateDbUserInfo(thisStudent);
 
                     break;
                 case STAFF:
@@ -176,14 +175,14 @@ public class ProfileActivity extends AppCompatActivity implements
                     thisStaff.setLastName((bundle.getString(USER_LAST_NAME)));
                     thisStaff.setDisplayName(bundle.getString(DISPLAY_PROFILE_NAME));
                     thisStaff.setPhone(bundle.getString(USER_PHONE_KEY));
-                    thisStaff.setJobTitle(bundle.getString(SPECILIZATION));
+                    thisStaff.setJobTitle(bundle.getString(JOB_TITLE));
 
                     String staffFullNameString = thisStaff.getFirstName() + " " + thisStaff.getLastName();
                     fullName.setText(staffFullNameString);
                     displayName.setText(thisStaff.getDisplayName());
                     phoneNumber.setText(thisStaff.getPhone());
                     specialization.setText(thisStaff.getJobTitle());
-                    profilePresenter.updateDbStudentInfo(thisStaff);
+                    profilePresenter.updateDbUserInfo(thisStaff);
 
                     break;
                 case INSTRUCTOR:
@@ -199,7 +198,7 @@ public class ProfileActivity extends AppCompatActivity implements
                     phoneNumber.setText(thisInstructor.getPhone());
                     cohort.setText(String.valueOf(thisInstructor.getCohort()));
                     specialization.setText(thisInstructor.getSpecialization());
-                    profilePresenter.updateDbStudentInfo(thisInstructor);
+                    profilePresenter.updateDbUserInfo(thisInstructor);
 
                     break;
                 case GUEST:
@@ -212,7 +211,7 @@ public class ProfileActivity extends AppCompatActivity implements
                     fullName.setText(guestFullNameString);
                     displayName.setText(thisUser.getDisplayName());
                     phoneNumber.setText(thisUser.getPhone());
-                    profilePresenter.updateDbStudentInfo(thisUser);
+                    profilePresenter.updateDbUserInfo(thisUser);
 
                     break;
             }
@@ -255,6 +254,11 @@ public class ProfileActivity extends AppCompatActivity implements
         } else {
             Toast.makeText(this, this.getText(R.string.complete_profile_message), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void setUploadUserInFirebaseDbStatus(boolean myBoolean) {
+        //do nothing
     }
 
 //==========================================UTILITY METHODS=========================================
@@ -379,7 +383,7 @@ public class ProfileActivity extends AppCompatActivity implements
                 cohort.setText(String.valueOf(thisStudent.getCohort()));
                 bundleForDialogFragment.putInt(COHORT, thisStudent.getCohort());
             } else {
-                cohort.setText(String.valueOf(ZERO));
+                cohort.setText(ZERO);
                 bundleForDialogFragment.putInt(COHORT, Integer.valueOf(ZERO));
             }
             bundleForDialogFragment.putString(USER, thisStudent.getFirstName());
@@ -416,9 +420,9 @@ public class ProfileActivity extends AppCompatActivity implements
 
             if (thisStaff.getJobTitle() != null) {
                 specialization.setText(thisStaff.getJobTitle());
-                bundleForDialogFragment.putString(SPECILIZATION, thisStaff.getJobTitle());
+                bundleForDialogFragment.putString(JOB_TITLE, thisStaff.getJobTitle());
             } else {
-                bundleForDialogFragment.putString(SPECILIZATION
+                bundleForDialogFragment.putString(JOB_TITLE
                         , (String) getText(R.string.job_title));
                 specialization.setText(getText(R.string.job_title));
             }
@@ -502,32 +506,32 @@ public class ProfileActivity extends AppCompatActivity implements
             case STUDENT:
                 if(thisStudent != null){
                     thisStudent.setProfileImageurl(imageUrl);
-                    profilePresenter.updateDbStudentInfo(thisStudent);
+                    profilePresenter.updateDbUserInfo(thisStudent);
                 }
                 break;
 
             case STAFF:
                 if(thisStaff != null){
                     thisStaff.setProfileImageurl(imageUrl);
-                    profilePresenter.updateDbStudentInfo(thisStaff);
+                    profilePresenter.updateDbUserInfo(thisStaff);
                 }
                 break;
             case INSTRUCTOR:
                 if(thisInstructor != null){
                     thisInstructor.setProfileImageurl(imageUrl);
-                    profilePresenter.updateDbStudentInfo(thisInstructor);
+                    profilePresenter.updateDbUserInfo(thisInstructor);
                 }
                 break;
             case GUEST:
                 if(thisUser != null){
                     thisUser.setProfileImageurl(imageUrl);
-                    profilePresenter.updateDbStudentInfo(thisUser);
+                    profilePresenter.updateDbUserInfo(thisUser);
                 }
                 break;
             default:
                 if(thisUser != null){
                     thisUser.setProfileImageurl(imageUrl);
-                    profilePresenter.updateDbStudentInfo(thisUser);
+                    profilePresenter.updateDbUserInfo(thisUser);
                 }
                 break;
         }

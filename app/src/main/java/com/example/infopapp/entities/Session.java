@@ -1,24 +1,24 @@
 package com.example.infopapp.entities;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.infopapp.utils.Constants;
-import com.google.firebase.database.Exclude;
+import java.util.Objects;
 
-import java.util.Map;
-
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "sessions_table")
 public class Session implements Parcelable {
 
     //=======================================ATTRIBUTES=================================================
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NonNull
+    private String id = "";
     @ColumnInfo(name = "session_title")
     private String sessionTitle;
 
@@ -49,14 +49,15 @@ public class Session implements Parcelable {
     @ColumnInfo(name = "session_resources")
     private String sessionResources;
 
-    @ColumnInfo(name = "session_feedback")
+    @ColumnInfo(name = "session_feedbacks")
     private Boolean isFeedbackComplete;
 
-    @Ignore
-    private Map<String, FeedbackItem> sessionFeedbacks;
+    @ColumnInfo(name = "student_feedback")
+    private String sessionstudentFeedbacks;
 
     //=======================================CONSTRUCTORS===============================================
     public Session() {
+
 
     }
 
@@ -83,9 +84,13 @@ public class Session implements Parcelable {
         this.sessionResources = sessionResources;
     }
 
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     protected Session(Parcel in) {
-        id = in.readInt();
+        id = Objects.requireNonNull(in.readString());
         sessionTitle = in.readString();
+        sessionType = in.readString();
+        sessionModule = in.readString();
         sessionInstructor = in.readString();
         sessionDescription = in.readString();
         sessionMonth = in.readString();
@@ -97,7 +102,6 @@ public class Session implements Parcelable {
         isFeedbackComplete = tmpIsFeedbackComplete == 0 ? null : tmpIsFeedbackComplete == 1;
     }
 
-    @Ignore
     public static final Creator<Session> CREATOR = new Creator<Session>() {
         @Override
         public Session createFromParcel(Parcel in) {
@@ -118,12 +122,12 @@ public class Session implements Parcelable {
     //========================================SETTERS AND GETTERS=======================================
 
 
-    public Map<String, FeedbackItem> getSessionFeedbacks() {
-        return sessionFeedbacks;
+    public String getSessionstudentFeedbacks() {
+        return sessionstudentFeedbacks;
     }
 
-    public void setSessionFeedbacks(Map<String, FeedbackItem> sessionFeedbacks) {
-        this.sessionFeedbacks = sessionFeedbacks;
+    public void setSessionstudentFeedbacks(String sessionstudentFeedbacks) {
+        this.sessionstudentFeedbacks = sessionstudentFeedbacks;
     }
 
     public void setSessionResources(String sessionResources) {
@@ -138,11 +142,12 @@ public class Session implements Parcelable {
         this.sessionModule = sessionModule;
     }
 
-    public int getId() {
+    @NonNull
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
@@ -218,17 +223,18 @@ public class Session implements Parcelable {
         this.isFeedbackComplete = isFeedbackComplete;
     }
 
-    @Ignore
+
     @Override
     public int describeContents() {
         return 0;
     }
 
-    @Ignore
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
+        dest.writeString(id);
         dest.writeString(sessionTitle);
+        dest.writeString(sessionType);
+        dest.writeString(sessionModule);
         dest.writeString(sessionInstructor);
         dest.writeString(sessionDescription);
         dest.writeString(sessionMonth);

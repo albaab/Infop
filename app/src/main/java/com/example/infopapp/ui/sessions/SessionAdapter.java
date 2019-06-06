@@ -29,14 +29,13 @@ public class SessionAdapter extends ListAdapter<Session, SessionAdapter.SessionV
 
     class SessionViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView sessionTitle, sessionMonth, sessionDay, sessionHour;
+        private TextView sessionTitle, sessionMonth, sessionDay;
 
         SessionViewHolder(@NonNull View itemView) {
             super(itemView);
             sessionTitle = itemView.findViewById(R.id.session_title);
             sessionMonth = itemView.findViewById(R.id.session_month);
             sessionDay = itemView.findViewById(R.id.session_day);
-            sessionHour = itemView.findViewById(R.id.session_hour);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -66,8 +65,6 @@ public class SessionAdapter extends ListAdapter<Session, SessionAdapter.SessionV
         holder.sessionTitle.setText(currentSession.getSessionTitle());
         holder.sessionMonth.setText(currentSession.getSessionMonth());
         holder.sessionDay.setText(String.valueOf(currentSession.getSessionDay()));
-        holder.sessionHour.setText(currentSession.getSessionHour());
-
     }
 
     @Override

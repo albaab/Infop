@@ -47,6 +47,9 @@ dependencies {
     //PFD Viewer dependency
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 
+    //gson dependency
+    implementation 'com.google.code.gson:gson:2.8.2'
+
     //com.android.support:design
 
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha05'

@@ -33,7 +33,6 @@
                 tools:layout_editor_absoluteY="10dp">
 
 
-
                 <ImageView
                     android:id="@+id/session_view_image"
                     android:layout_width="match_parent"
@@ -42,7 +41,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.666"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
                 <TextView
                     android:id="@+id/session_view_title"
                     android:layout_width="300dp"
@@ -51,7 +52,7 @@
                     android:text="@string/title_fragment_sessions"
                     android:textAllCaps="true"
                     android:textColor="@android:color/white"
-                    android:textSize="24dp"
+                    android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="@+id/session_view_image"
                     app:layout_constraintEnd_toEndOf="@+id/session_view_image"
                     app:layout_constraintStart_toStartOf="@+id/session_view_image"
@@ -60,19 +61,20 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!--Description-->
+            <!--Course Information-->
+
             <LinearLayout
-                android:id="@+id/description_layout"
+                android:id="@+id/course_info_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
-                android:background="@drawable/rect_outline"
+                android:background="@drawable/text_field"
                 android:orientation="vertical"
                 android:paddingBottom="10dp">
 
-                <TextView
 
+                <TextView
                     android:layout_width="293dp"
                     android:layout_height="22dp"
                     android:layout_marginStart="12dp"
@@ -80,22 +82,67 @@
                     android:layout_marginTop="7dp"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:drawableRight="@drawable/ic_arrow_down"
+                    android:gravity="center"
                     android:paddingEnd="2dp"
                     android:paddingRight="2dp"
-                    android:text="@string/description"
+                    android:text="@string/course_information"
                     android:textColor="@android:color/black"
                     tools:ignore="RtlSymmetry"
                     tools:layout_editor_absoluteX="4dp"
                     tools:layout_editor_absoluteY="164dp" />
 
+
+                <!--Time and Date-->
                 <TextView
-                    android:id="@+id/description_text_view"
+                    android:id="@+id/time_and_date_text_view"
                     android:layout_width="293dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12sp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginEnd="12sp"
                     android:layout_marginRight="12sp"
+                    android:background="@drawable/text_field_gray_no_outline"
+                    android:padding="10dp"
+                    android:text="@string/hour_and_date"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    android:visibility="gone"
+                    tools:ignore="RtlSymmetry"
+                    tools:layout_editor_absoluteX="4dp"
+                    tools:layout_editor_absoluteY="164dp" />
+
+
+                <!--Instructor-->
+                <TextView
+                    android:id="@+id/session_instructor_text_view"
+                    android:layout_width="293dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12sp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="12sp"
+                    android:layout_marginRight="12sp"
+                    android:background="@drawable/text_field_gray_no_outline"
+                    android:padding="10dp"
+                    android:text="@string/instructor"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    android:visibility="gone"
+                    tools:ignore="RtlSymmetry"
+                    tools:layout_editor_absoluteX="4dp"
+                    tools:layout_editor_absoluteY="164dp" />
+
+                <!--description-->
+                <TextView
+                    android:id="@+id/description_text_view"
+                    android:layout_width="293dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12sp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="12sp"
+                    android:layout_marginRight="12sp"
+                    android:layout_marginBottom="4dp"
                     android:background="@drawable/text_field_gray_no_outline"
                     android:padding="20dp"
                     android:text="@string/description"
@@ -115,7 +162,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/rect_outline"
+                android:background="@drawable/text_field"
                 android:orientation="vertical"
                 android:paddingBottom="10dp">
 
@@ -127,6 +174,7 @@
                     android:layout_marginTop="7dp"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:drawableRight="@drawable/ic_arrow_down"
+                    android:gravity="center"
                     android:paddingEnd="2dp"
                     android:paddingRight="2dp"
                     android:text="@string/homework"
@@ -142,6 +190,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginLeft="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginRight="12dp"
                     android:background="@drawable/text_field_gray_no_outline"
                     android:padding="20dp"
                     android:text="@string/homework"
@@ -160,7 +210,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/rect_outline"
+                android:background="@drawable/text_field"
                 android:orientation="vertical"
                 android:paddingBottom="10dp">
 
@@ -173,6 +223,7 @@
                     android:layout_marginTop="7dp"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:drawableRight="@drawable/ic_arrow_down"
+                    android:gravity="center"
                     android:paddingEnd="2dp"
                     android:paddingRight="2dp"
                     android:text="@string/resources"
@@ -188,6 +239,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginLeft="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginRight="12dp"
                     android:background="@drawable/text_field_gray_no_outline"
                     android:padding="20dp"
                     android:text="@string/resources"
@@ -207,7 +260,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/rect_outline"
+                android:background="@drawable/text_field"
                 android:orientation="vertical"
                 android:paddingBottom="10dp">
 
@@ -220,6 +273,7 @@
                     android:layout_marginTop="7dp"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:drawableRight="@drawable/ic_arrow_down"
+                    android:gravity="center"
                     android:paddingEnd="2dp"
                     android:paddingRight="2dp"
                     android:text="@string/feedbacks"
@@ -235,6 +289,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginLeft="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginRight="12dp"
                     android:background="@drawable/text_field_gray_no_outline"
                     android:padding="20dp"
                     android:text="@string/feedback_form_link"

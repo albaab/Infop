@@ -16,8 +16,12 @@ import static com.example.infopapp.utils.Constants.MOBILE_DEV;
 @Database(entities = {Session.class}, version = 1)
 public abstract class SessionRoomDatabase extends RoomDatabase {
 
+//===================================DATA ACCESS OBJECT=============================================
     public abstract SessionDao sessionDao();
+
+//===================================ROOM DATABASE INSTANCE=========================================
     private static SessionRoomDatabase instance;
+//===================================STATIC GET DATABASE METHOD=====================================
 
     public static synchronized SessionRoomDatabase getInstance(Application application) {
 
@@ -39,15 +43,16 @@ public abstract class SessionRoomDatabase extends RoomDatabase {
             new PopulateDdAsyncTask(instance).execute();
         }
     };
-
+//===================================ASYNCTASK CLASS TO POPULATE THE DB=============================
     private static class PopulateDdAsyncTask extends AsyncTask<Void, Void, Void> {
 
         private SessionDao sessionDao;
+//---------------------------------------CONSTRUCTOR------------------------------------------------
 
         PopulateDdAsyncTask(SessionRoomDatabase db) {
             this.sessionDao = db.sessionDao();
         }
-
+//----------------------------------DO IN BACKGROUND------------------------------------------------
         @Override
         protected Void doInBackground(Void... voids) {
 

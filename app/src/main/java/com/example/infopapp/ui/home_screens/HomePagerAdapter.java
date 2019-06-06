@@ -55,7 +55,7 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
                 return new ModulesFragment();
             case INSTRUCTOR:
                 //TODO return the list of cohorts or list of sessions
-                return new HomeFragment();
+                return new ModulesFragment();
             case GUEST:
                 //todo return a text "You do not have access to the courses"
                 return new HomeFragment();

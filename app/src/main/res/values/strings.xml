@@ -63,8 +63,8 @@
     <string name="phone_number">Phone number</string>
     <string name="display_name">Display name</string>
     <string name="edit_profile">Edit profile</string>
-    <string name="cancel">Cancel</string>
-    <string name="save">Ok</string>
+    <string name="cancel">CANCEL</string>
+    <string name="save">OK</string>
     <string name="upload_success">File uploaded</string>
     <string name="upload_failed">Failed to Upload! Please, try again later.</string>
     <string name="profile_updated_message">Profile updated</string>
@@ -110,13 +110,24 @@
     <string name="student_q_18">What improvements do you suggest?</string>
     <string name="student_q_19">Overall, what are your general impressions regarding this makersday session?</string>
     <string name="feedback_sent">Feedback Sent</string>
+    <string name="course_information">Course Information:</string>
+    <string name="hour_and_date">Time and Date</string>
+    <string name="feedback_imcomplete">Feedbacks imcompleted</string>
+    <string name="feedback_complete">Feedback Completed</string>
+    <string name="session_updated">Session Updated</string>
+    <string name="ok">OK</string>
+    <string name="send_feedback">SEND FEEDBACK</string>
 
     <array name="module_specialization">
         <item name="data_science">Data science</item>
         <item name="mobile_development">Mobile development</item>
         <item name="web_development">Web development</item>
-        <item name="instructor">Instructor</item>
-        <item name="student_success_coordinator">Student Success Coordinator</item>
+    </array>
+    <array name="job_title_array">
+        <item name="lead_facilitator">Lead Facilitator</item>
+        <item name="ssc">Student Success Coordinator</item>
         <item name="career_service_">Head of Career Services</item>
+        <item name="office_manager">Office Manager</item>
+        <item name="other">Other</item>
     </array>
 </resources>

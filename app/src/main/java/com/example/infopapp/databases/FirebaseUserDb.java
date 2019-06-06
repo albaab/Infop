@@ -66,7 +66,7 @@ public class FirebaseUserDb {
                     .setValue(user, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                            profileView.setUpdateUserInFirebaseDbStatus(true);
+                            profileView.setUploadUserInFirebaseDbStatus(true);
                             Log.d(TAG, "ThisUser: STUDENT ADDED TO FIRE BASE DATABASE");
                         }
                     });
@@ -163,7 +163,7 @@ public class FirebaseUserDb {
     //---------------------------------get all students in firebase---------------------------------
     public void getAllStudentsFromFirebase(final FirebaseDbCallBack firebaseDbCallBack) {
 //        userTypeReference = listOfStudentsDatabaseReference.child(STUDENT);
-        listOfStudentsDatabaseReference.child(STUDENT)
+        listOfStudentsDatabaseReference.child(STUDENT).orderByChild("cohort")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

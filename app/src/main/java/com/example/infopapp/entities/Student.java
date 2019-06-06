@@ -6,10 +6,12 @@ import static com.example.infopapp.utils.Constants.STUDENT;
 
 public class Student extends User {
 
+//==========================================ATTRIBUTES==============================================
     private int cohort = 0;
     private String specialization;
     private String resumeUrl;
 
+//==========================================CONSTRUCTORS============================================
     // empty constructor
     public Student(){
         setUserType(STUDENT);
@@ -19,8 +21,6 @@ public class Student extends User {
         super(firstName, lastName);
         setUserType(STUDENT);
     }
-
-
 
     //==========================================getters=============================================
     public int getCohort() {

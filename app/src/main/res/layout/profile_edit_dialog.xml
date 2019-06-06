@@ -4,20 +4,28 @@
     android:layout_width="match_parent"
     android:layout_gravity="center"
     android:gravity="center|top"
+    android:paddingLeft="10dp"
     android:layout_height="wrap_content"
     android:paddingBottom="40dp"
-    android:orientation="vertical">
+    android:paddingRight="10dp"
+    android:orientation="vertical"
+    android:paddingStart="10dp">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="33dp"
+        android:text="@string/edit_profile"
+        android:textAllCaps="true"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold|italic"
+        android:textColor="@android:color/black"
         android:background="@color/colorAccent"
         android:layout_gravity="top"
-        android:gravity="top" />
+        android:gravity="center" />
     <!--First Name-->
     <EditText
         android:id="@+id/profile_first_name_edit"
-        android:layout_width="300sp"
+        android:layout_width="290dp"
         android:layout_height="40sp"
         android:layout_marginTop="40dp"
         android:background="@drawable/text_field"
@@ -32,7 +40,7 @@
     <!--Last Name-->
     <EditText
         android:id="@+id/profile_last_name_edit"
-        android:layout_width="300sp"
+        android:layout_width="290dp"
         android:layout_height="40sp"
         android:layout_marginTop="20dp"
         android:background="@drawable/text_field"
@@ -47,7 +55,7 @@
     <!--User Name or Display Name-->
     <EditText
         android:id="@+id/profile_display_edit"
-        android:layout_width="300sp"
+        android:layout_width="290dp"
         android:layout_height="40sp"
         android:layout_marginTop="20dp"
         android:background="@drawable/text_field"
@@ -62,7 +70,7 @@
     <!--Phone Number-->
     <EditText
         android:id="@+id/profile_phone_edit"
-        android:layout_width="300sp"
+        android:layout_width="290dp"
         android:layout_height="40sp"
         android:layout_marginTop="20dp"
         android:background="@drawable/text_field"
@@ -107,7 +115,7 @@
     <!--Specialization-->
     <Spinner
         android:entries="@array/module_specialization"
-        android:id="@+id/profile_specialization_edit"
+        android:id="@+id/profile_specialization_spinner"
         android:layout_width="300sp"
         android:layout_height="40sp"
         android:layout_marginTop="20dp"
@@ -115,7 +123,17 @@
         android:paddingLeft="14dp"
         android:textSize="15sp"
         tools:ignore="RtlSymmetry" />
-
+    <!--Specialization-->
+    <Spinner
+        android:entries="@array/job_title_array"
+        android:id="@+id/job_title_spinner"
+        android:layout_width="300sp"
+        android:layout_height="40sp"
+        android:layout_marginTop="20dp"
+        android:paddingStart="14dp"
+        android:paddingLeft="14dp"
+        android:textSize="15sp"
+        tools:ignore="RtlSymmetry" />
 
 
 </LinearLayout>

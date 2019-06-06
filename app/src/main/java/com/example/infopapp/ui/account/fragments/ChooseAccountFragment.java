@@ -24,16 +24,15 @@ import static com.example.infopapp.utils.Constants.STUDENT;
  */
 public class ChooseAccountFragment extends Fragment {
 
-    private SignInFragment signInFragment = new SignInFragment();
     private CallBackChooseAccount mCallBack;
-    Bundle bundleChooseAccount = new Bundle();
+    private Bundle bundleChooseAccount = new Bundle();
 
     public ChooseAccountFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mCallBack = (CallBackChooseAccount) context;
     }
@@ -44,7 +43,7 @@ public class ChooseAccountFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_choose_account, container, false);

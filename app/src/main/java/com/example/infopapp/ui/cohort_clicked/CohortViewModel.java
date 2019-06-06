@@ -61,6 +61,11 @@ public class CohortViewModel extends AndroidViewModel implements ProfileView {
 
     }
 
+    @Override
+    public void setUploadUserInFirebaseDbStatus(boolean myBoolean) {
+
+    }
+
     //========================================CallBack interface listener ==============================
     public interface HomeViewModelCallbackListener {
         void OnCohortViewModelCallback(Cohort cohort);

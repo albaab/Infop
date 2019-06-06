@@ -47,6 +47,7 @@ import static com.example.infopapp.utils.Constants.STUDENT_TOKEN;
 
 public class SignUpFragment extends Fragment implements LoginView, ProfileView {
 
+//============================================ATTRIBUTES==========================================//
     private EditText emailEdit, passwordEdit, confirmPasswordEdit, userTokenEdit;
 
     private ProgressBar progressBar;
@@ -67,12 +68,11 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
     private FirebaseUserDb firebaseUserDb;
 
 
-    //============================================ public constructor================================//
+//============================================CONSTRUCTOR=========================================//
     public SignUpFragment() {
         // Required empty public constructor
     }
-
-    //=====================================loginView methods==========================================//
+//=====================================LOGIN VIEW METHODS==========================================//
     @Override
     public void setLoginStatus(boolean isSuccessful, boolean isEmailVerified) {
         //do nothing
@@ -125,7 +125,7 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
 //    }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 //        if (context instanceof CallBackCreateAccount) {
 //            callBackCreateAccount = (CallBackCreateAccount) context;
@@ -135,7 +135,7 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
 //        }
     }
 
-    //===================================== on Create View method======================================//
+//=====================================ON CREATE VIEW METHOD======================================//
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -143,7 +143,7 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
         return inflater.inflate(R.layout.fragment_sign_up, container, false);
     }
 
-    //===================================== OnViewCreated method======================================//
+//=====================================ON VIEW CREATED METHOD======================================//
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Log.d(TAG, "onViewCreated: START SIGN UP SUCCESSFUL");
@@ -285,6 +285,11 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
 
     @Override
     public void setUpdateUserInFirebaseDbStatus(boolean myBoolean) {
+        //do nothing
+    }
+
+    @Override
+    public void setUploadUserInFirebaseDbStatus(boolean myBoolean) {
         if (myBoolean){
             Intent connectIntent = new Intent(getActivity(), HomeActivity.class);
             startActivity(connectIntent);
@@ -292,6 +297,5 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
         }else{
             Toast.makeText(getContext(), errorMessage , Toast.LENGTH_SHORT).show();
         }
-
     }
 }

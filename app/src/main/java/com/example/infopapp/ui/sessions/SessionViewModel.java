@@ -13,22 +13,42 @@ import androidx.lifecycle.LiveData;
 
 public class SessionViewModel extends AndroidViewModel {
     private SessionsRepository repo;
-
     public SessionViewModel(@NonNull Application application) {
         super(application);
         repo = new SessionsRepository(application);
     }
-    public void insertEntry(Session session){
+
+    //==============================ROOM DATABASE QUERIES===========================================
+    public void insertRoomEntry(Session session){
         repo.insertSession(session);
     }
-    public void updateEntry(Session session ){
+    public void updateRoomEntry(Session session ){
         repo.updateSession(session);
     }
-    public void deleteEntry(Session session ){
+    public void deleteRoomEntry(Session session ){
         repo.deleteSession(session);
     }
 
-    public LiveData<List<Session>> getAllSessionsFromDatabase(){
-        return repo.getAllSessions();
+    public LiveData<List<Session>> getAllSessionsFromRoomDatabase(){
+        return repo.getAllSessionsFromRoomDb();
+    }
+
+    //==============================FIREBASE DATABASE QUERIES=======================================
+    public void getAllSessionsFromFirebase(String MODULE, final OnSessionModelCallBack os){
+         repo.getSessionsFromFirebaseDb(MODULE, new SessionsRepository.OnRepoSessionCallBack() {
+            @Override
+            public void getSessionsFromDb(List<Session> sessionsList) {
+                os.getSessionList(sessionsList);
+            }
+        });
+    }
+    public void uploadSessiontoFirbaseDb(Session session){
+        repo.insertSessionToFirebaseDb(session);
+    }
+    public void updateSessiontoFirebaseDb(Session session,int REQUEST){
+         repo.updateSessionInFirebaseDb(session,REQUEST);
+    }
+    public interface OnSessionModelCallBack{
+        void getSessionList(List<Session> sessions);
     }
 }
