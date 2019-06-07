@@ -15,6 +15,7 @@ import com.example.infopapp.R;
 
 public class PaymentsFragment extends Fragment {
 
+    //todo create payment fragment to manage to store student proof of payments
 
     public PaymentsFragment() {
         // Required empty public constructor

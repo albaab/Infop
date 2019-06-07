@@ -18,25 +18,33 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class SessionAdapter extends ListAdapter<Session, SessionAdapter.SessionViewHolder> {
 
+
+//=======================================PRIVATE ATTRIBUTES=========================================
     private List<Session> sessions = new ArrayList<>();
     private OnSessionClickListener mListener;
 
 
-
+//=======================================ADAPTER CONSTRUCTOR========================================
     public SessionAdapter(){
         super(DIFF_CALLBACK);
     }
 
+
+//=======================================SESSION VIEWHOLDER=========================================
     class SessionViewHolder extends RecyclerView.ViewHolder{
 
+        //VIEW ITEMS
         private TextView sessionTitle, sessionMonth, sessionDay;
 
         SessionViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            //GET THE VIEW ITEMS FROM THE LAYOUT
             sessionTitle = itemView.findViewById(R.id.session_title);
             sessionMonth = itemView.findViewById(R.id.session_month);
             sessionDay = itemView.findViewById(R.id.session_day);
 
+            //ON SESSION CLICKED LISTENER
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -51,6 +59,8 @@ public class SessionAdapter extends ListAdapter<Session, SessionAdapter.SessionV
         }
     }
 
+
+//=======================================ON CREATE VIEW HOLDER======================================
     @NonNull
     @Override
     public SessionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -59,6 +69,8 @@ public class SessionAdapter extends ListAdapter<Session, SessionAdapter.SessionV
         return new SessionViewHolder(v);
     }
 
+
+//=======================================ON BIND VIEW HOLDER======================================
     @Override
     public void onBindViewHolder(@NonNull SessionViewHolder holder, int position) {
         Session currentSession = sessions.get(position);
@@ -67,6 +79,8 @@ public class SessionAdapter extends ListAdapter<Session, SessionAdapter.SessionV
         holder.sessionDay.setText(String.valueOf(currentSession.getSessionDay()));
     }
 
+
+//=======================================GET ITEM COUNT=============================================
     @Override
     public int getItemCount() {
         return sessions.size();
@@ -76,10 +90,14 @@ public class SessionAdapter extends ListAdapter<Session, SessionAdapter.SessionV
         this.sessions = sessions;
         notifyDataSetChanged();
     }
+
+
+//===============================DIFF UTIL OBJECT TO COMPARE ITEM===================================
+
     private static final DiffUtil.ItemCallback<Session> DIFF_CALLBACK = new DiffUtil.ItemCallback<Session>() {
         @Override
         public boolean areItemsTheSame(@NonNull Session oldItem, @NonNull Session newItem) {
-            return oldItem.getId() ==  newItem.getId();
+            return oldItem.getId().equals(newItem.getId());
         }
 
         @Override
@@ -90,9 +108,15 @@ public class SessionAdapter extends ListAdapter<Session, SessionAdapter.SessionV
         }
     };
 
+
+//=======================================INTERFACE CALLBACK LISTENER================================
+
     public interface OnSessionClickListener {
         void onItemClicked(Session session);
     }
+
+//=======================================SET LISTENER METHOD========================================
+
     public void setOnItemClickListener(OnSessionClickListener mListener){
         this.mListener = mListener;
     }

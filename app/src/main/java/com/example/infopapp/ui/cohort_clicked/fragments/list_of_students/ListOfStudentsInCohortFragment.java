@@ -27,15 +27,20 @@ import static com.example.infopapp.utils.Constants.COHORT;
 
 public class ListOfStudentsInCohortFragment extends Fragment {
 
+
+//===================================PRIVATE ATTRIBUTES=============================================
+
     private OnListOfStudentsFragmentListener mListener;
     private RecyclerView listRecyclerView;
     private ListOfStudentsAdapter listOfStudentsAdapter;
 
+
+//==================================CONSTRUCTOR==============================================
     public ListOfStudentsInCohortFragment() {
 
     }
 
-
+//======================================ON CREATE VIEW==============================================
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,6 +48,7 @@ public class ListOfStudentsInCohortFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_list_of_students_in_cohort, container, false);
     }
 
+//======================================ON VIEW CREATED==============================================
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -91,6 +97,8 @@ public class ListOfStudentsInCohortFragment extends Fragment {
 
     }
 
+
+//===========================================ON ATTACH==============================================
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -102,31 +110,15 @@ public class ListOfStudentsInCohortFragment extends Fragment {
         }
     }
 
+
+//===========================================ON DETACH==============================================
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
-//    @Override
-//    public void setUploadProfilePic(boolean myBoolean, int visibility) {
-//
-//    }
-//
-//    @Override
-//    public void setUpdateUserInFirebaseDbStatus(boolean myBoolean) {
-////        if (myBoolean){
-////        }else{
-////            Toast.makeText(getActivity(), getText(R.string.error_message), Toast.LENGTH_SHORT).show();
-////        }
-//    }
-//
-//    @Override
-//    public void setUploadUserInFirebaseDbStatus(boolean myBoolean) {
-//
-//    }
-
-
+//===================================INTERFACE CALLBACK LISTNER=====================================
     public interface OnListOfStudentsFragmentListener {
         void onListOfStudentCallBack(Student student);
     }

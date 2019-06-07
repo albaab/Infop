@@ -40,18 +40,28 @@ class DashboardModel {
 //======================================MODEL METHODS===============================================
     void uploadResumeTofirebaseStorage(final Uri resumeUri, thisStudentResumeFragment thisStudentResumeFragment) {
 
+        //WEAK REFERENCE TO THE RESUME FRAGMENT
         WeakReference<thisStudentResumeFragment> resumeFragmentWeakRef =
                 new WeakReference<>(thisStudentResumeFragment);
+
+        //GET THE WEAK REFERENCE TO THE FRAGMENT
         final thisStudentResumeFragment thisStudentResumeFragment1 =resumeFragmentWeakRef.get();
 
+        //FIREBASE USER
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        //FIREBASE STORAGE REFERENCE
         StorageReference resumeStorageRef = FirebaseStorage.getInstance().getReference("Students CV");
+
+        //STUDENT RESUMÉS STORAGE REFERENCE
         final StorageReference userResumeRef = resumeStorageRef
                 .child((user != null ? user.getEmail() : null) + " " + "CV" + System.currentTimeMillis() + ".pdf");
         UploadTask uploadTask = userResumeRef.putFile(resumeUri);
 
+        //PROGRESS BAR
         thisStudentResumeFragment1.progressBar.setVisibility(View.VISIBLE);
 
+        //UPLOAD TASK
         uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
@@ -65,14 +75,14 @@ class DashboardModel {
                 }
             }
         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
                 if (task.isSuccessful()) {
                     thisStudentResumeFragment1.progressBar.setVisibility(View.GONE);
-                    resumeUrl = task.getResult().toString();
+                    resumeUrl = Objects.requireNonNull(task.getResult()).toString();
                     thisStudent.setResumeUrl(resumeUrl);
                     firebaseUserDb.updateStudentResume(thisStudent);
-                    //todo update the current student info in firebase database
                 } else {
                     Log.d(TAG, "onComplete: DEBUG -> COULD NOT GET DOWNLOAD URL");
                 }
@@ -81,10 +91,13 @@ class DashboardModel {
 
     }
 
+
+    //---------------------------------DOWNLOAD RESUME METHOD FOR STUDENT---------------------------
     void downloadResumeFromThisUrl(thisStudentResumeFragment fragment, String resumeUrl) {
         new DownloadPdfAsyncTask(fragment).execute(resumeUrl);
     }
 
+    //---------------------------------DOWNLOAD RESUME METHOD FOR SSC-------------------------------
     void downloadResumeFromUrl(StudentResumeFragment fragment, String resumeUrl) {
         new DownloadPdfAsyncTask(fragment).execute(resumeUrl);
     }

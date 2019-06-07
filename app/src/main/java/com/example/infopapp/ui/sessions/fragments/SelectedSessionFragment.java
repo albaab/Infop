@@ -202,9 +202,8 @@ public class SelectedSessionFragment extends Fragment {
 
                 if (description.getVisibility() == GONE) {
                     description.setVisibility(View.VISIBLE);
-                    if(USERTYPE.equals(STUDENT)){
+                    if(USERTYPE.equals(STUDENT) || USERTYPE.equals(STAFF)){
                         instructor.setVisibility(View.VISIBLE);
-
                     }
                     allowUseroEdit();
                     timeAndDate.setVisibility(View.VISIBLE);
@@ -222,7 +221,6 @@ public class SelectedSessionFragment extends Fragment {
             public void onClick(View v) {
                 if (homework.getVisibility() == GONE) {
                     homework.setVisibility(View.VISIBLE);
-
                     allowUseroEdit();
                 } else if (homework.getVisibility() == View.VISIBLE) {
                     homework.setVisibility(GONE);
@@ -259,6 +257,7 @@ public class SelectedSessionFragment extends Fragment {
                             }
                         });
                     } else if (USERTYPE.equals(STAFF)) {
+
                         if (!session.getIsFeedbackComplete()) {
                             feedBacks.setText(getText(R.string.feedback_imcomplete));
                             feedBacks.setTextColor(Color.RED);
@@ -284,8 +283,6 @@ public class SelectedSessionFragment extends Fragment {
 //            Drawable editDrawable = getResources().getDrawable(R.drawable.ic_edit);
 //            editDrawable.setBounds(0,0,60,60);
 //            timeAndDate.setCompoundDrawables(editDrawable,null,null,null);
-            instructor.setVisibility(View.VISIBLE);
-
             timeAndDate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

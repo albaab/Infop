@@ -1,9 +1,11 @@
 package com.example.infopapp.ui.dashboard.fragments;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,6 +29,8 @@ import com.example.infopapp.ui.dashboard.DashboardView;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Objects;
+
 import static android.app.Activity.RESULT_OK;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStudent;
@@ -34,9 +38,10 @@ import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStude
 
 public class thisStudentResumeFragment extends Fragment implements DashboardView {
 
+
+//=======================================ATTRIBUTESS============================================
     private static final int READ_REQUEST = 707;
     private  TextView noResumeTv;
-    //=======================================ATTRIBUTESS============================================
     public PDFView resumePdfView;
     public ProgressBar progressBar;
 
@@ -45,7 +50,6 @@ public class thisStudentResumeFragment extends Fragment implements DashboardView
 
     private static final int RESUME_REQUEST_CODE = 101;
 
-//    private OnFragmentInteractionListener mListener;
 
     public thisStudentResumeFragment() {
         // Required empty public constructor
@@ -63,14 +67,17 @@ public class thisStudentResumeFragment extends Fragment implements DashboardView
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d(TAG, "onViewCreated: DEBUG -> RESUME FRAGMENT CREATED");
+
+        //RETRIEVE THE VIEW ITEMS OF THE LAYOUT
         resumePdfView = view.findViewById(R.id.resume_pdf_view);
         progressBar = view.findViewById(R.id.loading_resume_progressbar);
         noResumeTv = view.findViewById(R.id.no_resume_tv);
         FloatingActionButton uploadButton = view.findViewById(R.id.upload_resume_button);
 
+        //PRESENTER
         dashboardPresenter = new DashboardPresenter(this);
 
+        //SET THE "NO RESUME AVALAIBLE" TEXT VIEW VISIBILITY
         if(thisStudent != null && thisStudent.getResumeUrl() != null){
             noResumeTv.setVisibility(View.GONE);
             dashboardPresenter.downloadThisStudentResume(this,thisStudent.getResumeUrl());
@@ -78,15 +85,21 @@ public class thisStudentResumeFragment extends Fragment implements DashboardView
             noResumeTv.setVisibility(View.VISIBLE);
         }
 
+
+        //UPLOAD BUTTON ONCLICK LISTENER
         uploadButton.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
 
-                if(ContextCompat.checkSelfPermission(getActivity()
+                //CHECK PERMISSION TO READ EXTERNAL STORAGEA
+                if(ContextCompat.checkSelfPermission(Objects.requireNonNull(getActivity())
                         , Manifest.permission.READ_EXTERNAL_STORAGE)
                         == PackageManager.PERMISSION_GRANTED){
                     chooseResumePDF();
                 }else{
+
+                    // ASK PERMISSION TO READ EXTERNAL STORAGE
                     ActivityCompat.requestPermissions(getActivity()
                             , new String[]{Manifest.permission.READ_EXTERNAL_STORAGE
                                     ,Manifest.permission.WRITE_EXTERNAL_STORAGE},READ_REQUEST);
@@ -97,6 +110,7 @@ public class thisStudentResumeFragment extends Fragment implements DashboardView
 
     }
 
+//==================================ON REQUEST PERMISSION RESULT====================================
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -125,39 +139,11 @@ public class thisStudentResumeFragment extends Fragment implements DashboardView
 //===============================DASHBOARDVIEW INTERFACE METHODS====================================
     @Override
     public void setUploadResumeStatus(boolean isSuccessful) {
-        //TODO handle the status of the upload
         if(isSuccessful){
             Toast.makeText(getActivity(), getText(R.string.upload_success), Toast.LENGTH_SHORT).show();
             dashboardPresenter.downloadThisStudentResume(this,thisStudent.getResumeUrl());
         }
     }
-
-
-//==========================================ON ATTACH===============================================
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-    }
-
-//==========================================ON DETACH===============================================
-    @Override
-    public void onDetach() {
-        super.onDetach();
-//        mListener = null;
-    }
-
-//======================================FRAGMENT INTERFACE LISTENER=================================
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        void onFragmentInteraction(Uri uri);
-//    }
-
 
 //======================================private utility methods=====================================
 

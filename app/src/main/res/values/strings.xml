@@ -117,6 +117,8 @@
     <string name="session_updated">Session Updated</string>
     <string name="ok">OK</string>
     <string name="send_feedback">SEND FEEDBACK</string>
+    <string name="write_post">New post</string>
+    <string name="field_empty">Field empty</string>
 
     <array name="module_specialization">
         <item name="data_science">Data science</item>

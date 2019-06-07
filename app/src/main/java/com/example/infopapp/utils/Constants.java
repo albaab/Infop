@@ -53,5 +53,6 @@ public abstract class Constants {
     public static final int FEEDBACK_REQUEST = 007;
     public static final int UPDATE_SESSION_REQUEST = 011;
     public static final String SESSION_FEEDBACK = "SessionFeedback";
+    public static final String EDACY_COMMUNITY = "EDACY_COMMUNITY";
 
 }

@@ -21,12 +21,16 @@ public class CohortClickedActivity extends AppCompatActivity
         implements ListOfStudentsInCohortFragment.OnListOfStudentsFragmentListener,
                     StudentProfileFragment.OnStudentProfileListener{
 
+
+
+//===========================================ATTRIBUTES==============================================
     private ListOfStudentsInCohortFragment lisfOfStudents;
     private StudentProfileFragment studentProfileFragment;
     private StudentResumeFragment studentResumeFragment;
 
     private FragmentManager manager = getSupportFragmentManager();
 
+//===========================================ON CREATE==============================================
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,35 @@ public class CohortClickedActivity extends AppCompatActivity
 
     }
 
+
+
+//=================================INTERFACE CALLBACK METHODS=======================================
+    @Override
+    public void onListOfStudentCallBack(Student student) {
+        studentProfileFragment.setStudent(student);
+        goToSelectedFragment(studentProfileFragment);
+    }
+
+
+    @Override
+    public void sendResumeUrlToFragment(String url) {
+        Bundle bundle = new Bundle();
+        bundle.putString(STUDENT_RESUME,url);
+        studentResumeFragment.setArguments(bundle);
+        goToSelectedFragment(studentResumeFragment);
+
+    }
+
+
+//========================================FINISH METHOD=============================================
+
+    @Override
+    public void finish() {
+        super.finish();
+        studentProfileFragment = null;
+        lisfOfStudents = null;
+    }
+//========================================UTILITY METHODS===========================================
     private void goToSelectedFragment(Fragment fragment){
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.cohort_clicked_container,fragment);
@@ -56,28 +89,5 @@ public class CohortClickedActivity extends AppCompatActivity
             transaction.addToBackStack(null);
             transaction.commit();
         }
-    }
-
-    @Override
-    public void onListOfStudentCallBack(Student student) {
-        studentProfileFragment.setStudent(student);
-        goToSelectedFragment(studentProfileFragment);
-    }
-
-
-    @Override
-    public void finish() {
-        super.finish();
-        studentProfileFragment = null;
-        lisfOfStudents = null;
-    }
-
-    @Override
-    public void sendResumeUrlToFragment(String url) {
-        Bundle bundle = new Bundle();
-        bundle.putString(STUDENT_RESUME,url);
-        studentResumeFragment.setArguments(bundle);
-        goToSelectedFragment(studentResumeFragment);
-
     }
 }

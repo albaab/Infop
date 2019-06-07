@@ -23,17 +23,17 @@ public class PortoFolioAdapter extends ListAdapter<Cohort, PortoFolioAdapter.Coh
 
 
 
-    public PortoFolioAdapter(){
+    PortoFolioAdapter(){
         super(DIFF_CALLBACK);
     }
 
 //=========================================VIEWHOLDER===============================================
-    public class CohortViewHolder extends RecyclerView.ViewHolder{
+class CohortViewHolder extends RecyclerView.ViewHolder{
 
         private TextView CohortTitle;
 
         //--------------------------------viewholder constructor-----------------------------------
-        public CohortViewHolder(@NonNull View itemView) {
+        CohortViewHolder(@NonNull View itemView) {
             super(itemView);
             CohortTitle = itemView.findViewById(R.id.cohort_number_tv);
             itemView.setOnClickListener(new View.OnClickListener() {

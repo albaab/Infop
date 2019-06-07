@@ -2,6 +2,8 @@ package com.example.infopapp.entities;
 
 import com.google.firebase.database.Exclude;
 
+import androidx.annotation.NonNull;
+
 public class User {
     private String id, userType, firstName, lastName, displayName, email, userToken, phone,
             profileImageurl;
@@ -90,5 +92,11 @@ public class User {
 
     public void setProfileImageurl(String profileImageurl) {
         this.profileImageurl = profileImageurl;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return displayName;
     }
 }

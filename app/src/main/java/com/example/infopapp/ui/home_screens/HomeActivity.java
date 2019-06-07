@@ -43,6 +43,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     public static FirebaseUser firebaseUser;
 
+
 //    public static Student currentStudent = new Student();
 
 //=======================================ON CREATE =================================================

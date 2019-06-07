@@ -23,16 +23,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ListOfStudentsAdapter extends ListAdapter<Student, ListOfStudentsAdapter.StudentViewHolder> {
 
+//==================================PRIVATE ATTRIBUTES==============================================
+
     private static final String TAG = "LIST OF STUDENT ADAPTER" ;
     private List<Student> students = new ArrayList<>();
     private OnStudentClickListener mListener;
     private Context context;
 
-
+//==================================ADAPTER CONSTRUCTOR=============================================
     ListOfStudentsAdapter() {
         super(DIFF_CALLBACK);
     }
 
+
+//=====================================VIEW HOLDER==================================================
     class StudentViewHolder extends RecyclerView.ViewHolder {
 
         private TextView studentFullNameTv;
@@ -56,6 +60,8 @@ public class ListOfStudentsAdapter extends ListAdapter<Student, ListOfStudentsAd
         }
     }
 
+
+//==================================ADAPTER METHOD==============================================
     Student getStudentAt(int position){
         notifyDataSetChanged();
         return students.get(position);
@@ -64,6 +70,7 @@ public class ListOfStudentsAdapter extends ListAdapter<Student, ListOfStudentsAd
 //        students.remove(position);
 //    }
 
+//==================================ON CREATE VIEWHOLDER============================================
     @NonNull
     @Override
     public StudentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -72,6 +79,7 @@ public class ListOfStudentsAdapter extends ListAdapter<Student, ListOfStudentsAd
         return new StudentViewHolder(v);
     }
 
+//==================================ON BIND VIEW HOLDER=============================================
     @Override
     public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) {
         Student currentStudent = students.get(position);
@@ -96,6 +104,8 @@ public class ListOfStudentsAdapter extends ListAdapter<Student, ListOfStudentsAd
 
     }
 
+
+//==================================GET ITEM COUNT METHOD===========================================
     @Override
     public int getItemCount() {
         return students.size();
@@ -107,6 +117,8 @@ public class ListOfStudentsAdapter extends ListAdapter<Student, ListOfStudentsAd
 //        notifyDataSetChanged();
     }
 
+
+//===============================DIFFUTIL OBJECT TO COMPARE ITEMS===================================
     private static final DiffUtil.ItemCallback<Student> DIFF_CALLBACK = new DiffUtil.ItemCallback<Student>() {
         @Override
         public boolean areItemsTheSame(@NonNull Student oldItem, @NonNull Student newItem) {
@@ -127,10 +139,15 @@ public class ListOfStudentsAdapter extends ListAdapter<Student, ListOfStudentsAd
         }
     };
 
+
+
+//==================================INTERFACE CALLBACK LISTENER=====================================
     public interface OnStudentClickListener {
         void onItemClicked(Student student);
     }
 
+
+//==================================SET ONCLIK LISTENER CALLBACK====================================
     void setOnItemClickListener(OnStudentClickListener mListener) {
         this.mListener = mListener;
     }

@@ -17,18 +17,13 @@ import com.example.infopapp.ui.HardSkillsActivity;
 
 public class ModulesFragment extends Fragment {
 
-    private Context mContext;
-
+//=======================================CONSTRUCTOR================================================
     public ModulesFragment() {
         // Required empty public constructor
     }
 
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
+//=======================================ON CREATE VIEW=============================================
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,7 +32,7 @@ public class ModulesFragment extends Fragment {
     }
 
 
-
+//=======================================ON VIEW CREATED============================================
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -49,7 +44,7 @@ public class ModulesFragment extends Fragment {
         hardSkills.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, HardSkillsActivity.class);
+                Intent intent = new Intent(getContext(), HardSkillsActivity.class);
                 startActivity(intent);
             }
         });
@@ -67,13 +62,6 @@ public class ModulesFragment extends Fragment {
 //                startActivity(intent);
             }
         });
-
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mContext = context;
 
     }
 

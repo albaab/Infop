@@ -10,8 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.infopapp.R;
@@ -47,6 +49,8 @@ public class ConnectToAccountActivity extends AppCompatActivity implements
     private SignInFragment signInFragment;
     private SignUpFragment signUpFragment;
     private ResetPasswordFragment resetPasswordFragment;
+
+    private ProgressBar connectingProgressBar;
     //fragment manager
     private FragmentManager manager = getSupportFragmentManager();
 
@@ -55,7 +59,7 @@ public class ConnectToAccountActivity extends AppCompatActivity implements
     public static Student thisStudent;
     public static Staff thisStaff;
     public static Instructor thisInstructor;
-    public static String USERTYPE = "";
+    public static String USERTYPE;
 
     //=====================================On create method=======================================//
 
@@ -69,6 +73,7 @@ public class ConnectToAccountActivity extends AppCompatActivity implements
 
         setContentView(R.layout.activity_main);
 
+        connectingProgressBar = findViewById(R.id.connect_progressbar);
         thisUser = new User();
         thisStudent = new Student();
         thisStaff = new Staff();
@@ -78,11 +83,10 @@ public class ConnectToAccountActivity extends AppCompatActivity implements
         signUpFragment = new SignUpFragment();
         resetPasswordFragment = new ResetPasswordFragment();
 
-        switchToFragment(signInFragment);
-
     }
 
     protected void switchToFragment(Fragment fragment) {
+        connectingProgressBar.setVisibility(View.GONE);
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.main_activity, fragment);
         transaction.commit();
@@ -156,12 +160,14 @@ public class ConnectToAccountActivity extends AppCompatActivity implements
         Log.d(TAG, "onStart: START THE CONNECT TO ACCOUNT ACTIVITY");
         super.onStart();
         if (fbUser != null) {
+            connectingProgressBar.setVisibility(View.VISIBLE);
             thisUser.setId(fbUser.getUid());
             thisUser.setUserType(fbUser.getDisplayName());
             USERTYPE = fbUser.getDisplayName();
             FirebaseUserDb.isUserInFirebaseDb(thisUser,this);
-            startActivity(new Intent(this, HomeActivity.class));
-            finish();
+        }else{
+            switchToFragment(signInFragment);
+
         }
     }
 
@@ -175,27 +181,35 @@ public class ConnectToAccountActivity extends AppCompatActivity implements
         if (user != null) {
             thisUser = user;
             USERTYPE = GUEST;
+            SignInFragment.THIS_USERNAME = thisUser.getDisplayName();
             thisStudent = null;
             thisStaff = null;
             thisInstructor = null;
         } else if (student != null) {
             thisStudent = student;
             USERTYPE = STUDENT;
+            SignInFragment.THIS_USERNAME = thisStudent.getDisplayName();
             thisUser = null;
             thisStaff = null;
             thisInstructor = null;
         } else if (staff != null) {
             thisStaff = staff;
             USERTYPE = STAFF;
+            SignInFragment.THIS_USERNAME = thisStaff.getDisplayName();
             thisStudent = null;
             thisUser = null;
             thisInstructor = null;
         } else if (instructor != null) {
             thisInstructor = instructor;
             USERTYPE = INSTRUCTOR;
+            SignInFragment.THIS_USERNAME = thisInstructor.getDisplayName();
             thisStudent = null;
             thisStaff = null;
             thisUser = null;
         }
+        startActivity(new Intent(this, HomeActivity.class));
+        finish();
+        connectingProgressBar.setVisibility(View.GONE);
+
     }
 }

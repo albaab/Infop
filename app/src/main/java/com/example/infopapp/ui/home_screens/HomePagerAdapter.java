@@ -1,13 +1,14 @@
 package com.example.infopapp.ui.home_screens;
 
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.infopapp.ui.home_screens.fragments.MessagesFragment;
 import com.example.infopapp.ui.home_screens.fragments.ModulesFragment;
-import com.example.infopapp.ui.home_screens.fragments.HomeFragment;
+import com.example.infopapp.ui.home_screens.fragments.home_fragment.HomeFragment;
 
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.USERTYPE;
 
@@ -18,17 +19,20 @@ import static com.example.infopapp.utils.Constants.STUDENT;
 
 public class HomePagerAdapter extends FragmentStatePagerAdapter {
 
-
-    public HomePagerAdapter(FragmentManager fm) {
-        super(fm);
+    //=======================================ADAPTER CONSTRUCTOR========================================
+    HomePagerAdapter(@NonNull FragmentManager fm, int behavior) {
+        super(fm, behavior);
     }
 
+
+    //=======================================GET FRAGMENT METHOD========================================
+    @NonNull
     @Override
     public Fragment getItem(int i) {
-        Fragment fragment = null;
+        Fragment fragment = new Fragment();
         switch (i) {
             case 0:
-                fragment = HomeFragment.newInstance();
+                fragment = new HomeFragment();
                 break;
 
             case 1:
@@ -47,6 +51,7 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
         return 3;
     }
 
+    //=======================================ADAPTER PRIVATE METHOD=====================================
     private Fragment getFragmentFromUserType() {
         switch (USERTYPE) {
             case STUDENT:

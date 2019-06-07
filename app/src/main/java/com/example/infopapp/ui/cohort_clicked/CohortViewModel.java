@@ -17,21 +17,25 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class CohortViewModel extends AndroidViewModel implements ProfileView {
 
+
+//========================================PRIVATE ATTRIBUTES===========================================
+
+
     private UserRepository userRepo;
 
+//==========================================CONSTRUCTOR=============================================
 
     CohortViewModel(@NonNull Application application) {
         super(application);
         userRepo = new UserRepository(this);
     }
 
-    public void deleteStudentDbEntry(Student studentAt) {
-        userRepo.deteleStudentInFirebase(studentAt);
-    }
+
 
 
 //======================================Cohort ViewModel method ====================================
 
+    //--------------------------------GET THE RESPECTIVE COHORT-------------------------------------
     public void getTheCohort(final int cohortNumber, final HomeViewModelCallbackListener listener) {
         userRepo.getAllCohorts(new UserRepository.UserRepoCallBackInterface() {
             @Override
@@ -50,7 +54,12 @@ public class CohortViewModel extends AndroidViewModel implements ProfileView {
         });
     }
 
-    //========================================unused profile view methods===============================
+    //----------------------------------DELETE STUDENT METHOD---------------------------------------
+    public void deleteStudentDbEntry(Student studentAt) {
+        userRepo.deteleStudentInFirebase(studentAt);
+    }
+
+//========================================unused profile view methods===============================
     @Override
     public void setUploadProfilePic(boolean myBoolean, int visibility) {
 
@@ -66,7 +75,7 @@ public class CohortViewModel extends AndroidViewModel implements ProfileView {
 
     }
 
-    //========================================CallBack interface listener ==============================
+//========================================CallBack interface listener ==============================
     public interface HomeViewModelCallbackListener {
         void OnCohortViewModelCallback(Cohort cohort);
     }

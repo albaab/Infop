@@ -51,6 +51,7 @@ public class SignInFragment extends Fragment implements LoginView, FirebaseUserD
     private LogPresenter logPresenter;
     private Bundle signInBundle = new Bundle();
     private CallBackSignInListener mCreateAccountCallback;
+    public static String THIS_USERNAME;
 
     //=======================================constructor(s)========================================//
     public SignInFragment() {
@@ -63,11 +64,11 @@ public class SignInFragment extends Fragment implements LoginView, FirebaseUserD
     public void setLoginStatus(boolean isSuccessful, boolean isEmailVerified) {
         Log.d(TAG, "setLoginStatus: START LOGIN SUCCESSFUL");
 
-        if (isSuccessful){
-            FirebaseUserDb.isUserInFirebaseDb(thisUser,this);
-        }else{
+        if (isSuccessful) {
+            FirebaseUserDb.isUserInFirebaseDb(thisUser, this);
+        } else {
             progressBar.setVisibility(View.GONE);
-            Toast.makeText(getActivity(),getText(R.string.login_fail_message) , Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getText(R.string.login_fail_message), Toast.LENGTH_SHORT).show();
         }
 
 //        if (isEmailVerified) {
@@ -112,24 +113,28 @@ public class SignInFragment extends Fragment implements LoginView, FirebaseUserD
         if (user != null) {
             thisUser = user;
             USERTYPE = GUEST;
+            THIS_USERNAME = thisUser.getDisplayName();
             thisStudent = null;
             thisStaff = null;
             thisInstructor = null;
         } else if (student != null) {
             thisStudent = student;
             USERTYPE = STUDENT;
+            THIS_USERNAME = thisStudent.getDisplayName();
             thisUser = null;
             thisStaff = null;
             thisInstructor = null;
         } else if (staff != null) {
             thisStaff = staff;
             USERTYPE = STAFF;
+            THIS_USERNAME = thisStaff.getDisplayName();
             thisStudent = null;
             thisUser = null;
             thisInstructor = null;
         } else if (instructor != null) {
             thisInstructor = instructor;
             USERTYPE = INSTRUCTOR;
+            THIS_USERNAME = thisInstructor.getDisplayName();
             thisStudent = null;
             thisStaff = null;
             thisUser = null;
@@ -165,6 +170,7 @@ public class SignInFragment extends Fragment implements LoginView, FirebaseUserD
     @Override
     public void onDetach() {
         super.onDetach();
+        mCreateAccountCallback = null;
     }
     //=====================================On create===============================================//
 

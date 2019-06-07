@@ -20,7 +20,12 @@ import static com.example.infopapp.utils.Constants.MONTH_PICKED;
 
 public class DatePickerDialogFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
+
+//=======================================ATTRIBUTES=================================================
     private MyDatePickerDialogListener mListener;
+
+
+//=======================================ON CREATE DIALOG===========================================
 
     @NonNull
     @Override
@@ -33,10 +38,12 @@ public class DatePickerDialogFragment extends DialogFragment implements DatePick
         return new DatePickerDialog(getActivity(),
                 this, year, month, day);
     }
+//=======================================ON DATE SET METHOD=================================================
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Bundle bundle = new Bundle();
+        //GET CURRENT CALENDAR INSTANCE
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
@@ -52,6 +59,8 @@ public class DatePickerDialogFragment extends DialogFragment implements DatePick
         mListener.getDatePicked(bundle);
     }
 
+//=======================================ON ATTACH=================================================
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -65,12 +74,14 @@ public class DatePickerDialogFragment extends DialogFragment implements DatePick
 
     }
 
+//=======================================ON DETACH==================================================
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
+//==================================INTERFACE CALLBACK LISTENER=====================================
     public interface MyDatePickerDialogListener {
         void getDatePicked(Bundle bundle);
     }

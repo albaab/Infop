@@ -23,14 +23,20 @@ import static com.example.infopapp.utils.Constants.STUDENT;
 
 public class DashActivity extends AppCompatActivity {
 
+
+//=======================================ATTRIBUTES=================================================
+
+    //FRAGMENTS
     private thisStudentResumeFragment thisStudentResumeFragment;
     private PaymentsFragment paymentsFragment;
     private PortFoliosFragment portFoliosFragment;
     private FragmentManager manager;
 
+    //VIEW ITEMS
     private ImageView resumeRect, paymentsRectImage, gradesRectImage, eventsRectImage;
-
     private TextView userRectTv;
+
+//=======================================ON CREATE METHOD===========================================
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,43 +46,33 @@ public class DashActivity extends AppCompatActivity {
 
         manager = getSupportFragmentManager();
 
+        //INSTANTIATE FRAGMENTS
         thisStudentResumeFragment = new thisStudentResumeFragment();
         paymentsFragment = new PaymentsFragment();
         portFoliosFragment = new PortFoliosFragment();
 
+        //RETRIEVE VIEW ITEMS ON LAYOUT
         resumeRect = findViewById(R.id.resume_rect);
         paymentsRectImage = findViewById(R.id.payment_rect);
         gradesRectImage = findViewById(R.id.grades_rect);
         eventsRectImage = findViewById(R.id.events_rect);
         userRectTv = findViewById(R.id.user_rect_text_view);
 
-        if (USERTYPE != null) {
-            switch (USERTYPE){
-                case STUDENT:
-                    userRectTv.setText(getText(R.string.talent_resume));
-                    break;
-                case STAFF:
-                    userRectTv.setText(getText(R.string.portfolios));
-                    break;
-                case INSTRUCTOR:
-                    //todo instructor dashboard
-                    break;
-                case GUEST:
-                    //TODO guest dashboard
-                    break;
-                    default:
-                        userRectTv.setText(getText(R.string.talent_resume));
-            }
-        }
+        //ADAPT THE VIEW
+        adaptViewFromUserType();
 
+        //RESUME ON CLICK LISTENER
         resumeRect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToActivityFromType();
             }
         });
+        //TODO ONCLICK LISTENER FOR PAYMENTS, GRADES, EVENTS
 
     }
+
+//=======================================UTILITY METHODS============================================
 
     private void goToThisFragment(Fragment fragment) {
         FragmentTransaction ts = manager.beginTransaction();
@@ -103,5 +99,26 @@ public class DashActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    private void adaptViewFromUserType(){
+        if (USERTYPE != null) {
+            switch (USERTYPE){
+                case STUDENT:
+                    userRectTv.setText(getText(R.string.talent_resume));
+                    break;
+                case STAFF:
+                    userRectTv.setText(getText(R.string.portfolios));
+                    break;
+                case INSTRUCTOR:
+                    //todo instructor dashboard
+                    break;
+                case GUEST:
+                    //TODO guest dashboard
+                    break;
+                default:
+                    userRectTv.setText(getText(R.string.talent_resume));
+            }
+        }
     }
 }

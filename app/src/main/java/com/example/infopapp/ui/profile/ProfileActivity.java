@@ -446,6 +446,7 @@ public class ProfileActivity extends AppCompatActivity implements
             }
             if (thisInstructor.getDisplayName() != null) {
                 displayName.setText(thisInstructor.getDisplayName());
+
             } else {
                 displayName.setText(getText(R.string.display_name));
             }
@@ -483,6 +484,7 @@ public class ProfileActivity extends AppCompatActivity implements
             }
             if (thisUser.getDisplayName() != null) {
                 displayName.setText(thisUser.getDisplayName());
+
             } else {
                 displayName.setText(getText(R.string.display_name));
             }
