@@ -3,10 +3,18 @@ package com.example.infopapp.entities;
 import androidx.annotation.NonNull;
 
 public class PostItem {
-    private String channel,username, userPhotoUrl, post, date, time;
+    private String channel,username, usertype ,userPhotoUrl, post, date, time;
 
     public PostItem() {
 
+    }
+
+    public String getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
     }
 
     public String getChannel() {

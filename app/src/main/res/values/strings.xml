@@ -119,6 +119,8 @@
     <string name="send_feedback">SEND FEEDBACK</string>
     <string name="write_post">New post</string>
     <string name="field_empty">Field empty</string>
+    <string name="your_answer">Your answer...</string>
+    <string name="enter_username">Please, complete your profile information</string>
 
     <array name="module_specialization">
         <item name="data_science">Data science</item>

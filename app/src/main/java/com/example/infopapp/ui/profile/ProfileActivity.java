@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.infopapp.R;
+import com.example.infopapp.ui.account.fragments.SignInFragment;
+import com.example.infopapp.ui.home_screens.HomeActivity;
 import com.example.infopapp.utils.RoundPicasso;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,7 +46,7 @@ import static com.example.infopapp.utils.Constants.ZERO;
 public class ProfileActivity extends AppCompatActivity implements
         ProfileDialogFragment.ProfileDialogListener, ProfileView {
 
-//======================================PRIVATE ATTRIBUTES==========================================
+    //======================================PRIVATE ATTRIBUTES==========================================
     private static final String TAG = "ProfileActivity";
     private static final int CHOOSE_IMAGE = 111;
     private ImageView profileImage;
@@ -99,7 +100,7 @@ public class ProfileActivity extends AppCompatActivity implements
                 chooseImage();
             }
         });
-        Log.d(TAG, "onCreate: profile view created");
+        Log.d(TAG, "onCreate: PROFILE VIEW CREATED");
 
     }
 
@@ -119,18 +120,18 @@ public class ProfileActivity extends AppCompatActivity implements
     //======================================ON START METHOD=============================================
     @Override
     protected void onStart() {
+        Log.d(TAG, "onStart: PROFILE VIEW START SUCCESS");
         super.onStart();
         loadProfilePic();
         loadUserInfoFromUserType();
-        Log.d(TAG, "onStart: Profile view success");
     }
 
-     //=========================================ON DESTROY METHOD====================================
+    //=========================================ON DESTROY METHOD====================================
     @Override
     protected void onDestroy() {
         super.onDestroy();
         bundleForDialogFragment = null;
-        Log.d(TAG, "onDestroy: Profile View closed");
+        Log.d(TAG, "onDestroy: PROFILE VIEW DESTROYED");
     }
 
     //======================================UTILITY METHODS===========================================
@@ -149,9 +150,8 @@ public class ProfileActivity extends AppCompatActivity implements
     //----------------------------Profile dialog fragment interface method--------------------------
     @Override
     public void saveProfileInfo(Bundle bundle) {
-
         if (bundle != null) {
-
+            Log.d(TAG, "saveProfileInfo: SAVING PROFILE INFO");
             switch (currentUser.getDisplayName()) {
 
                 case STUDENT:
@@ -167,6 +167,7 @@ public class ProfileActivity extends AppCompatActivity implements
                     phoneNumber.setText(thisStudent.getPhone());
                     cohort.setText(String.valueOf(thisStudent.getCohort()));
                     specialization.setText(thisStudent.getSpecialization());
+                    SignInFragment.THIS_USERNAME = thisStudent.getDisplayName();
                     profilePresenter.updateDbUserInfo(thisStudent);
 
                     break;
@@ -182,6 +183,7 @@ public class ProfileActivity extends AppCompatActivity implements
                     displayName.setText(thisStaff.getDisplayName());
                     phoneNumber.setText(thisStaff.getPhone());
                     specialization.setText(thisStaff.getJobTitle());
+                    SignInFragment.THIS_USERNAME = thisStaff.getDisplayName();
                     profilePresenter.updateDbUserInfo(thisStaff);
 
                     break;
@@ -192,12 +194,13 @@ public class ProfileActivity extends AppCompatActivity implements
                     thisInstructor.setPhone(bundle.getString(USER_PHONE_KEY));
                     thisInstructor.setSpecialization(bundle.getString(SPECILIZATION));
 
-                    String insFullNameString = thisStudent.getFirstName() + " " + thisStudent.getLastName();
+                    String insFullNameString = thisInstructor.getFirstName() + " " + thisInstructor.getLastName();
                     fullName.setText(insFullNameString);
                     displayName.setText(thisInstructor.getDisplayName());
                     phoneNumber.setText(thisInstructor.getPhone());
                     cohort.setText(String.valueOf(thisInstructor.getCohort()));
                     specialization.setText(thisInstructor.getSpecialization());
+                    SignInFragment.THIS_USERNAME = thisInstructor.getDisplayName();
                     profilePresenter.updateDbUserInfo(thisInstructor);
 
                     break;
@@ -211,6 +214,7 @@ public class ProfileActivity extends AppCompatActivity implements
                     fullName.setText(guestFullNameString);
                     displayName.setText(thisUser.getDisplayName());
                     phoneNumber.setText(thisUser.getPhone());
+                    SignInFragment.THIS_USERNAME = thisUser.getDisplayName();
                     profilePresenter.updateDbUserInfo(thisUser);
 
                     break;
@@ -225,7 +229,6 @@ public class ProfileActivity extends AppCompatActivity implements
     @Override
     public void setUploadProfilePic(boolean myBoolean, int visibility) {
 
-        String uploadMessageSuccess = this.getResources().getString(R.string.upload_success);
         String uploadMessageFail = this.getResources().getString(R.string.upload_failed);
 
         uploadProgressBar.setVisibility(visibility);
@@ -233,7 +236,7 @@ public class ProfileActivity extends AppCompatActivity implements
             saveImageUrlToFirebaseDatabase(currentUser.getPhotoUrl().toString());
             Picasso.with(this)
                     .load(profileImageUri)
-                    .resize(1444,1444)
+                    .resize(1444, 1444)
                     .centerCrop()
                     .transform(new RoundPicasso(profileImage.getHeight(), 0))
                     .into(profileImage);
@@ -273,7 +276,7 @@ public class ProfileActivity extends AppCompatActivity implements
                 Picasso.with(this)
                         .load(currentUser.getPhotoUrl().toString())
                         .centerCrop()
-                        .resize(1444,1444)
+                        .resize(1444, 1444)
                         .transform(new RoundPicasso(profileImage.getMaxHeight(), 0))
                         .into(profileImage, new Callback() {
                             @Override
@@ -291,27 +294,27 @@ public class ProfileActivity extends AppCompatActivity implements
                 Log.d(TAG, "loadProfilePic: download Picture with Picasso");
             } else {
                 float pixelDensity = getResources().getDisplayMetrics().density;
-                int pixelValue = (int)pixelDensity*50;
+                int pixelValue = (int) pixelDensity * 50;
 
                 switch (USERTYPE) {
                     case STUDENT:
-                        profileImage.setPadding(pixelValue,pixelValue,pixelValue,pixelValue);
+                        profileImage.setPadding(pixelValue, pixelValue, pixelValue, pixelValue);
                         profileImage.setImageResource(R.drawable.talent);
                         break;
                     case STAFF:
-                        profileImage.setPadding(pixelValue,pixelValue,pixelValue,pixelValue);
+                        profileImage.setPadding(pixelValue, pixelValue, pixelValue, pixelValue);
                         profileImage.setImageResource(R.drawable.staff_edacy);
                         break;
                     case INSTRUCTOR:
-                        profileImage.setPadding(pixelValue,pixelValue,pixelValue,pixelValue);
+                        profileImage.setPadding(pixelValue, pixelValue, pixelValue, pixelValue);
                         profileImage.setImageResource(R.drawable.ic_instructor);
                         break;
                     case GUEST:
-                        profileImage.setPadding(pixelValue,pixelValue,pixelValue,pixelValue);
+                        profileImage.setPadding(pixelValue, pixelValue, pixelValue, pixelValue);
                         profileImage.setImageResource(R.drawable.ic_person);
                         break;
                     default:
-                        profileImage.setPadding(pixelValue,pixelValue,pixelValue,pixelValue);
+                        profileImage.setPadding(pixelValue, pixelValue, pixelValue, pixelValue);
                         profileImage.setImageResource(R.drawable.ic_person);
                         break;
                 }
@@ -349,6 +352,7 @@ public class ProfileActivity extends AppCompatActivity implements
     }
 
     private void loadStudentInfo() {
+        Log.d(TAG, "loadStudentInfo: LOADING PROFILE INFORMATION");
         if (thisStudent != null) {
             if (thisStudent.getFirstName() != null && thisStudent.getLastName() != null) {
                 String userFullName = thisStudent.getFirstName() + " " + thisStudent.getLastName();
@@ -400,8 +404,8 @@ public class ProfileActivity extends AppCompatActivity implements
 
     private void loadStaffInfo() {
         if (thisStaff != null) {
-            String staffFullName = thisStaff.getFirstName() + " " + thisStaff.getLastName();
-            if (!TextUtils.isEmpty(staffFullName)) {
+            if (thisStaff.getFirstName() != null && thisStaff.getLastName() != null) {
+                String staffFullName = thisStaff.getFirstName() + " " + thisStaff.getLastName();
                 Log.d(TAG, "loadProfilePic: Name of user displayed on screen");
                 fullName.setText(staffFullName);
             } else {
@@ -437,8 +441,8 @@ public class ProfileActivity extends AppCompatActivity implements
 
     private void loadInstructorInfo() {
         if (thisInstructor != null) {
-            String instructorFullName = thisInstructor.getFirstName() + " " + thisInstructor.getLastName();
-            if (!TextUtils.isEmpty(instructorFullName)) {
+            if (thisInstructor.getFirstName() != null && thisInstructor.getLastName() != null) {
+                String instructorFullName = thisInstructor.getFirstName() + " " + thisInstructor.getLastName();
                 Log.d(TAG, "loadProfilePic: Name of user displayed on screen");
                 fullName.setText(instructorFullName);
             } else {
@@ -475,8 +479,8 @@ public class ProfileActivity extends AppCompatActivity implements
 
     private void loadGuestInfo() {
         if (thisUser != null) {
-            String guestFullName = thisUser.getFirstName() + " " + thisUser.getLastName();
-            if (!TextUtils.isEmpty(guestFullName)) {
+            if (thisUser.getFirstName() != null && thisUser.getLastName() != null) {
+                String guestFullName = thisUser.getFirstName() + " " + thisUser.getLastName();
                 Log.d(TAG, "loadProfilePic: Name of user displayed on screen");
                 fullName.setText(guestFullName);
             } else {
@@ -503,35 +507,35 @@ public class ProfileActivity extends AppCompatActivity implements
         profileDialogFragment.setArguments(bundleForDialogFragment);
     }
 
-    private void saveImageUrlToFirebaseDatabase(String imageUrl){
+    private void saveImageUrlToFirebaseDatabase(String imageUrl) {
         switch (USERTYPE) {
             case STUDENT:
-                if(thisStudent != null){
+                if (thisStudent != null) {
                     thisStudent.setProfileImageurl(imageUrl);
                     profilePresenter.updateDbUserInfo(thisStudent);
                 }
                 break;
 
             case STAFF:
-                if(thisStaff != null){
+                if (thisStaff != null) {
                     thisStaff.setProfileImageurl(imageUrl);
                     profilePresenter.updateDbUserInfo(thisStaff);
                 }
                 break;
             case INSTRUCTOR:
-                if(thisInstructor != null){
+                if (thisInstructor != null) {
                     thisInstructor.setProfileImageurl(imageUrl);
                     profilePresenter.updateDbUserInfo(thisInstructor);
                 }
                 break;
             case GUEST:
-                if(thisUser != null){
+                if (thisUser != null) {
                     thisUser.setProfileImageurl(imageUrl);
                     profilePresenter.updateDbUserInfo(thisUser);
                 }
                 break;
             default:
-                if(thisUser != null){
+                if (thisUser != null) {
                     thisUser.setProfileImageurl(imageUrl);
                     profilePresenter.updateDbUserInfo(thisUser);
                 }

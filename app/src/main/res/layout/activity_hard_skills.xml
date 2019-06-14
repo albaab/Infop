@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/SuisseNeueFont"
     android:id="@+id/hard_kills_container"
     tools:context=".ui.HardSkillsActivity">
 
@@ -38,13 +39,14 @@
 
                 <TextView
                     android:id="@+id/data_science_text_view"
-                    android:layout_width="294dp"
+                    android:layout_width="325dp"
                     android:layout_height="44dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/text_field_gray"
+                    android:fontFamily="@font/suisse_neue_medium"
                     android:gravity="center"
                     android:text="@string/data_science"
                     android:textColor="@android:color/black"
@@ -81,11 +83,12 @@
 
                 <TextView
                     android:id="@+id/wed_text_view"
-                    android:layout_width="296dp"
+                    android:layout_width="321dp"
                     android:layout_height="46dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:background="@drawable/text_field_gray"
+                    android:fontFamily="@font/suisse_neue_medium"
                     android:gravity="center"
                     android:text="@string/web_development"
                     android:textColor="@android:color/black"
@@ -98,11 +101,12 @@
 
                 <TextView
                     android:id="@+id/mobile_text_view"
-                    android:layout_width="306dp"
+                    android:layout_width="325dp"
                     android:layout_height="45dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:background="@drawable/text_field_gray"
+                    android:fontFamily="@font/suisse_neue_medium"
                     android:gravity="center"
                     android:text="@string/mobile_development"
                     android:textColor="@android:color/black"

@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import androidx.core.app.NavUtils;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
@@ -21,6 +22,7 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -34,24 +36,26 @@ import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisInstr
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStaff;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisStudent;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisUser;
+import static com.example.infopapp.ui.account.fragments.SignInFragment.THIS_USERNAME;
 import static com.example.infopapp.utils.Constants.STAFF;
 
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-//======================================private attributes==========================================
+    private static final String TAG = "HomeActivity" ;
+    //======================================private attributes==========================================
     private DrawerLayout drawerLayout;
     public static FirebaseUser firebaseUser;
 
 
 //    public static Student currentStudent = new Student();
 
-//=======================================ON CREATE =================================================
+    //=======================================ON CREATE =================================================
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.d(TAG, "onCreate: PROFILE -> HOME ACTIVITY CREATED");
         setContentView(R.layout.activity_home);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -75,7 +79,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //---------------------------------View pager and adapter-----------------------------------
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        HomePagerAdapter homePagerAdapter = new HomePagerAdapter(getSupportFragmentManager());
+        HomePagerAdapter homePagerAdapter = new HomePagerAdapter(getSupportFragmentManager(), 0);
 
         // Set up the ViewPager with the sections adapter.
         ViewPager mViewPager = findViewById(R.id.container);
@@ -125,9 +129,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         homeTab.setIcon(R.drawable.ic_home);
                         middleTab.setIcon(R.drawable.ic_session_selected);
                         messageTab.setIcon(R.drawable.ic_message);
-                        if(USERTYPE.equals(STAFF)){
+                        if (USERTYPE.equals(STAFF)) {
                             setTitle(R.string.title_portfolios);
-                        }else{
+                        } else {
                             setTitle(R.string.title_fragment_sessions);
                         }
                         break;
@@ -164,6 +168,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onStart() {
         super.onStart();
+        Log.d(TAG, "onStart: PROFILE-> HOME ACTIVITY STARTING");
         if (firebaseUser == null) {
             startActivity(new Intent(this, ConnectToAccountActivity.class));
             thisUser = null;
@@ -175,6 +180,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: PROFILE-> HOME ACTIVITY DESTROYED");
+    }
+
     //=================================Create Option Menu===========================================
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -183,7 +194,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-//==================================== menu Item actions ===========================================
+    //==================================== menu Item actions ===========================================
     //right Menu actions
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -191,10 +202,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.action_logout:
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
-                thisUser = null;
-                thisStudent = null;
-                thisStaff = null;
-                thisInstructor = null;
+                nullifyMainVariables();
                 finish();
                 startActivity(new Intent(this, ConnectToAccountActivity.class));
                 break;
@@ -230,5 +238,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-
+    private void nullifyMainVariables() {
+        thisUser = null;
+        thisStudent = null;
+        thisStaff = null;
+        thisInstructor = null;
+        THIS_USERNAME = null;
+        USERTYPE = null;
+    }
 }

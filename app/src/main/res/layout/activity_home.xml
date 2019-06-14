@@ -23,6 +23,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
+                app:titleTextAppearance="@style/SuisseNeueFont"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_weight="1"
                 android:background="?attr/colorPrimary">
@@ -53,10 +54,12 @@
         android:padding="10dp"
         android:background="@drawable/gradient"
         android:layout_marginRight="133dp"
+        app:itemTextAppearance="@style/SuisseNeueFont"
         android:layout_gravity="start"
         android:layout_height="match_parent"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_menu">
+        app:menu="@menu/drawer_menu"
+        android:layout_marginEnd="133dp">
 
     </com.google.android.material.navigation.NavigationView>
 

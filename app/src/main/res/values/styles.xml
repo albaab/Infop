@@ -12,6 +12,11 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="fontFamily">@font/suisse_neue_medium</item>
+    </style>
+
+    <style name="SuisseNeueFont">
+        <item name="fontFamily">@font/suisse_neue_medium</item>
     </style>
 
     <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">

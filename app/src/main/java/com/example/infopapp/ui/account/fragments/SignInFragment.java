@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.infopapp.databases.FirebaseDbCallback;
 import com.example.infopapp.databases.FirebaseUserDb;
 import com.example.infopapp.entities.Instructor;
 import com.example.infopapp.entities.Staff;
@@ -41,7 +42,7 @@ import static com.example.infopapp.utils.Constants.STATUS_KEY;
 import static com.example.infopapp.utils.Constants.STUDENT;
 
 
-public class SignInFragment extends Fragment implements LoginView, FirebaseUserDb.FirebaseDbCallBack {
+public class SignInFragment extends Fragment implements LoginView, FirebaseDbCallback {
 
 //======================================Attributes=============================================//
 
@@ -141,7 +142,10 @@ public class SignInFragment extends Fragment implements LoginView, FirebaseUserD
         }
         progressBar.setVisibility(View.INVISIBLE);
         signInBundle.putBoolean(STATUS_KEY, true);
-        mCreateAccountCallback.startHomeActivityFromSingIn(signInBundle);
+        if(mCreateAccountCallback!=null){
+            mCreateAccountCallback.startHomeActivityFromSingIn(signInBundle);
+        }
+
     }
 
 

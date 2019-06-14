@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="66dp"
-    android:background="@color/colorPrimary"
+    android:layout_height="88dp"
     android:padding="12dp"
     android:layout_marginTop="22dp"
+    android:background="@drawable/edacy_full_letters"
     android:gravity="center"
     android:layout_gravity="start"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/header_username_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="38sp"
-        android:fontFamily="monospace"
-        android:text="@string/edacy"/>
+    <!--<TextView-->
+        <!--android:id="@+id/header_username_tv"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/edacy_full_letters"-->
+        <!--android:textColor="@android:color/black"-->
+        <!--android:textSize="38sp"-->
+        <!--android:fontFamily="monospace"/>-->
 
 </LinearLayout>

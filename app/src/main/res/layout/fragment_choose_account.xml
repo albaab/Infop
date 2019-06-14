@@ -1,233 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@drawable/gradient"
+    android:foregroundGravity="center"
     tools:context=".ui.account.fragments.ChooseAccountFragment">
 
 
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:foregroundGravity="center">
+        android:gravity="center">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center">
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:foregroundGravity="center">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <!--talent background-->
+            <ImageView
+                android:id="@+id/student_rect"
+                android:layout_width="155dp"
+                android:layout_height="154dp"
+                android:layout_marginTop="50dp"
+                android:layout_toEndOf="@id/rect_student"
+                android:layout_toRightOf="@id/rect_student"
+                android:contentDescription="@string/background"
+                android:src="@drawable/white_circle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--talent image-->
+            <ImageView
+                android:id="@+id/talent_image"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_toEndOf="@id/rect_student"
+                android:layout_toRightOf="@id/rect_student"
+                android:contentDescription="@string/background"
+                android:src="@drawable/talent"
+                app:layout_constraintBottom_toBottomOf="@+id/student_rect"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/student_rect"
+                app:layout_constraintTop_toTopOf="@+id/student_rect" />
+
+            <!--staff background-->
+            <ImageView
+                android:id="@+id/staff_rect"
+                android:layout_width="155dp"
+                android:layout_height="155dp"
+                android:layout_marginTop="50dp"
+                android:layout_toEndOf="@id/rect_student"
+                android:layout_toRightOf="@id/rect_student"
+                android:contentDescription="@string/background"
+                android:src="@drawable/white_circle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--talent image-->
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:layout_gravity="center"
-                android:foregroundGravity="center"
-                android:layout_marginStart="2dp">
+                android:layout_height="21dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:text="@string/staff"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                app:fontFamily="monospace"
+                app:layout_constraintBottom_toTopOf="@+id/staff_image"
+                app:layout_constraintEnd_toEndOf="@+id/staff_image"
+                app:layout_constraintStart_toStartOf="@+id/staff_image"
+                app:layout_constraintTop_toTopOf="@+id/staff_rect" />
 
-                <!--talent background-->
-                <ImageView
-                    android:id="@+id/student_rect"
-                    android:layout_width="155dp"
-                    android:layout_height="154dp"
-                    android:layout_marginTop="50dp"
-                    android:layout_toRightOf="@id/rect_student"
-                    android:contentDescription="@string/background"
-                    android:src="@drawable/white_circle"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_toEndOf="@id/rect_student" />
-                <!--talent image-->
-                <ImageView
-                    android:id="@+id/talent_image"
-                    android:layout_width="76dp"
-                    android:layout_height="76dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_toEndOf="@id/rect_student"
-                    android:layout_toRightOf="@id/rect_student"
-                    android:contentDescription="@string/background"
-                    android:src="@drawable/talent"
-                    app:layout_constraintBottom_toBottomOf="@+id/student_rect"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/student_rect"
-                    app:layout_constraintTop_toTopOf="@+id/student_rect" />
+            <ImageView
+                android:id="@+id/staff_image"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_toEndOf="@id/rect_student"
+                android:layout_toRightOf="@id/rect_student"
+                android:contentDescription="@string/background"
+                android:src="@drawable/staff_edacy"
+                app:layout_constraintBottom_toBottomOf="@+id/staff_rect"
+                app:layout_constraintEnd_toEndOf="@+id/staff_rect"
+                app:layout_constraintHorizontal_bias="0.422"
+                app:layout_constraintStart_toStartOf="@+id/staff_rect"
+                app:layout_constraintTop_toTopOf="@+id/staff_rect"
+                app:layout_constraintVertical_bias="0.493" />
 
-                <!--staff background-->
-                <ImageView
-                    android:id="@+id/staff_rect"
-                    android:layout_width="155dp"
-                    android:layout_height="155dp"
-                    android:layout_marginTop="50dp"
-                    android:layout_toRightOf="@id/rect_student"
-                    android:src="@drawable/white_circle"
-                    android:contentDescription="@string/background"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_toEndOf="@id/rect_student" />
-                <!--talent image-->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="21dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="center"
-                    android:text="@string/staff"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp"
-                    app:fontFamily="monospace"
-                    app:layout_constraintBottom_toTopOf="@+id/staff_image"
-                    app:layout_constraintEnd_toEndOf="@+id/staff_image"
-                    app:layout_constraintStart_toStartOf="@+id/staff_image"
-                    app:layout_constraintTop_toTopOf="@+id/staff_rect" />
-
-                <ImageView
-                    android:id="@+id/staff_image"
-                    android:layout_width="76dp"
-                    android:layout_height="76dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_toEndOf="@id/rect_student"
-                    android:layout_toRightOf="@id/rect_student"
-                    android:contentDescription="@string/background"
-                    android:src="@drawable/staff_edacy"
-                    app:layout_constraintBottom_toBottomOf="@+id/staff_rect"
-                    app:layout_constraintEnd_toEndOf="@+id/staff_rect"
-                    app:layout_constraintHorizontal_bias="0.422"
-                    app:layout_constraintStart_toStartOf="@+id/staff_rect"
-                    app:layout_constraintTop_toTopOf="@+id/staff_rect"
-                    app:layout_constraintVertical_bias="0.493" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="21dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="center"
-                    android:text="@string/student"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp"
-                    app:fontFamily="monospace"
-                    app:layout_constraintBottom_toTopOf="@+id/talent_image"
-                    app:layout_constraintEnd_toEndOf="@+id/talent_image"
-                    app:layout_constraintHorizontal_bias="0.48"
-                    app:layout_constraintStart_toStartOf="@+id/talent_image"
-                    app:layout_constraintTop_toTopOf="@+id/student_rect" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:text="@string/student"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                app:fontFamily="monospace"
+                app:layout_constraintBottom_toTopOf="@+id/talent_image"
+                app:layout_constraintEnd_toEndOf="@+id/talent_image"
+                app:layout_constraintHorizontal_bias="0.48"
+                app:layout_constraintStart_toStartOf="@+id/talent_image"
+                app:layout_constraintTop_toTopOf="@+id/student_rect" />
 
 
-                <ImageView
-                    android:id="@+id/instructor_rect"
-                    android:layout_width="155dp"
-                    android:layout_height="155dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginBottom="50dp"
-                    android:layout_toEndOf="@id/rect_student"
-                    android:layout_toRightOf="@id/rect_student"
-                    android:contentDescription="@string/background"
-                    android:src="@drawable/white_circle"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/other_rect"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/staff_rect"
-                    app:layout_constraintVertical_bias="1.0" />
+            <ImageView
+                android:id="@+id/instructor_rect"
+                android:layout_width="155dp"
+                android:layout_height="155dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginBottom="50dp"
+                android:layout_toEndOf="@id/rect_student"
+                android:layout_toRightOf="@id/rect_student"
+                android:contentDescription="@string/background"
+                android:src="@drawable/white_circle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/other_rect"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/staff_rect"
+                app:layout_constraintVertical_bias="1.0" />
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="21dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="center"
-                    android:text="@string/instructor"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp"
-                    app:fontFamily="monospace"
-                    app:layout_constraintBottom_toTopOf="@+id/instructor_image"
-                    app:layout_constraintEnd_toEndOf="@+id/instructor_image"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="@+id/instructor_image"
-                    app:layout_constraintTop_toTopOf="@+id/instructor_rect"
-                    app:layout_constraintVertical_bias="1.0" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:text="@string/instructor"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                app:fontFamily="monospace"
+                app:layout_constraintBottom_toTopOf="@+id/instructor_image"
+                app:layout_constraintEnd_toEndOf="@+id/instructor_image"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/instructor_image"
+                app:layout_constraintTop_toTopOf="@+id/instructor_rect"
+                app:layout_constraintVertical_bias="1.0" />
 
-                <ImageView
-                    android:id="@+id/instructor_image"
-                    android:layout_width="76dp"
-                    android:layout_height="76dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_toEndOf="@id/rect_student"
-                    android:layout_toRightOf="@id/rect_student"
-                    android:contentDescription="@string/background"
-                    android:src="@drawable/ic_instructor"
-                    app:layout_constraintBottom_toBottomOf="@+id/instructor_rect"
-                    app:layout_constraintEnd_toEndOf="@+id/instructor_rect"
-                    app:layout_constraintHorizontal_bias="0.422"
-                    app:layout_constraintStart_toStartOf="@+id/instructor_rect"
-                    app:layout_constraintTop_toTopOf="@+id/instructor_rect"
-                    app:layout_constraintVertical_bias="0.506" />
+            <ImageView
+                android:id="@+id/instructor_image"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_toEndOf="@id/rect_student"
+                android:layout_toRightOf="@id/rect_student"
+                android:contentDescription="@string/background"
+                android:src="@drawable/ic_instructor"
+                app:layout_constraintBottom_toBottomOf="@+id/instructor_rect"
+                app:layout_constraintEnd_toEndOf="@+id/instructor_rect"
+                app:layout_constraintHorizontal_bias="0.422"
+                app:layout_constraintStart_toStartOf="@+id/instructor_rect"
+                app:layout_constraintTop_toTopOf="@+id/instructor_rect"
+                app:layout_constraintVertical_bias="0.506" />
 
-                <ImageView
-                    android:id="@+id/other_rect"
-                    android:layout_width="155dp"
-                    android:layout_height="155dp"
-                    android:layout_marginBottom="50dp"
-                    android:layout_toRightOf="@id/rect_student"
-                    android:contentDescription="@string/background"
-                    android:src="@drawable/white_circle"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_toEndOf="@id/rect_student" />
+            <ImageView
+                android:id="@+id/other_rect"
+                android:layout_width="155dp"
+                android:layout_height="155dp"
+                android:layout_marginBottom="50dp"
+                android:layout_toEndOf="@id/rect_student"
+                android:layout_toRightOf="@id/rect_student"
+                android:contentDescription="@string/background"
+                android:src="@drawable/white_circle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="21dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="center"
-                    android:text="@string/guest"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp"
-                    app:fontFamily="monospace"
-                    app:layout_constraintBottom_toTopOf="@+id/other_image"
-                    app:layout_constraintEnd_toEndOf="@+id/other_image"
-                    app:layout_constraintStart_toStartOf="@+id/other_image"
-                    app:layout_constraintTop_toTopOf="@+id/other_rect" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:text="@string/guest"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                app:fontFamily="monospace"
+                app:layout_constraintBottom_toTopOf="@+id/other_image"
+                app:layout_constraintEnd_toEndOf="@+id/other_image"
+                app:layout_constraintStart_toStartOf="@+id/other_image"
+                app:layout_constraintTop_toTopOf="@+id/other_rect" />
 
-                <ImageView
-                    android:id="@+id/other_image"
-                    android:layout_width="76dp"
-                    android:layout_height="76dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_toEndOf="@id/rect_student"
-                    android:layout_toRightOf="@id/rect_student"
-                    android:contentDescription="@string/background"
-                    android:src="@drawable/ic_person"
-                    app:layout_constraintBottom_toBottomOf="@+id/other_rect"
-                    app:layout_constraintEnd_toEndOf="@+id/other_rect"
-                    app:layout_constraintHorizontal_bias="0.549"
-                    app:layout_constraintStart_toStartOf="@+id/other_rect"
-                    app:layout_constraintTop_toTopOf="@+id/other_rect"
-                    app:layout_constraintVertical_bias="0.506" />
+            <ImageView
+                android:id="@+id/other_image"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_toEndOf="@id/rect_student"
+                android:layout_toRightOf="@id/rect_student"
+                android:contentDescription="@string/background"
+                android:src="@drawable/ic_person"
+                app:layout_constraintBottom_toBottomOf="@+id/other_rect"
+                app:layout_constraintEnd_toEndOf="@+id/other_rect"
+                app:layout_constraintHorizontal_bias="0.549"
+                app:layout_constraintStart_toStartOf="@+id/other_rect"
+                app:layout_constraintTop_toTopOf="@+id/other_rect"
+                app:layout_constraintVertical_bias="0.506" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
-
-
-    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 
 
-
-
-</FrameLayout>
+</androidx.core.widget.NestedScrollView>

@@ -20,22 +20,28 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.USERTYPE;
+import static com.example.infopapp.utils.Constants.GUEST;
+import static com.example.infopapp.utils.Constants.INSTRUCTOR;
+import static com.example.infopapp.utils.Constants.STAFF;
+import static com.example.infopapp.utils.Constants.STUDENT;
+
 public class PostAdapter extends ListAdapter<PostItem, PostAdapter.PostItemViewHolder> {
 
 
-//===================================PRIVATE ATTRIBUTES=============================================
+    //===================================PRIVATE ATTRIBUTES=============================================
     private List<PostItem> postItems = new ArrayList<>();
     private OnPostItemClickListener mListener;
     private Context context;
 
 
-//===================================ADAPTER CONSTRUCTOR=============================================
+    //===================================ADAPTER CONSTRUCTOR=============================================
     PostAdapter() {
         super(DIFF_CALLBACK);
     }
 
 
-//==========================================VIEW HOLDER=============================================
+    //==========================================VIEW HOLDER=============================================
     class PostItemViewHolder extends RecyclerView.ViewHolder {
 
         //VIEW ITEMS
@@ -52,7 +58,7 @@ public class PostAdapter extends ListAdapter<PostItem, PostAdapter.PostItemViewH
             postItemTimeAndDate = itemView.findViewById(R.id.post_date_text_view);
 
             //ON POST CLICK LISTENER
-            itemView.setOnClickListener(new View.OnClickListener() {
+            userImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
@@ -66,7 +72,7 @@ public class PostAdapter extends ListAdapter<PostItem, PostAdapter.PostItemViewH
     }
 
 
-//===================================ON CREATE VIEWHOLDER===========================================
+    //===================================ON CREATE VIEWHOLDER===========================================
     @NonNull
     @Override
     public PostItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -75,7 +81,7 @@ public class PostAdapter extends ListAdapter<PostItem, PostAdapter.PostItemViewH
         return new PostItemViewHolder(v);
     }
 
-//===================================ON BIND VIEWHOLDER=============================================
+    //===================================ON BIND VIEWHOLDER=============================================
     @Override
     public void onBindViewHolder(@NonNull PostItemViewHolder holder, int position) {
         PostItem currentPostItem = postItems.get(position);
@@ -87,13 +93,29 @@ public class PostAdapter extends ListAdapter<PostItem, PostAdapter.PostItemViewH
                     .centerCrop()
                     .transform(new RoundPicasso(holder.userImage.getMaxHeight(), 0))
                     .into(holder.userImage);
-        } else {
-            Picasso.with(context)
-                    .load(R.drawable.ic_person)
-                    .resize(722, 722)
-                    .centerCrop()
-                    .transform(new RoundPicasso(holder.userImage.getMaxHeight(), 0))
-                    .into(holder.userImage);
+        } else if(currentPostItem.getUsertype()!=null) {
+            float pixelDensity = context.getResources().getDisplayMetrics().density;
+            int pixelValue = (int) pixelDensity * 10;
+//            holder.userImage.setPadding(pixelValue, pixelValue, pixelValue, pixelValue);
+            switch (currentPostItem.getUsertype()) {
+                case STUDENT:
+                    holder.userImage.setImageResource(R.drawable.talent);
+                    break;
+                case INSTRUCTOR:
+                    holder.userImage.setImageResource(R.drawable.ic_instructor);
+                    break;
+                case STAFF:
+                    holder.userImage.setImageResource(R.drawable.staff_edacy);
+                    break;
+                case GUEST:
+                    holder.userImage.setImageResource(R.drawable.ic_person);
+                    break;
+                default:
+                    holder.userImage.setImageResource(R.drawable.ic_person);
+                    break;
+            }
+        }else{
+            holder.userImage.setImageResource(R.drawable.ic_person);
         }
 
         //SET THE DETAILS OF THE POST
@@ -105,14 +127,14 @@ public class PostAdapter extends ListAdapter<PostItem, PostAdapter.PostItemViewH
     }
 
 
-//===================================GET ITEM COUNT METHOD==========================================
+    //===================================GET ITEM COUNT METHOD==========================================
     @Override
     public int getItemCount() {
         return postItems.size();
     }
 
 
-//=======================================ADAPTER METHOD=============================================
+    //=======================================ADAPTER METHOD=============================================
     void setListOfPostItems(Context context, List<PostItem> postItems) {
         this.context = context;
         this.postItems = postItems;
@@ -120,7 +142,7 @@ public class PostAdapter extends ListAdapter<PostItem, PostAdapter.PostItemViewH
     }
 
 
-//==============================DIFF UTIL OBJECT TO COMPARE ITEM====================================
+    //==============================DIFF UTIL OBJECT TO COMPARE ITEM====================================
     private static final DiffUtil.ItemCallback<PostItem> DIFF_CALLBACK = new DiffUtil.ItemCallback<PostItem>() {
         @Override
         public boolean areItemsTheSame(@NonNull PostItem oldItem, @NonNull PostItem newItem) {
@@ -139,13 +161,12 @@ public class PostAdapter extends ListAdapter<PostItem, PostAdapter.PostItemViewH
     };
 
 
-
-//=======================================INTERFACE CALLBACK LISTENER================================
+    //=======================================INTERFACE CALLBACK LISTENER================================
     public interface OnPostItemClickListener {
         void onItemClicked(PostItem postItem);
     }
 
-//=======================================SET LISTENER METHOD=============================================
+    //=======================================SET LISTENER METHOD=============================================
     public void setOnItemClickListener(OnPostItemClickListener mListener) {
         this.mListener = mListener;
     }

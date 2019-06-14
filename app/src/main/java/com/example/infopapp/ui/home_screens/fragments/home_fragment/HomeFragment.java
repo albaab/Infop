@@ -18,12 +18,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.infopapp.R;
 import com.example.infopapp.entities.Cohort;
 import com.example.infopapp.entities.PostItem;
 
-import com.example.infopapp.entities.User;
 import com.example.infopapp.ui.home_screens.HomeViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,6 +33,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
+import static com.example.infopapp.ui.account.ConnectToAccountActivity.USERTYPE;
 import static com.example.infopapp.ui.account.fragments.SignInFragment.THIS_USERNAME;
 import static com.example.infopapp.utils.Constants.EDACY_COMMUNITY;
 
@@ -47,13 +48,13 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
-//===================================PUBLIC EMPTY CONSTRUCTOR=======================================
+    //===================================PUBLIC EMPTY CONSTRUCTOR=======================================
     public HomeFragment() {
         // Required empty public constructor
     }
 
 
-//===================================ON CREATE VIEW=================================================
+    //===================================ON CREATE VIEW=================================================
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class HomeFragment extends Fragment {
     }
 
 
-//===================================ON VIEW CREATED=================================================
+    //===================================ON VIEW CREATED=================================================
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -82,8 +83,7 @@ public class HomeFragment extends Fragment {
         postRv = view.findViewById(R.id.post_recycler_view);// RECYCLER VIEW TO DISPLAY POSTS
         postAdapter = new PostAdapter();// ADAPTER TO ARRANGE THE POSTS
         postRv.setHasFixedSize(true);// STABILIZE THE RECYCLER VIEW
-        postRv.setLayoutManager(rvManager);// SET THE LINEAR LAYOUT MANAGER OF THE RECYCLER VIEW
-
+        postRv.setLayoutManager(rvManager);/* SET THE LINEAR LAYOUT MANAGER OF THE RECYCLER VIEW*/
         //NEW POST ITEM
         final PostItem currentPostItem = new PostItem();
 
@@ -92,7 +92,12 @@ public class HomeFragment extends Fragment {
         channelTitle.setText(EDACY_COMMUNITY);
 
         //SET THE USERNAME OF THE POST ITEM
-        currentPostItem.setUsername(THIS_USERNAME);
+        if(THIS_USERNAME!=null){
+            currentPostItem.setUsername(THIS_USERNAME);
+        }
+        if(USERTYPE!=null){
+            currentPostItem.setUsertype(USERTYPE);
+        }
 
         //STORE THE LINK OF THE PHOTO OF THE USER IN THE POST ITEM
         if (currenUser != null) {
@@ -111,24 +116,28 @@ public class HomeFragment extends Fragment {
                 Calendar c = Calendar.getInstance();
                 int hour = c.get(Calendar.HOUR);
                 int minute = c.get(Calendar.MINUTE);
-    
+
 //                SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM");
 //                String monthString = monthFormat.format(c.getTime());
                 String currenDate = DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime());
-                String timeString = String.valueOf(hour)+":"+String.valueOf(minute);
+                String timeString = String.valueOf(hour) + ":" + String.valueOf(minute);
 
                 //IF THE TEXT FIELD IS NOT EMPTY-> PUSH THE POST TO FIREBASE DATABSE
-                if (!postEdit.getText().toString().trim().isEmpty()){
-                    currentPostItem.setPost(postEdit.getText().toString());
-                    currentPostItem.setDate(currenDate);
-                    currentPostItem.setTime(timeString);
-                    homeViewModel.uploadPostToChannel(currentPostItem);
-                    hideKeyboard();
-                    postEdit.getText().clear();
-                }else{
+                if (!postEdit.getText().toString().trim().isEmpty()) {
+                    //IF THE USER DID NOT COMPLETE HIS OR HER USERNAME
+                    if (currentPostItem.getUsername() == null) {
+                        Toast.makeText(getActivity(), getText(R.string.enter_username), Toast.LENGTH_SHORT).show();
+                    } else {
+                        currentPostItem.setPost(postEdit.getText().toString());
+                        currentPostItem.setDate(currenDate);
+                        currentPostItem.setTime(timeString);
+                        homeViewModel.uploadPostToChannel(currentPostItem);
+                        hideKeyboard();
+                        postEdit.getText().clear();
+                    }
+                } else {
                     postEdit.setError(getText(R.string.field_empty));
                 }
-
 
             }
         });
@@ -141,7 +150,7 @@ public class HomeFragment extends Fragment {
 //                Log.d(TAG, "getListOfPosts: GETTING ALL LIST OF POSTS " + postItems.get(0));
                 postAdapter.setListOfPostItems(getContext(), postItems);
                 postRv.setAdapter(postAdapter);
-                postRv.scrollToPosition(postItems.size() -1);
+                postRv.scrollToPosition(postItems.size() - 1);
             }
 
             @Override
@@ -153,12 +162,20 @@ public class HomeFragment extends Fragment {
 
     }
 
-//======================================UTILITY METHOD==============================================
-    private void hideKeyboard(){
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+
+        Log.d(TAG, "onAttach: PROFILE-> HOME FRAGMENT ATTACHED");
+        super.onAttach(context);
+    }
+
+    //======================================UTILITY METHOD==============================================
+    private void hideKeyboard() {
         View v = getActivity().getCurrentFocus();
-        if (v != null){
+        if (v != null) {
             InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(v.getWindowToken(),0);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         }
     }
 

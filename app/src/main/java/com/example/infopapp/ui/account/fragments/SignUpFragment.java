@@ -1,6 +1,7 @@
 package com.example.infopapp.ui.account.fragments;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -29,6 +30,8 @@ import com.example.infopapp.ui.account.LogPresenter;
 import com.example.infopapp.ui.home_screens.HomeActivity;
 import com.example.infopapp.ui.profile.ProfileView;
 
+import java.util.Objects;
+
 import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.USERTYPE;
 import static com.example.infopapp.ui.account.ConnectToAccountActivity.thisInstructor;
@@ -47,7 +50,7 @@ import static com.example.infopapp.utils.Constants.STUDENT_TOKEN;
 
 public class SignUpFragment extends Fragment implements LoginView, ProfileView {
 
-//============================================ATTRIBUTES==========================================//
+    //============================================ATTRIBUTES==========================================//
     private EditText emailEdit, passwordEdit, confirmPasswordEdit, userTokenEdit;
 
     private ProgressBar progressBar;
@@ -55,7 +58,6 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
     private String email, password, confirmPassword, userToken;
 
     private Bundle bundleCreateAccount = new Bundle();
-
 
     private LogPresenter logPresenter;
 
@@ -68,11 +70,12 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
     private FirebaseUserDb firebaseUserDb;
 
 
-//============================================CONSTRUCTOR=========================================//
+    //============================================CONSTRUCTOR=========================================//
     public SignUpFragment() {
         // Required empty public constructor
     }
-//=====================================LOGIN VIEW METHODS==========================================//
+
+    //=====================================LOGIN VIEW METHODS==========================================//
     @Override
     public void setLoginStatus(boolean isSuccessful, boolean isEmailVerified) {
         //do nothing
@@ -135,7 +138,7 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
 //        }
     }
 
-//=====================================ON CREATE VIEW METHOD======================================//
+    //=====================================ON CREATE VIEW METHOD======================================//
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -143,14 +146,15 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
         return inflater.inflate(R.layout.fragment_sign_up, container, false);
     }
 
-//=====================================ON VIEW CREATED METHOD======================================//
+    //=====================================ON VIEW CREATED METHOD======================================//
+    @SuppressLint("NewApi")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Log.d(TAG, "onViewCreated: START SIGN UP SUCCESSFUL");
         super.onViewCreated(view, savedInstanceState);
         logPresenter = new LogPresenter(this);
         firebaseUserDb = new FirebaseUserDb(this);
-        successMessage = (String) getActivity().getResources().getText(R.string.success);
+        successMessage = (String) Objects.requireNonNull(getActivity()).getResources().getText(R.string.success);
         errorMessage = (String) getText(R.string.error_message);
         userAlreadyRegisteredMessage = getActivity().getResources()
                 .getString(R.string.user_already_registered);
@@ -206,22 +210,23 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
         Drawable otherDrawable = getResources().getDrawable(R.drawable.ic_person);
 
         //=======================Adapt the sign Up Interface=======================================//
-        if (bundleCreateAccount.getString(KEY).equals(STUDENT)) {
+        if (STUDENT.equals(bundleCreateAccount.getString(KEY))) {
             signUpImage.setImageDrawable(talentDrawable);
             signUpTextView.setText(R.string.student);
             return;
         }
-        if (bundleCreateAccount.getString(KEY).equals(STAFF)) {
-            signUpImage.setImageDrawable(staffDrawable);
+        if (STAFF.equals(bundleCreateAccount.getString(KEY))) {
+        signUpImage.setImageDrawable(staffDrawable);
             signUpTextView.setText(R.string.staff);
             return;
         }
-        if (bundleCreateAccount.getString(KEY).equals(INSTRUCTOR)) {
+        if (INSTRUCTOR.equals(bundleCreateAccount.getString(KEY))) {
+
             signUpImage.setImageDrawable(instructorDrawable);
             signUpTextView.setText(R.string.instructor);
             return;
         }
-        if (bundleCreateAccount.getString(KEY).equals(GUEST)) {
+        if (GUEST.equals(bundleCreateAccount.getString(KEY))) {
             signUpImage.setImageDrawable(otherDrawable);
             signUpTextView.setText(R.string.guest);
             userTokenEdit.setVisibility(View.GONE);
@@ -231,7 +236,7 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
 
     //---------------------------------does user have access method --------------------------------
     private boolean doesUserhaveAccess(String key, String token) {
-        if (!TextUtils.isEmpty(token)) {
+        if (token != null) {
             switch (key) {
                 case STUDENT:
                     return (token.equals(STUDENT_TOKEN));
@@ -239,11 +244,11 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
                     return (token.equals(INSTRUCTOR_TOKEN));
                 case STAFF:
                     return (token.equals(STAFF_TOKEN));
-                case GUEST:
-                    return true;
                 default:
                     return false;
             }
+        } else if (GUEST.equals(key)) {
+            return true;
         } else {
             userTokenEdit.setError(tokenMessage);
             userTokenEdit.requestFocus();
@@ -278,7 +283,7 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
         }
     }
 
-    //-----------------------------------profile view methods-------------------------------------------
+//-----------------------------------profile view methods-------------------------------------------
     @Override
     public void setUploadProfilePic(boolean myBoolean, int visibility) {
     }
@@ -288,14 +293,16 @@ public class SignUpFragment extends Fragment implements LoginView, ProfileView {
         //do nothing
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void setUploadUserInFirebaseDbStatus(boolean myBoolean) {
-        if (myBoolean){
+
+        if (myBoolean) {
             Intent connectIntent = new Intent(getActivity(), HomeActivity.class);
             startActivity(connectIntent);
-            getActivity().finish();
-        }else{
-            Toast.makeText(getContext(), errorMessage , Toast.LENGTH_SHORT).show();
+            Objects.requireNonNull(getActivity()).finish();
+        } else {
+            Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
         }
     }
 }

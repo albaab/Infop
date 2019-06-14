@@ -32,7 +32,7 @@
         android:textColor="@android:color/background_dark"
         android:textSize="19sp"
         android:textStyle="italic"
-        app:fontFamily="monospace"
+        android:fontFamily="@font/suisse_neue_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"

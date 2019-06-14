@@ -1,5 +1,6 @@
 package com.example.infopapp.repositories;
 
+import com.example.infopapp.databases.FirebaseDbCallback;
 import com.example.infopapp.databases.FirebaseUserDb;
 import com.example.infopapp.entities.Cohort;
 import com.example.infopapp.entities.Instructor;
@@ -37,7 +38,7 @@ public class UserRepository {
 
     public void getAllCohorts(final UserRepoCallBackInterface repoCallBackInterface) {
 
-        firebaseUserDb.getAllStudentsFromFirebase(new FirebaseUserDb.FirebaseDbCallBack() {
+        firebaseUserDb.getAllStudentsFromFirebase(new FirebaseDbCallback() {
                     @Override
                     public void onCallBack(List<Student> studentList) {
 

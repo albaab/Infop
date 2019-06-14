@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.infopapp.R;
+import com.example.infopapp.databases.FirebaseDbCallback;
 import com.example.infopapp.databases.FirebaseUserDb;
 import com.example.infopapp.entities.Instructor;
 import com.example.infopapp.entities.Staff;
@@ -40,9 +41,9 @@ import static com.example.infopapp.utils.Constants.STUDENT;
 
 public class ConnectToAccountActivity extends AppCompatActivity implements
         ChooseAccountFragment.CallBackChooseAccount,
-        SignInFragment.CallBackSignInListener, FirebaseUserDb.FirebaseDbCallBack {
+        SignInFragment.CallBackSignInListener {
 
-    private static final String TAG = "Signing in";
+    private static final String TAG = "ConnectActivity";
     //=====================================private attributes======================================//
     //fragments
     private ChooseAccountFragment chooseAccountFragment = new ChooseAccountFragment();
@@ -112,7 +113,7 @@ public class ConnectToAccountActivity extends AppCompatActivity implements
         }
     }
 
-//=====================================Switching from fragment to fragment methods==============//
+    //=====================================Switching from fragment to fragment methods==============//
     @Override
     public void switchToSignUpFragment(Bundle bundle) {
         signUpFragment.setArguments(bundle);
@@ -131,7 +132,7 @@ public class ConnectToAccountActivity extends AppCompatActivity implements
         switchToFragment(resetPasswordFragment);
     }
 
-//=====================================Sign In and Sign up methods==================================
+    //=====================================Sign In and Sign up methods==================================
     @Override
     public void startHomeActivityFromSingIn(Bundle bundle) {
 
@@ -157,59 +158,72 @@ public class ConnectToAccountActivity extends AppCompatActivity implements
     @Override
     protected void onStart() {
         FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
-        Log.d(TAG, "onStart: START THE CONNECT TO ACCOUNT ACTIVITY");
+        Log.d(TAG, "onStart: PROFILE START THE CONNECT TO ACCOUNT ACTIVITY");
         super.onStart();
         if (fbUser != null) {
             connectingProgressBar.setVisibility(View.VISIBLE);
             thisUser.setId(fbUser.getUid());
             thisUser.setUserType(fbUser.getDisplayName());
             USERTYPE = fbUser.getDisplayName();
-            FirebaseUserDb.isUserInFirebaseDb(thisUser,this);
-        }else{
+            final Thread getUserInfoThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    FirebaseUserDb.isUserInFirebaseDb(thisUser, new FirebaseDbCallback() {
+                        @Override
+                        public void onCallBack(List<Student> studentList) {
+
+                        }
+
+                        @Override
+                        public void onCallBackGetUser(User user, Student student, Staff staff, Instructor instructor) {
+                            if (user != null) {
+                                thisUser = user;
+                                USERTYPE = GUEST;
+                                SignInFragment.THIS_USERNAME = thisUser.getDisplayName();
+                                thisStudent = null;
+                                thisStaff = null;
+                                thisInstructor = null;
+                            } else if (student != null) {
+                                thisStudent = student;
+                                USERTYPE = STUDENT;
+                                SignInFragment.THIS_USERNAME = thisStudent.getDisplayName();
+                                thisUser = null;
+                                thisStaff = null;
+                                thisInstructor = null;
+                            } else if (staff != null) {
+                                thisStaff = staff;
+                                USERTYPE = STAFF;
+                                SignInFragment.THIS_USERNAME = thisStaff.getDisplayName();
+                                thisStudent = null;
+                                thisUser = null;
+                                thisInstructor = null;
+                            } else if (instructor != null) {
+                                thisInstructor = instructor;
+                                USERTYPE = INSTRUCTOR;
+                                SignInFragment.THIS_USERNAME = thisInstructor.getDisplayName();
+                                thisStudent = null;
+                                thisStaff = null;
+                                thisUser = null;
+                            }
+                        }
+                    });
+                }
+            });
+            getUserInfoThread.start();
+            do{
+                connectingProgressBar.setVisibility(View.VISIBLE);
+            }while ((getUserInfoThread.isAlive()));
+
+            if (!getUserInfoThread.isAlive()){
+                startActivity(new Intent(this, HomeActivity.class));
+                finish();
+                connectingProgressBar.setVisibility(View.GONE);
+            }
+        } else {
             switchToFragment(signInFragment);
 
         }
     }
 
-    @Override
-    public void onCallBack(List<Student> studentList) {
 
-    }
-
-    @Override
-    public void onCallBackGetUser(User user, Student student, Staff staff, Instructor instructor) {
-        if (user != null) {
-            thisUser = user;
-            USERTYPE = GUEST;
-            SignInFragment.THIS_USERNAME = thisUser.getDisplayName();
-            thisStudent = null;
-            thisStaff = null;
-            thisInstructor = null;
-        } else if (student != null) {
-            thisStudent = student;
-            USERTYPE = STUDENT;
-            SignInFragment.THIS_USERNAME = thisStudent.getDisplayName();
-            thisUser = null;
-            thisStaff = null;
-            thisInstructor = null;
-        } else if (staff != null) {
-            thisStaff = staff;
-            USERTYPE = STAFF;
-            SignInFragment.THIS_USERNAME = thisStaff.getDisplayName();
-            thisStudent = null;
-            thisUser = null;
-            thisInstructor = null;
-        } else if (instructor != null) {
-            thisInstructor = instructor;
-            USERTYPE = INSTRUCTOR;
-            SignInFragment.THIS_USERNAME = thisInstructor.getDisplayName();
-            thisStudent = null;
-            thisStaff = null;
-            thisUser = null;
-        }
-        startActivity(new Intent(this, HomeActivity.class));
-        finish();
-        connectingProgressBar.setVisibility(View.GONE);
-
-    }
 }

@@ -41,11 +41,12 @@ public class FirebaseUserDb {
     private static List<Student> students;
 
 
-//===================================PUBLIC CONSTRUCTOR=============================================
+    //===================================PUBLIC CONSTRUCTOR=============================================
     public FirebaseUserDb(ProfileView profileView) {
         this.profileView = profileView;
     }
-    public FirebaseUserDb(DashboardView dashboardView){
+
+    public FirebaseUserDb(DashboardView dashboardView) {
         this.dashboardView = dashboardView;
     }
 
@@ -59,9 +60,6 @@ public class FirebaseUserDb {
 
             userTypeReference = listOfStudentsDatabaseReference
                     .child(user.getUserType());
-//            String currentUserId = userTypeReference.push().getKey();
-
-//            user.setId(currentUserId);
             userTypeReference.child(user.getId())
                     .setValue(user, new DatabaseReference.CompletionListener() {
                         @Override
@@ -71,10 +69,9 @@ public class FirebaseUserDb {
                         }
                     });
         } else {
-            profileView.setUpdateUserInFirebaseDbStatus(false);
+            profileView.setUploadUserInFirebaseDbStatus(false);
         }
     }
-
 
 
     //    ---------------------------------Update user in database----------------------------------
@@ -91,9 +88,8 @@ public class FirebaseUserDb {
     }
 
 
-
     //--------------------------------------update student resume method----------------------------
-    public void updateStudentResume(Student student){
+    public void updateStudentResume(Student student) {
         userTypeReference = listOfStudentsDatabaseReference.child(STUDENT);
         userTypeReference.child(student.getId())
                 .setValue(student, new DatabaseReference.CompletionListener() {
@@ -106,9 +102,8 @@ public class FirebaseUserDb {
     }
 
 
-
     //--------------------------------------is user in database?------------------------------------
-    public static void isUserInFirebaseDb(final User user, final FirebaseDbCallBack fbCallback) {
+    public static void isUserInFirebaseDb(final User user, final FirebaseDbCallback fbCallback) {
 
         Log.d(TAG, "isUserInFirebaseDb: START SEARCHING IN DATABASE");
 
@@ -159,9 +154,8 @@ public class FirebaseUserDb {
     }
 
 
-
     //---------------------------------get all students in firebase---------------------------------
-    public void getAllStudentsFromFirebase(final FirebaseDbCallBack firebaseDbCallBack) {
+    public void getAllStudentsFromFirebase(final FirebaseDbCallback firebaseDbCallBack) {
 //        userTypeReference = listOfStudentsDatabaseReference.child(STUDENT);
         listOfStudentsDatabaseReference.child(STUDENT).orderByChild("cohort")
                 .addValueEventListener(new ValueEventListener() {
@@ -184,7 +178,6 @@ public class FirebaseUserDb {
     }
 
 
-
     //---------------------------------delete a student in firebase---------------------------------
     public void deleteEntry(Student student) {
         if (student.getUserType() != null) {
@@ -200,28 +193,18 @@ public class FirebaseUserDb {
                 public void onComplete(@NonNull Task<Void> task) {
                     Log.d(TAG, "onComplete: START STUDENT REMOVED FROM DATABASE");
                     if (task.isSuccessful()) {
-                        profileView.setUpdateUserInFirebaseDbStatus(true);
-                    }else {
-                        profileView.setUpdateUserInFirebaseDbStatus(false);
+                        //todo Update the ui
+                    } else {
+                        //todo update the ui
                     }
 
                 }
             });
         } else {
-            profileView.setUpdateUserInFirebaseDbStatus(false);
+            //todo update the ui
         }
     }
 
 
-
-
-
-
-    //==========================================Firebase CallBack Interface=============================
-    public interface FirebaseDbCallBack {
-        void onCallBack(List<Student> studentList);
-
-        void onCallBackGetUser(User user, Student student, Staff staff, Instructor instructor);
-    }
 }
 
